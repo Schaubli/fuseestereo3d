@@ -1,0 +1,895 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fusee.Xene</name>
+    </assembly>
+    <members>
+        <member name="T:Fusee.Xene.ContainerExtensions">
+            <summary>
+            Static quick-hack helpers to access components within nodes.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.ContainerExtensions.Matrix(Fusee.Serialization.TransformComponent)">
+            <summary>
+            Calculates a transformation matrix from this transform component.
+            </summary>
+            <param name="tcThis">This transform component.</param>
+            <returns>The transform component's translation, rotation and scale combined in a single matrix.</returns>
+        </member>
+        <member name="M:Fusee.Xene.ContainerExtensions.GetComponent(Fusee.Serialization.SceneNodeContainer,System.Type,System.Int32)">
+            <summary>
+            Finds the component with the specified type in this scene node container.
+            </summary>
+            <param name="sncThis">This scene node container.</param>
+            <param name="type">The type of the component to look for.</param>
+            <param name="inx">specifies the n'th component if more than component of the given type exists.</param>
+            <returns>A component of the specified type, if contained within the given container, null otherwise.</returns>
+        </member>
+        <member name="M:Fusee.Xene.ContainerExtensions.GetComponent``1(Fusee.Serialization.SceneNodeContainer,System.Int32)">
+            <summary>
+            Finds the component with the specified type in this scene node container.
+            </summary>
+            <typeparam name="TComp">The type of the component to look for.</typeparam>
+            <param name="sncThis">This scene node container.</param>
+            <param name="inx">specifies the n'th component if more than component of the given type exists.</param>
+            <returns>A component of the specified type, if contained within this container, null otherwise.</returns>
+        </member>
+        <member name="M:Fusee.Xene.ContainerExtensions.GetMesh(Fusee.Serialization.SceneNodeContainer,System.Int32)">
+            <summary>
+            Shortcut for <code>GetComponent&lt;MeshComponent&gt;(sncThis, inx);</code>. See <see cref="M:Fusee.Xene.ContainerExtensions.GetComponent``1(Fusee.Serialization.SceneNodeContainer,System.Int32)"/>.
+            </summary>
+            <param name="sncThis">This scene node container.</param>
+            <param name="inx">specifies the n'th component if more than component of the given type exists.</param>
+            <returns>A mesh if contained within this container.</returns>
+        </member>
+        <member name="M:Fusee.Xene.ContainerExtensions.GetMaterial(Fusee.Serialization.SceneNodeContainer,System.Int32)">
+            <summary>
+            Shortcut for <code>GetComponent&lt;MaterialComponent&gt;(sncThis, inx);</code>. See <see cref="M:Fusee.Xene.ContainerExtensions.GetComponent``1(Fusee.Serialization.SceneNodeContainer,System.Int32)"/>.
+            </summary>
+            <param name="sncThis">This scene node container.</param>
+            <param name="inx">specifies the n'th component if more than component of the given type exists.</param>
+            <returns>A material if contained within this container.</returns>
+        </member>
+        <member name="M:Fusee.Xene.ContainerExtensions.GetLight(Fusee.Serialization.SceneNodeContainer,System.Int32)">
+            <summary>
+            Shortcut for <code>GetComponent&lt;LightComponent&gt;(sncThis, inx);</code>. See <see cref="M:Fusee.Xene.ContainerExtensions.GetComponent``1(Fusee.Serialization.SceneNodeContainer,System.Int32)"/>.
+            </summary>
+            <param name="sncThis">This scene node container.</param>
+            <param name="inx">specifies the n'th component if more than component of the given type exists.</param>
+            <returns>A light if contained within this container.</returns>
+        </member>
+        <member name="M:Fusee.Xene.ContainerExtensions.GetWeights(Fusee.Serialization.SceneNodeContainer,System.Int32)">
+            <summary>
+            Shortcut for <code>GetComponent&lt;WeightComponent&gt;(sncThis, inx);</code>. See <see cref="M:Fusee.Xene.ContainerExtensions.GetComponent``1(Fusee.Serialization.SceneNodeContainer,System.Int32)"/>.
+            </summary>
+            <param name="sncThis">This scene node container.</param>
+            <param name="inx">specifies the n'th component if more than component of the given type exists.</param>
+            <returns>A weight component if contained within this container.</returns>
+        </member>
+        <member name="M:Fusee.Xene.ContainerExtensions.GetTransform(Fusee.Serialization.SceneNodeContainer,System.Int32)">
+            <summary>
+            Shortcut for <code>GetComponent&lt;TransformComponent&gt;(sncThis, inx);</code>. See <see cref="M:Fusee.Xene.ContainerExtensions.GetComponent``1(Fusee.Serialization.SceneNodeContainer,System.Int32)"/>.
+            </summary>
+            <param name="sncThis">This scene node container.</param>
+            <param name="inx">specifies the n'th component if more than component of the given type exists.</param>
+            <returns>A transform if contained within this container.</returns>
+        </member>
+        <member name="M:Fusee.Xene.ContainerExtensions.AddComponent(Fusee.Serialization.SceneNodeContainer,Fusee.Serialization.SceneComponentContainer)">
+            <summary>
+            Adds the given component into this container's list of components.
+            </summary>
+            <param name="sncThis">This node.</param>
+            <param name="scc">The component to add.</param>
+        </member>
+        <member name="T:Fusee.Xene.SceneFinderExtensions">
+            <summary>
+            Various extensions methods to find nodes or components within trees of scene nodes.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindNodes(Fusee.Serialization.SceneNodeContainer,System.Predicate{Fusee.Serialization.SceneNodeContainer})">
+            <summary>
+            Creates an enumerable traversing the tree starting with the given node.
+            </summary>
+            <param name="root">The root node where to start the traversal.</param>
+            <param name="match">The matching predicate. Enumeration will yield on every matching node.</param>
+            <returns>An enumerable that can be used in foreach statements.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindNodes``1(Fusee.Serialization.SceneNodeContainer,System.Predicate{``0})">
+            <summary>
+            Finds nodes of a certain type and matching the given search predicate within a tree of nodes.
+            </summary>
+            <typeparam name="TNode">The type of nodes to find.</typeparam>
+            <param name="root">The root node where to start the search.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>All nodes of the specified type matching the predicate.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindNodes(System.Collections.Generic.IEnumerable{Fusee.Serialization.SceneNodeContainer},System.Predicate{Fusee.Serialization.SceneNodeContainer})">
+            <summary>
+            Finds nodes matching the given search predicate within a list of trees.
+            </summary>
+            <param name="rootList">The list of root nodes of the trees to search in.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>All nodes matching the predicate.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindNodes``1(System.Collections.Generic.IEnumerable{Fusee.Serialization.SceneNodeContainer},System.Predicate{``0})">
+            <summary>
+            Finds nodes of a certain type and matching the given search predicate within a list of trees.
+            </summary>
+            <typeparam name="TNode">The type of nodes to find.</typeparam>
+            <param name="rootList">The list of root nodes of the trees to search in.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>All nodes of the specified type matching the predicate.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindComponents(Fusee.Serialization.SceneNodeContainer,System.Predicate{Fusee.Serialization.SceneComponentContainer})">
+            <summary>
+            Finds components matching the given search predicate within a trees of nodes.
+            </summary>
+            <param name="root">The root node where to start the search.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>All components matching the predicate.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindComponents``1(Fusee.Serialization.SceneNodeContainer,System.Predicate{``0})">
+            <summary>
+            Finds components of the specified type and matching the given search predicate within a trees of nodes.
+            </summary>
+            <typeparam name="TComponent">The type of components to find.</typeparam>
+            <param name="root">The root node where to start the search.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>All components of the specified type matching the predicate.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindComponents(System.Collections.Generic.IEnumerable{Fusee.Serialization.SceneNodeContainer},System.Predicate{Fusee.Serialization.SceneComponentContainer})">
+            <summary>
+            Finds components matching the given search predicate within a list of trees of nodes.
+            </summary>
+            <param name="rootList">The list of root nodes of the trees to search in.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>All components matching the predicate.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindComponents``1(System.Collections.Generic.IEnumerable{Fusee.Serialization.SceneNodeContainer},System.Predicate{``0})">
+            <summary>
+            Finds components of the specified type and matching the given search predicate within a list of trees of nodes.
+            </summary>
+            <typeparam name="TComponent">The type of components to find.</typeparam>
+            <param name="rootList">The list of root nodes of the trees to search in.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>All components of the specified type matching the predicate.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindNodesWhereComponent(Fusee.Serialization.SceneNodeContainer,System.Predicate{Fusee.Serialization.SceneComponentContainer})">
+            <summary>
+            Finds all nodes containing one or more components matching a given search predicate within a tree of nodes.
+            </summary>
+            <param name="root">The root node where to start the search.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>All nodes containing matching components.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindNodesWhereComponent``1(Fusee.Serialization.SceneNodeContainer,System.Predicate{``0})">
+            <summary>
+            Finds all nodes containing one or more components matching the specified type and a given search predicate within a tree of nodes.
+            </summary>
+            <typeparam name="TComponent">The type of the components to look for.</typeparam>
+            <param name="root">The root node where to start the search.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>
+            All nodes containing components matching both, type and predicate.
+            </returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindNodesWhereComponent``2(Fusee.Serialization.SceneNodeContainer,System.Predicate{``1})">
+            <summary>
+            Finds all nodes of a certain type containing one or more components matching the specified type and a given search predicate within a tree of nodes.
+            </summary>
+            <typeparam name="TNode">The type of the nodes to search in.</typeparam>
+            <typeparam name="TComponent">The type of the components to look for.</typeparam>
+            <param name="root">The root node where to start the search.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>
+            All nodes of the specified type containing components matching both, type and predicate.
+            </returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindNodesWhereComponent(System.Collections.Generic.IEnumerable{Fusee.Serialization.SceneNodeContainer},System.Predicate{Fusee.Serialization.SceneComponentContainer})">
+            <summary>
+            Finds all nodes containing one or more components matching a given search predicate within a list of trees of nodes.
+            </summary>
+            <param name="rootList">The list of root nodes of the trees to search in.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>All nodes containing matching components.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindNodesWhereComponent``1(System.Collections.Generic.IEnumerable{Fusee.Serialization.SceneNodeContainer},System.Predicate{``0})">
+            <summary>
+            Finds all nodes containing one or more components matching the specified type and a given search predicate within a list of trees of nodes.
+            </summary>
+            <typeparam name="TComponent">The type of the components to look for.</typeparam>
+            <param name="rootList">The list of root nodes of the trees to search in.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>
+            All nodes containing components matching both, type and predicate.
+            </returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderExtensions.FindNodesWhereComponent``2(System.Collections.Generic.IEnumerable{Fusee.Serialization.SceneNodeContainer},System.Predicate{``1})">
+            <summary>
+            Finds all nodes of a certain type containing one or more components matching the specified type and a given search predicate within a list of trees of nodes.
+            </summary>
+            <typeparam name="TNode">The type of the nodes to search in.</typeparam>
+            <typeparam name="TComponent">The type of the components to look for.</typeparam>
+            <param name="rootList">The list of root nodes of the trees to search in.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+            <returns>
+            All nodes of the specified type containing components matching both, type and predicate.
+            </returns>
+        </member>
+        <member name="T:Fusee.Xene.SceneNodeFinder`1">
+            <summary>
+            Allows various searches over scene graphs. 
+            This class can be used directly but will be more commonly used by calling one 
+            of the Find extension methods declared in <see cref="T:Fusee.Xene.SceneFinderExtensions"/>.
+            </summary>
+            <remarks>
+            Search criteria can be passed as (lambda) predicates matching scene nodes.
+            Results are returned as enumerator. Instead of directly using this class, users should use one of the FindNodes or
+            FindComponents extension methods. 
+            </remarks>
+            <typeparam name="TNode">The concrete type of nodes to look for.</typeparam>
+        </member>
+        <member name="M:Fusee.Xene.SceneNodeFinder`1.#ctor(System.Collections.Generic.IEnumerator{Fusee.Serialization.SceneNodeContainer},System.Predicate{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.SceneNodeFinder`1"/> class.
+            </summary>
+            <param name="rootList">The root list where to start the seach.</param>
+            <param name="match">The search predicate. Typically specified as a Lambda expression.</param>
+        </member>
+        <member name="M:Fusee.Xene.SceneNodeFinder`1.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+            true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+            </returns>
+        </member>
+        <member name="P:Fusee.Xene.SceneNodeFinder`1.Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.SceneNodeFinder`1.MatchNode(`0)">
+            <summary>
+            Reflected Viserator Callback. Performs the match test on the specified node.
+            </summary>
+            <param name="node">The node to check for the match.</param>
+        </member>
+        <member name="T:Fusee.Xene.SceneComponentFinder`1">
+            <summary>
+            Allows various searches over scene graphs. 
+            This class can be used directly but will be more commonly used by calling one 
+            of the Find extension methods declared in <see cref="T:Fusee.Xene.SceneFinderExtensions"/>.
+            </summary>
+            <remarks>
+            Search criteria can be passed as (lambda) predicates matching scene nodes.
+            Results are returned as enumerator. Instead of directly using this class, users should use one of the FindNodes or
+            FindComponents extension methods. 
+            </remarks>
+            <typeparam name="TComponent">The concrete type of the components to look for.</typeparam>
+        </member>
+        <member name="M:Fusee.Xene.SceneComponentFinder`1.#ctor(System.Collections.Generic.IEnumerator{Fusee.Serialization.SceneNodeContainer},System.Predicate{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.SceneComponentFinder`1"/> class.
+            </summary>
+            <param name="rootList">The root list.</param>
+            <param name="match">The match.</param>
+        </member>
+        <member name="M:Fusee.Xene.SceneComponentFinder`1.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+            true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+            </returns>
+        </member>
+        <member name="P:Fusee.Xene.SceneComponentFinder`1.Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.SceneComponentFinder`1.MatchComponent(`0)">
+            <summary>
+            Reflected Viserator Callback. Performs the match test on the specified component.
+            </summary>
+            <param name="component">The component to check for the match.</param>
+        </member>
+        <member name="T:Fusee.Xene.SceneNodeWhereComponentFinder`2">
+            <summary>
+            Allows various searches over scene graphs.
+            This class can be used directly but will be more commonly used by calling one
+            of the Find extension methods declared in <see cref="T:Fusee.Xene.SceneFinderExtensions" />.
+            </summary>
+            <typeparam name="TNode">The type of the node.</typeparam>
+            <typeparam name="TComponent">The concrete type of the components to look for.</typeparam>
+            <remarks>
+            Search criteria can be passed as (lambda) predicates matching scene nodes.
+            Results are returned as enumerator. Instead of directly using this class, users should use one of the FindNodes or
+            FindComponents extension methods.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Xene.SceneNodeWhereComponentFinder`2.#ctor(System.Collections.Generic.IEnumerator{Fusee.Serialization.SceneNodeContainer},System.Predicate{`1})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.SceneNodeWhereComponentFinder`2"/> class.
+            </summary>
+            <param name="rootList">The root list.</param>
+            <param name="match">The match.</param>
+        </member>
+        <member name="M:Fusee.Xene.SceneNodeWhereComponentFinder`2.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+            true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+            </returns>
+        </member>
+        <member name="P:Fusee.Xene.SceneNodeWhereComponentFinder`2.Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.SceneNodeWhereComponentFinder`2.MatchComponent(`1)">
+            <summary>
+            Reflected Viserator Callback. Performs the match test on the specified component.
+            </summary>
+            <param name="component">The component to check for the match.</param>
+        </member>
+        <member name="T:Fusee.Xene.SceneFinderBase`1">
+            <summary>
+            Base class serving for various searches over scene graphs. See the list of derived classes.
+            </summary>
+            <typeparam name="TSceneElementType">The concrete type of the components to look for.</typeparam>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderBase`1.#ctor(System.Collections.Generic.IEnumerator{Fusee.Serialization.SceneNodeContainer},System.Predicate{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.SceneFinderBase`1"/> class.
+            </summary>
+            <param name="rootList">The root list.</param>
+            <param name="match">The match.</param>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderBase`1.Dispose">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.SceneFinderBase`1.Reset">
+            <summary>
+            Resets this instance.
+            </summary>
+        </member>
+        <member name="T:Fusee.Xene.VisitMethodAttribute">
+            <summary>
+            Use this attribute to identify visitor methods. Visitor methods are called during traversal on 
+            nodes or components with the specified type.
+            WARNING: Currently no component or node type inheritance matching is done: A Visitor method is
+            only called if it exaclty matches the type - TODO: fix this...
+            </summary>
+        </member>
+        <member name="T:Fusee.Xene.SceneVisitorHelpers">
+            <summary>
+            Static class containing helper methods around the SceneVisitor
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitorHelpers.SingleRootEnumerator(Fusee.Serialization.SceneNodeContainer)">
+            <summary>
+            Returns an enumerator enumerating only one item: the root parameter passed.
+            This method can be used in situations where an IEnumerator is required (as a method argument)
+            but only one single node needs to be passed.
+            </summary>
+            <param name="root">The root to enumerate.</param>
+            <returns>An enumerator yielding only only one element: the node passed as root.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitorHelpers.SingleRootEnumerable(Fusee.Serialization.SceneNodeContainer)">
+            <summary>
+            Returns an enumerable enumerating only one item: the root parameter passed.
+            This method can be used in situations where an IEnumerator is required (as a method argument)
+            but only one single node needs to be passed.
+            </summary>
+            <param name="root">The root to enumerate.</param>
+            <returns>An enumerable yielding only only one element: the node passed as root.</returns>
+        </member>
+        <member name="T:Fusee.Xene.SceneVisitor">
+            <summary>
+            Work-in-Progress. This class tries to serve three goals
+            <list type="number">
+            <item>As a base class for visitor patterns. Users can add visitor methods and provide code for different types of visited items.</item>
+            <item>As building block for enumerators. Visitor methods can yield an enumeration.</item>
+            <item>As a toolset to implement transformations on scenes. Transformations operate on scenes and alter their structure.</item>
+            </list>
+            
+            Serves as a base class for advanced visitor pattern implementations traversing scenes. Visitors derived from this class may implement
+            their own Visit methods for all kinds of scene graph elements. Visitor methods can be defined for scene nodes (although many implementations
+            will most likely NOT have a very big inheritance tree for nodes) as well as for scene components.
+            A Visitor method can be any instance method (not static) taking one parameter either derived from <see cref="T:Fusee.Serialization.SceneNodeContainer"/> or derived from
+            <see cref="T:Fusee.Serialization.SceneComponentContainer"/>. To mark such a method as a Visitor method it needs to be decorated with the <see cref="T:Fusee.Xene.VisitMethodAttribute"/> 
+            attribute. Visitor methods can have arbitrary names and don't need to be virtual. 
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitor.Traverse(Fusee.Serialization.SceneNodeContainer)">
+            <summary>
+            Start traversing a scene graph starting with the given root node. Performs a recursive depth-first 
+            traversal from the speciefiedd root.
+            </summary>
+            <param name="rootNode">The root node where to start the traversal.</param>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitor.Traverse(System.Collections.Generic.IEnumerable{Fusee.Serialization.SceneNodeContainer})">
+            <summary>
+            Start traversing a list of nodes. Performs a recursive depth-first traversal 
+            over the list starting with the first node in the list.
+            </summary>
+            <param name="children">The list of nodes to traverse over.</param>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitor.InitState">
+            <summary>
+            Method is called when traversal starts to initialize the traversal state. Override this method in derived classes to initialize any state.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitor.PushState">
+            <summary>
+            Method is called when going down one hierarchy level while traversing. Override this method to push any self-defined state.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitor.PopState">
+            <summary>
+            Method is called when going up one hierarchy level while traversing. Override this method to perform pop on any self-defined state.
+            </summary>
+        </member>
+        <member name="P:Fusee.Xene.SceneVisitor.CurrentNode">
+            <summary>
+            Returns currently visited node during a traversal.
+            </summary>
+            <value>
+            The current node.
+            </value>
+        </member>
+        <member name="P:Fusee.Xene.SceneVisitor.CurrentComponent">
+            <summary>
+            Returns the currently visited component during a traversal.
+            </summary>
+            <value>
+            The current component.
+            </value>
+        </member>
+        <member name="P:Fusee.Xene.SceneVisitor.YieldOnCurrentNode">
+            <summary>
+            Can be called in derived visitors. Set this property to true during traversals to make the visitor yield the current node when used as an enumerator.
+            </summary>
+            <value>
+              <c>true</c> if the enumeration should yield the current node; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Xene.SceneVisitor.YieldOnCurrentComponent">
+            <summary>
+            Can be called in derived visitors. Set this property to true during traversals to make the visitor yield the current component when used as an enumerator.
+            </summary>
+            <value>
+              <c>true</c> if the enumeration should yield the current component; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Xene.SceneVisitor.YieldEnumeration">
+            <summary>
+            Gets a value indicating whether the current enumeration should yield.
+            </summary>
+            <value>
+              <c>true</c> if the current enumeration should yield; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitor.EnumInit(System.Collections.Generic.IEnumerator{Fusee.Serialization.SceneNodeContainer})">
+            <summary>
+            Enumerator Building Block to be called in derived Visitors acting as enumerators. Use this to 
+            initialize the traversing enumeration on a list of nodes (in
+            </summary>
+            <param name="nodes">The nodes.</param>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitor.EnumMoveNext">
+            <summary>
+            This method implements a re-entrant (in terms of yield, not multi-threading) non-recursive traversal over combined node and component trees.
+            Call this method in derived classes implementing enumerators, like in the various find extension methods or the <see cref="T:Fusee.Xene.Viserator`2"/>
+            </summary>
+            <returns><c>true</c> if the enumerator was successfully advanced to the next element; <c>false</c> if the enumerator has passed the end of node-component-tree.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitor.EnumMoveNextNoComponent">
+            <summary>
+            Continue a currently active enumeration. Call all registered Visit methods. Visitor methods may set <see cref="P:Fusee.Xene.SceneVisitor.YieldOnCurrentComponent"/>
+            or <see cref="P:Fusee.Xene.SceneVisitor.YieldOnCurrentNode"/> to true to signal the enumration to yield.
+            </summary>
+            <returns>true if the enumeration is not finnished yet (i.e. if components/nodes are still unvisited). false otherwise.</returns>
+        </member>
+        <member name="M:Fusee.Xene.SceneVisitor.ScanForVisitors">
+            <summary>
+            Scans the Visitor class (which typically is derived from SceneVisitor) for any methods marked as VisitorMethods.
+            </summary>
+        </member>
+        <member name="T:Fusee.Xene.ViseratorExtensions">
+            <summary>
+            Contains extensions methods to perform <see cref="T:Fusee.Xene.Viserator`2"/> actions on trees of scene nodes.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.ViseratorExtensions.Viserate``2(Fusee.Serialization.SceneNodeContainer)">
+            <summary>
+            Performs a <see cref="T:Fusee.Xene.Viserator`2"/> action on the specified tree.
+            </summary>
+            <typeparam name="TViserator">The type of the viserator.</typeparam>
+            <typeparam name="TResult">The type of the elements resulting from the Viserate traversal.</typeparam>
+            <param name="root">The root where to start the traversal.</param>
+            <returns>All items yielded from within the traversal (see <see cref="M:Fusee.Xene.ViseratorBase`1.YieldItem(`0)"/>).</returns>
+        </member>
+        <member name="M:Fusee.Xene.ViseratorExtensions.Viserate``2(System.Collections.Generic.IEnumerable{Fusee.Serialization.SceneNodeContainer})">
+            <summary>
+            Performs a <see cref="T:Fusee.Xene.Viserator`2"/> action on the specified list of trees.
+            </summary>
+            <typeparam name="TViserator">The type of the viserator.</typeparam>
+            <typeparam name="TResult">The type of the elements resulting from the Viserate traversal.</typeparam>
+            <param name="rootList">The list of root items where to start the traversal with.</param>
+            <returns>All items yielded from within the traversal (see <see cref="M:Fusee.Xene.ViseratorBase`1.YieldItem(`0)"/>).</returns>
+        </member>
+        <member name="T:Fusee.Xene.ViseratorBase`1">
+            <summary>
+            Extract of the final Viserator without everything State related. This class is necessary
+            to be able to define extension methods on node lists. Do not use this class directly.
+            </summary>
+            <typeparam name="TItem">The type of the item.</typeparam>
+        </member>
+        <member name="M:Fusee.Xene.ViseratorBase`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.ViseratorBase`1"/> class.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.ViseratorBase`1.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.ViseratorBase`1.MoveNext">
+            <summary>
+            Advances the enumerator to the next element of the collection.
+            </summary>
+            <returns>
+            true if the enumerator was successfully advanced to the next element; false if the enumerator has passed the end of the collection.
+            </returns>
+        </member>
+        <member name="M:Fusee.Xene.ViseratorBase`1.Reset">
+            <summary>
+            Sets the enumerator to its initial position, which is before the first element in the collection.
+            </summary>
+        </member>
+        <member name="P:Fusee.Xene.ViseratorBase`1.Current">
+            <summary>
+            Gets the element in the collection at the current position of the enumerator.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.ViseratorBase`1.YieldItem(`0)">
+            <summary>
+            Call this method in visitor methods of derived Viserator classes to signal that an item should
+            be propagated to the traversal's result enumeration.
+            </summary>
+            <param name="item">The item.</param>
+        </member>
+        <member name="T:Fusee.Xene.Viserator`2">
+            <summary>
+            A Viserator is a scene visitor which returns an enumerator of a user defined type. Serves as a base class
+            for use-cases where traversing a node-component-graph should yield a list (enumerator) of results.
+            </summary>
+            <typeparam name="TItem">The type of the result yielded by the enumerator.</typeparam>
+            <typeparam name="TState">The type of the state to use during traversal. See <see cref="T:Fusee.Xene.VisitorState"/> how to
+             implement your own state type.</typeparam>
+            <remarks>
+            Very often you want to traverse a node-component-graph while maintaining a traversal state keeping track of
+            inividual values and their changes while traversing. At certain points during the traversal a result arises that
+            should be promoted to the outside of the traversal. Typically the result is derived from the state at a certain
+            time during traversal and some additional information of the tree object currently visited.
+            <para />
+            To implement your own Viserator you should consider which state information the Viserator must keep track of.
+            Either you assemble your own State type by deriving from <see cref="T:Fusee.Xene.VisitorState"/> or choose to use one of 
+            the standard state types like <see cref="T:Fusee.Xene.StandardState"/>. Then you need to derive your own class from 
+            <see cref="T:Fusee.Xene.Viserator`2"/>
+            with the TState replaced by your choice of State and TItem replaced by the type of the items you want your Viserator to yield
+            during the traversal.
+            <para />
+            The word Viserator is a combination of a visitor and and enumerator. Look up "to viscerate" in a dictionary and
+            judge for yourself if a Viserator's operation resembles disembowelling the innards of a tree structure.
+            </remarks>
+        </member>
+        <member name="F:Fusee.Xene.Viserator`2.State">
+            <summary>
+            The state to keep track of during traversal. You can use your own implementation (as long as it implements <see cref="T:Fusee.Xene.IStateStack"/>
+            or use one of the pre-defined implementations. See <see cref="T:Fusee.Xene.VisitorState"/> how to implement your own state type.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.Viserator`2.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.Viserator`2"/> class.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.Viserator`2.#ctor(System.Collections.Generic.IEnumerator{Fusee.Serialization.SceneNodeContainer})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.Viserator`2"/> class.
+            </summary>
+            <param name="rootList">The root list.</param>
+        </member>
+        <member name="M:Fusee.Xene.Viserator`2.InitState">
+            <summary>
+            This method is called when traversal starts to initialize the traversal state. Override this method in derived classes to initialize any state beyond
+            the standard <see cref="F:Fusee.Xene.Viserator`2.State" />.
+            Most visitors will simply initialize the <see cref="F:Fusee.Xene.Viserator`2.State" /> and will thus NOT need to override this method. Make sure to call the base
+            implementation in overridden versions.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.Viserator`2.PushState">
+            <summary>
+            This method  is called when going down one hierarchy level while traversing. Pushes the traversal state stack <see cref="F:Fusee.Xene.Viserator`2.State" />.
+            Most visitors will simply push the <see cref="F:Fusee.Xene.Viserator`2.State" /> and will thus NOT need to override this method. Make sure to call the base
+            implementation in overridden versions.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.Viserator`2.PopState">
+            <summary>
+            This method  is called when going up one hierarchy level while traversing. Pops the traversal state stack <see cref="F:Fusee.Xene.Viserator`2.State" />.
+            Most visitors will simply perform pop on the <see cref="F:Fusee.Xene.Viserator`2.State" /> and will thus NOT need to override this method. Make sure to call the base
+            implementation in overridden versions.
+            </summary>
+        </member>
+        <member name="T:Fusee.Xene.IStateStack">
+            <summary>
+            Defines the minimum set of operations on any data structure to be used as a stack during traversal. The main difference
+            between StateStacks and "normal" stacks (<see cref="T:System.Collections.Generic.Stack`1"/>) is that the Push operation here doesn't take an argument
+            but simply replicates the current state (or rather - memorizes the current state for restoring it later with Push). 
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.IStateStack.Push">
+            <summary>
+            The stack's Push operation. Increases the stack Depth about one and copies the top of stack.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.IStateStack.Pop">
+            <summary>
+            The stack's Pop operation. Decreases the stack Depth about one and restores the previous state.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.IStateStack.Clear">
+            <summary>
+            Clears the stack. The Depth will be reset to zero.
+            </summary>
+        </member>
+        <member name="P:Fusee.Xene.IStateStack.Depth">
+            <summary>
+            Retrieves the stack's depth.
+            </summary>
+            <value>
+            The current depth of the stack. 
+            </value>
+        </member>
+        <member name="T:Fusee.Xene.StateStack`1">
+            <summary>
+            A simple implementation of the <see cref="T:Fusee.Xene.IStateStack"/> interface. Defines the <see cref="P:Fusee.Xene.StateStack`1.Tos"/> property granting read and write access to the current Top of stack.
+            </summary>
+            <typeparam name="T">The type of the entries stored within the stack.</typeparam>
+        </member>
+        <member name="M:Fusee.Xene.StateStack`1.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.StateStack`1"/> class.
+            </summary>
+            <param name="capacity">The initial capacity of the stack. This is the expected maximum stack depth. 
+            If the stack depth grows bigger, the stack automatically doubles its capacity internally.</param>
+        </member>
+        <member name="P:Fusee.Xene.StateStack`1.Tos">
+            <summary>
+            Gets or sets the Top of stack.
+            </summary>
+            <value>
+            The top of stack.
+            </value>
+        </member>
+        <member name="M:Fusee.Xene.StateStack`1.Push">
+            <summary>
+            The stack's Push operation. Increases the stack Depth about one and copies the top of stack.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.StateStack`1.Pop">
+            <summary>
+            The stack's Pop operation. Decreases the stack Depth about one and restores the previous state.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.StateStack`1.Clear">
+            <summary>
+            Clears the stack. The Depth will be reset to zero.
+            </summary>
+        </member>
+        <member name="P:Fusee.Xene.StateStack`1.Depth">
+            <summary>
+            Retrieves the stack's depth.
+            </summary>
+            <value>
+            The current depth of the stack.
+            </value>
+        </member>
+        <member name="T:Fusee.Xene.CollapsingStateStack`1">
+            <summary>
+            An <see cref="T:Fusee.Xene.IStateStack"/> implementation behaving better in situations where many subsequent Push (and Pop) operations occur
+            without actually altering the Tos contents. 
+            </summary>
+            <remarks>
+            Using instances of this class is recommended if the Type parameter is a large value type.
+            Defines the <see cref="P:Fusee.Xene.CollapsingStateStack`1.Tos"/> property granting read and write access the current Top of stack.
+            <typeparam name="T">The type of the entries stored within the stack.</typeparam>
+            </remarks>
+        </member>
+        <member name="M:Fusee.Xene.CollapsingStateStack`1.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.CollapsingStateStack`1"/> class.
+            </summary>
+            <param name="capacity">The initial capacity of the stack. This is the expected maximum stack depth. 
+            If the stack depth grows bigger, the stack automatically doubles its capacity internally.</param>
+        </member>
+        <member name="M:Fusee.Xene.CollapsingStateStack`1.Push">
+            <summary>
+            The stack's Push operation. Increases the stack Depth about one and copies the top of stack.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.CollapsingStateStack`1.Pop">
+            <summary>
+            The stack's Pop operation. Decreases the stack Depth about one and restores the previous state.
+            </summary>
+            <exception cref="T:System.InvalidOperationException">CollapsingState Stack depth is already 0. Cannot Pop stack.</exception>
+        </member>
+        <member name="M:Fusee.Xene.CollapsingStateStack`1.Clear">
+            <summary>
+            Clears the stack. The Depth will be reset to zero.
+            </summary>
+        </member>
+        <member name="P:Fusee.Xene.CollapsingStateStack`1.Depth">
+            <summary>
+            Retrieves the stack's depth.
+            </summary>
+            <value>
+            The current depth of the stack.
+            </value>
+        </member>
+        <member name="P:Fusee.Xene.CollapsingStateStack`1.Tos">
+            <summary>
+            Gets or sets the Top of stack.
+            </summary>
+            <value>
+            The top of stack.
+            </value>
+        </member>
+        <member name="T:Fusee.Xene.EmptyState">
+            <summary>
+            Dummy implementation of the <see cref="T:Fusee.Xene.IStateStack"/> interface. Nothing can be stored within instance of this type.
+            There's no Top of Stack object. Only the stack Depth is correctly tracked according to the number of Push() and Pop() 
+            operations already performed on the EmptyStack.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.EmptyState.Push">
+            <summary>
+            The stack's Push operation. Increases the stack Depth about one and copies the top of stack.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.EmptyState.Pop">
+            <summary>
+            The stack's Pop operation. Decreases the stack Depth about one and restores the previous state.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.EmptyState.Clear">
+            <summary>
+            Clears the stack. The Depth will be reset to zero.
+            </summary>
+        </member>
+        <member name="P:Fusee.Xene.EmptyState.Depth">
+            <summary>
+            Retrieves the stack's depth.
+            </summary>
+            <value>
+            The current depth of the stack.
+            </value>
+        </member>
+        <member name="T:Fusee.Xene.VisitorState">
+            <summary>
+            Use this as a base class for defining your own state for arbitrary SceneVisitors. 
+            </summary>
+            <remarks>
+            A state is always a list of individual
+            values that can be altered during traversal. To restore state along hierarchy levels the values are kept in <see cref="T:Fusee.Xene.IStateStack"/>objects - one stack
+            per tracked value. 
+            The VisitorState itself represents an <see cref="T:Fusee.Xene.IStateStack"/>. It delegates all interface methods to the individual value stacks registered.
+            </remarks>
+            <example>Here's an example of a VisitorState containing an integer and a string value:
+            <code>
+            class TestState : VisitorState
+            {
+                private CollapsingStateStack&lt;string&gt; _stringState = new CollapsingStateStack&lt;string&gt;();
+                private CollapsingStateStack&lt;int&gt; _intState = new CollapsingStateStack&lt;int&gt;();
+            
+                public string StringState
+                {
+                     get { return _stringState.Tos; }
+                     set { _stringState.Tos = value; }
+                }
+            
+                public string IntState
+                {
+                     get { return _intState.Tos; }
+                     set { _intState.Tos = value; }
+                }
+            
+                TestState() : base()
+                {
+                   RegisterState(_stringState);
+                   RegisterState(_intState);
+                }
+            </code>
+            </example>
+        </member>
+        <member name="M:Fusee.Xene.VisitorState.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.VisitorState"/> class.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.VisitorState.RegisterState(Fusee.Xene.IStateStack)">
+            <summary>
+            Registers a state stack. State stacks need to be registered to be notified when the entire state is pushed or popped.
+            </summary>
+            <param name="stack">The state stack to register.</param>
+        </member>
+        <member name="M:Fusee.Xene.VisitorState.Push">
+            <summary>
+            The visitor state's Push operation. Pushes all registered state stacks.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.VisitorState.Pop">
+            <summary>
+            The visitor state's Pop operation. Pops all registered state stacks.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xene.VisitorState.Clear">
+            <summary>
+            Clears all registered state stacks. The Depth will be reset to zero.
+            </summary>
+        </member>
+        <member name="P:Fusee.Xene.VisitorState.Depth">
+            <summary>
+            Retrieves the state's overall depth.
+            </summary>
+            <value>
+            The current depth of the visitor state.
+            </value>
+        </member>
+        <member name="T:Fusee.Xene.StandardState">
+            <summary>
+            A standard state for typical traversals mimicking rendering activities. Keeps track of the main matrices
+            as well as selected render states.
+            </summary>
+        </member>
+        <member name="P:Fusee.Xene.StandardState.Model">
+            <summary>
+            Gets or sets the top of the Model matrix stack. The Model matrix transforms model coordinates into world coordinates.
+            </summary>
+            <value>
+            The Model matrix.
+            </value>
+        </member>
+        <member name="P:Fusee.Xene.StandardState.View">
+            <summary>
+            Gets or sets the top of the View matrix stack. The View matrix transforms world coordinates into view coordinates.
+            The View matrix contains a camera's extrinsic parameters (position and orientation).
+            </summary>
+            <value>
+            The View matrix.
+            </value>
+        </member>
+        <member name="P:Fusee.Xene.StandardState.Projection">
+            <summary>
+            Gets or sets the top of the Projection matrix stack. The Projection matrix transforms view coordinates into projection coordinates.
+            The Projection matrix contains a camera's intrinsic parameters (field-of-view/focal length for perspective projections).
+            </summary>
+            <value>
+            The Projection matrix
+            </value>
+        </member>
+        <member name="M:Fusee.Xene.StandardState.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xene.StandardState"/> class.
+            </summary>
+        </member>
+    </members>
+</doc>

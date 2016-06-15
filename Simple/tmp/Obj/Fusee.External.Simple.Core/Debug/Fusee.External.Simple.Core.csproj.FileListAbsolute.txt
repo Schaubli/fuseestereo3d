@@ -1,0 +1,10 @@
+C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\bin\Debug\Libraries\Assets\FuseeLogo150.png
+C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\bin\Debug\Libraries\Assets\RocketModel.fus
+C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\bin\Debug\Libraries\Assets\Lato-Black.ttf
+C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\bin\Debug\Libraries\Fusee.External.Simple.Core.dll
+C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\bin\Debug\Libraries\Fusee.External.Simple.Core.pdb
+C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.dll
+C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.pdb
+C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.csprojResolveAssemblyReference.cache
+C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.dll.mdb
+C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\bin\Debug\Libraries\Fusee.External.Simple.Core.dll.mdb

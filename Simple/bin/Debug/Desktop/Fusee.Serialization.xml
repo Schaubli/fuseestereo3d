@@ -1,0 +1,471 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fusee.Serialization</name>
+    </assembly>
+    <members>
+        <member name="T:Fusee.Serialization.AnimationComponent">
+            <summary>
+            Contains animation data. Generally, a list of animation tracks
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationComponent.AnimationTracks">
+            <summary>
+            The animation tracks making up this animation data. 
+            Each animation track controls a single value.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.AnimationKeyContainerBase">
+            <summary>
+            Base class to hold a single animation key. Derived types specify the type of the value
+            controlled by the keys.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationKeyContainerBase.Time">
+            <summary>
+            The position of the key on the timeline.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.AnimationKeyContainerDouble">
+            <summary>
+            Animation key storing double values.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationKeyContainerDouble.Value">
+            <summary>
+            The key value effective at the <see cref="F:Fusee.Serialization.AnimationKeyContainerBase.Time"/>.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.AnimationKeyContainerInt">
+            <summary>
+            Animation key storing integer values.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationKeyContainerInt.Value">
+            <summary>
+            The key value effective at the <see cref="F:Fusee.Serialization.AnimationKeyContainerBase.Time"/>.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.AnimationKeyContainerFloat">
+            <summary>
+            Animation key storing float values.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationKeyContainerFloat.Value">
+            <summary>
+            The key value effective at the <see cref="F:Fusee.Serialization.AnimationKeyContainerBase.Time"/>.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.AnimationKeyContainerFloat2">
+            <summary>
+            Animation key storing float2 values.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationKeyContainerFloat2.Value">
+            <summary>
+            The key value effective at the <see cref="F:Fusee.Serialization.AnimationKeyContainerBase.Time"/>.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.AnimationKeyContainerFloat3">
+            <summary>
+            Animation key storing float3 values.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationKeyContainerFloat3.Value">
+            <summary>
+            The key value effective at the <see cref="F:Fusee.Serialization.AnimationKeyContainerBase.Time"/>.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.AnimationKeyContainerFloat4">
+            <summary>
+            Animation key storing float4 values.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationKeyContainerFloat4.Value">
+            <summary>
+            The key value effective at the <see cref="F:Fusee.Serialization.AnimationKeyContainerBase.Time"/>.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.LerpType">
+            <summary>
+            Symbolic value describing the type of Lerp (linear interpolation) to perform.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.LerpType.Lerp">
+            <summary>
+            Standard interpolation. Multi-Value-Types are interpolated individually for each value (e.g., x, y, z).
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.LerpType.Slerp">
+            <summary>
+            Spherical interpolation. float3 are interpreted as Euler angles and interpolated in a shortest-path way using <see cref="T:Fusee.Math.Core.Quaternion"/>s.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.AnimationTrackContainer">
+            <summary>
+            Stores data about a single animation track (mainly a list of keyframes)
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationTrackContainer.SceneComponent">
+            <summary>
+            The scene component to be controlled by this animation track.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationTrackContainer.Property">
+            <summary>
+            The name to the property/field to control. May be a dot-separated path to a sub-item (e.g. "Transform.Position.x").
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationTrackContainer.KeyType">
+            <summary>
+            The type of the key-values stored in this animation track.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationTrackContainer.LerpType">
+            <summary>
+            The lerp type to use for interpolation. 
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.AnimationTrackContainer.KeyFrames">
+            <summary>
+            The list of key frames ordered by time.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.BoneComponent">
+            <summary>
+            Marker component (contains no data). If contained within a node, the node 
+            serves as a bone in a bone animation.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.LightType">
+            <summary>
+            Specifies the type of the light.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.LightType.Point">
+            <summary>
+            Point light. Emits rays from a single point radially into all directions
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.LightType.Parallel">
+            <summary>
+            Parallel light. Emits parallel rays into a specified direction.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.LightType.Spot">
+            <summary>
+            Spot light. Like a point light but with rules describing the intensities of the
+            rays depending on their direction.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.LightComponent">
+            <summary>
+            Contains light information. If contained in a node, the node serves as a light object.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.LightComponent.Type">
+            <summary>
+            The type of the light source.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.LightComponent.Color">
+            <summary>
+            The color emitted by the light source.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.LightComponent.Intensity">
+            <summary>
+            The light's intensity.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.MatChannelContainer">
+            <summary>
+            Part of the <see cref="T:Fusee.Serialization.MaterialComponent"/> defining material settings.
+            Used in the different lighting calculation components.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.MatChannelContainer.Color">
+            <summary>
+            The color of the light componennt.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.MatChannelContainer.Texture">
+            <summary>
+            If not null, the texture to use as the color.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.MatChannelContainer.Mix">
+            <summary>
+            The percentage how to mix Color and Texture.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.SpecularChannelContainer">
+            <summary>
+            The specular channel definition. 
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SpecularChannelContainer.Shininess">
+            <summary>
+            The material's shininess.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SpecularChannelContainer.Intensity">
+            <summary>
+            The specular intensity.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.BumpChannelContainer">
+            <summary>
+            If used, the material shows bumps defined by a normal map (a texture).
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.BumpChannelContainer.Texture">
+            <summary>
+            The texture to read the normal information from.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.BumpChannelContainer.Intensity">
+            <summary>
+            The intensity of the bumps.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.MaterialComponent">
+            <summary>
+            Material definition. If contained within a node, the node's (and potentially child node's)
+            geometry is rendered with the speicified material.
+            </summary>
+        </member>
+        <member name="P:Fusee.Serialization.MaterialComponent.HasDiffuse">
+            <summary>
+            Gets a value indicating whether this instance has a diffuse channel.
+            </summary>
+            <value>
+            <c>true</c> if this instance has a diffuse channel; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="F:Fusee.Serialization.MaterialComponent.Diffuse">
+            <summary>
+            The diffuse channel.
+            </summary>
+        </member>
+        <member name="P:Fusee.Serialization.MaterialComponent.HasSpecular">
+            <summary>
+            Gets a value indicating whether this instance has a specular channel.
+            </summary>
+            <value>
+            <c>true</c> if this instance has a specular channel; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="F:Fusee.Serialization.MaterialComponent.Specular">
+            <summary>
+            The specular channel.
+            </summary>
+        </member>
+        <member name="P:Fusee.Serialization.MaterialComponent.HasEmissive">
+            <summary>
+            Gets a value indicating whether this instance has an emissive channel.
+            </summary>
+            <value>
+            <c>true</c> if this instance has an emissive channel; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="F:Fusee.Serialization.MaterialComponent.Emissive">
+            <summary>
+            The emissive channel.
+            </summary>
+        </member>
+        <member name="P:Fusee.Serialization.MaterialComponent.HasBump">
+            <summary>
+            Gets a value indicating whether this instance has a bump channel.
+            </summary>
+            <value>
+              <c>true</c> if this instance has a bump channel; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="F:Fusee.Serialization.MaterialComponent.Bump">
+            <summary>
+            The bump channel.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.SceneComponentContainer">
+            <summary>
+            Base class for components. Each node (<see cref="T:Fusee.Serialization.SceneNodeContainer"/>) contains a list of components of various types.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SceneComponentContainer.Name">
+            <summary>
+            The name of this component.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.SceneHeader">
+            <summary>
+            The header of a scene file.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SceneHeader.Version">
+            <summary>
+            The version number of this scene file.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SceneHeader.Generator">
+            <summary>
+            The generator used to create this scene file.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SceneHeader.CreatedBy">
+            <summary>
+            The user who created this scene.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SceneHeader.CreationDate">
+            <summary>
+            The creation date of the file.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.SceneContainer">
+            <summary>
+            The root object of a scene file.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SceneContainer.Header">
+            <summary>
+            The file header.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SceneContainer.Children">
+            <summary>
+            The list of child nodes. Each can contain children itself.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.MeshComponent">
+            <summary>
+            Defines mesh data (geometry).
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.MeshComponent.Vertices">
+            <summary>
+            The list of vertices.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.MeshComponent.Normals">
+            <summary>
+            The list of normals at the vertices.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.MeshComponent.UVs">
+            <summary>
+            The list of texture coordinates at the vertices.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.MeshComponent.Triangles">
+            <summary>
+            The list of triagles. Three contiguous indeces into the <see cref="F:Fusee.Serialization.MeshComponent.Vertices"/> list
+            define one triangle.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.MeshComponent.BoundingBox">
+            <summary>
+            The bounding box of this geometry chunk.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.SceneNodeContainer">
+            <summary>
+            The building block to create hierarchies.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SceneNodeContainer.Name">
+            <summary>
+            The name.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SceneNodeContainer.Components">
+            <summary>
+            The components this node is made of.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.SceneNodeContainer.Children">
+            <summary>
+            Possible children. 
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.WeightComponent">
+            <summary>
+            Defines a weight map. Basically a table with a row for each vertex and a column for each bone
+            controlling the geometry. 
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.WeightComponent.WeightMap">
+            <summary>
+            The weight map. Contains as many entries as the object containing this node's geomoetry has vertices.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.WeightComponent.Joints">
+            <summary>
+            The joint objects controlling the geometry.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.WeightComponent.BindingMatrices">
+            <summary>
+            The binding matrices defining the object's untransformed state.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.VertexWeight">
+            <summary>
+            A single entry of a weight table row.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.VertexWeight.JointIndex">
+            <summary>
+            The joint index controlling the vertex.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.VertexWeight.Weight">
+            <summary>
+            The weight (the influence) of the bone on the vertex's transformation.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.VertexWeightList">
+            <summary>
+            A single row of the weight table. Stored in a way respecting sparse data (only few bones control a vertex).
+            </summary>
+        </member>
+        <member name="P:Fusee.Serialization.VertexWeightList.VertexWeights">
+            <summary>
+            List of bones controlling the vertex.
+            </summary>
+        </member>
+        <member name="T:Fusee.Serialization.JointWeightColumn">
+            <summary>
+            DEPRECATED
+            </summary>
+        </member>
+        <member name="P:Fusee.Serialization.JointWeightColumn.JointWeights">
+            <summary>
+            DEPRECATED: Gets or sets the joint weights.
+            </summary>
+            <value>
+            The joint weights.
+            </value>
+        </member>
+        <member name="T:Fusee.Serialization.TransformComponent">
+            <summary>
+            Transformation (position, orientation and size) of the node.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.TransformComponent.Translation">
+            <summary>
+            The translation (position) of the node.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.TransformComponent.Rotation">
+            <summary>
+            The rotation (orientation) of the node.
+            </summary>
+        </member>
+        <member name="F:Fusee.Serialization.TransformComponent.Scale">
+            <summary>
+            The scale (size) of the node.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,943 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fusee.Xirkit</name>
+    </assembly>
+    <members>
+        <member name="T:Fusee.Xirkit.Animation">
+            <summary>
+            The Animation Class is capable of storing and handling different types of Channels.
+            </summary>
+        </member>
+        <member name="F:Fusee.Xirkit.Animation._channels">
+            <summary>
+            The _channels List stores all Animation Channels that are derived from the ChannelBase Class.
+            </summary>
+        </member>
+        <member name="F:Fusee.Xirkit.Animation._animHandler">
+            <summary>
+            The _anim handler is a Xirkit Circuit connecting the calculated values to the corresponding Object.
+            </summary>
+        </member>
+        <member name="F:Fusee.Xirkit.Animation._time">
+            <summary>
+            The _time is the actual time in this Animation.
+            </summary>
+        </member>
+        <member name="F:Fusee.Xirkit.Animation._maxDuration">
+            <summary>
+            The Duration of the Animation
+            </summary>
+        </member>
+        <member name="F:Fusee.Xirkit.Animation._animMode">
+            <summary>
+            The _anim mode detrminds wheater the animation runs in PingPong or Loop mode.
+            </summary>
+        </member>
+        <member name="F:Fusee.Xirkit.Animation._direction">
+            <summary>
+            The _direction is the actual direction the animation is playing (forward and backward ist possible)
+            </summary>
+        </member>
+        <member name="P:Fusee.Xirkit.Animation.ChannelBaseList">
+            <summary>
+            Gets the channel base list.
+            </summary>
+        </member>
+        <member name="P:Fusee.Xirkit.Animation.AnimationMode">
+            <summary>
+            Gets or sets the animation mode.
+            </summary>
+            <value>
+            The animation mode.
+            </value>
+        </member>
+        <member name="M:Fusee.Xirkit.Animation.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.Animation"/> class.
+            </summary>
+            <param name="animMode">The parameter sets the AnimationMode</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Animation.AddChannel(Fusee.Xirkit.ChannelBase)">
+            <summary>
+            Adds a channel to this Animation. This channel will be handled by this Animation.
+            </summary>
+            <param name="baseChannel">The base channel that will be handled by this Animation.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Animation.AddAnimation``1(Fusee.Xirkit.Channel{``0},System.Object,System.String)">
+            <summary>
+            Adds the Channel to this Animation and adds it to the _animHandler.
+            </summary>
+            <typeparam name="TValue">The Type of the channel.</typeparam>
+            <param name="channel">The channel that will be added.</param>
+            <param name="channelObject">The Object that will be wired with the channel.</param>
+            <param name="field">The full name of the Field or Property of the Objekt that will be handled by this Animation.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Animation.RemoveChannel(System.Int32)">
+            <summary>
+            Removes a channel from the _channelList.
+            </summary>
+            <param name="channelPosition">The position of the channel that has to be removed.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Animation.SetTick(System.Single)">
+            <summary>
+            Sets the time in all channels.
+            </summary>
+            <param name="time">The time that will be set.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Animation.Animate(System.Single)">
+            <summary>
+            Animates all channels. The time is set by the user.
+            </summary>
+            <param name="time">The time that the user set's.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Animation.DeleteAnimation(System.Int32)">
+            <summary>
+            Deletes the animation and removes the Nodes from the AnimHandler
+            </summary>
+            <param name="pos">The position.</param>
+        </member>
+        <member name="T:Fusee.Xirkit.ChainedMemberAccessor`2">
+            <summary>
+            Class used inside Xirkit to accces (read and write) nested members that are referenced
+            by a chain of properties/fields separated by the object-access operator '.' (dot).
+            </summary>
+            <typeparam name="TPin">The type of the pin (the type to the outside world).</typeparam>
+            <typeparam name="TObj">The type of the object referenced by the innermost member of the access chain.</typeparam>
+        </member>
+        <member name="M:Fusee.Xirkit.ChainedMemberAccessor`2.#ctor(System.Reflection.MemberInfo[],Fusee.Math.Core.Converter{`0,`1},Fusee.Math.Core.Converter{`1,`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.ChainedMemberAccessor`2"/> class.
+            </summary>
+            <param name="miList">A list of member info objects (sorted from outermost to innermost member along the access chain).</param>
+            <param name="p2o">A converter converting from the pin type to and from the original type accessed by the pin.</param>
+            <param name="o2p">A converter converting from the innermost type referenced by access chain to the outside pin type.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.ChainedMemberAccessor`2.Set(System.Object,`0)">
+            <summary>
+            Assigns the value given in val to the object acessed by this member accessor.
+            </summary>
+            <param name="o">The object to which the access chain belongs to.</param>
+            <param name="val">The value to be written to the end of the access chain starting in o.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.ChainedMemberAccessor`2.Get(System.Object)">
+            <summary>
+            Retrieves the value of the innermost member along the access chain from the specified object.
+            </summary>
+            <param name="o">The object to retrieve a value from.</param>
+            <returns>The value contained in the given object at the end of the access chain starting in o.</returns>
+        </member>
+        <member name="T:Fusee.Xirkit.Channel`1">
+            <summary>
+            Generic Channel implementation capable of storing keyframes of the given Type.
+            </summary>
+            <typeparam name="TValue">The type of keyframes' values that the channel should store.</typeparam>
+        </member>
+        <member name="T:Fusee.Xirkit.Channel`1.LerpFunc">
+            <summary>
+            A function that returns a generic Type. The Functions can be seen in Lerp.cs
+            </summary>
+            <param name="firstVal">The first value.</param>
+            <param name="secondVal">The second value.</param>
+            <param name="time1">The time1.</param>
+            <param name="time2">The time2.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fusee.Xirkit.Channel`1.SetChanelValue">
+            <summary>
+            A delegate function for setting a value.
+            </summary>
+            <param name="val">The value that will be set.</param>
+        </member>
+        <member name="E:Fusee.Xirkit.Channel`1.TimeChanged">
+            <summary>
+            Occurs when the channel time changed.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Channel`1.#ctor(Fusee.Xirkit.Channel{`0}.SetChanelValue,Fusee.Xirkit.Channel{`0}.LerpFunc)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.Channel`1"/> class. Adds one defaul Keyframe and the right Lerpfunction.
+            </summary>
+            <param name="timeChanged">The time changed.</param>
+            <param name="lerpFunc">The lerp function.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Channel`1.#ctor(Fusee.Xirkit.Channel{`0}.LerpFunc)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.Channel`1"/> class. Adds the right Lerpfunction.
+            </summary>
+            <param name="lerpFunc">The right lerpfunction.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Channel`1.#ctor(Fusee.Xirkit.Channel{`0}.LerpFunc,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.Channel`1"/> class. Adds a Keyframe with a specific value and the right lerpFunction.
+            </summary>
+            <param name="lerpFunc">The right lerpfunction.</param>
+            <param name="value">The value of the firs keyframe.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Channel`1.SetTick(System.Single)">
+            <summary>
+            Increments the current time and advances between the best fitting keyframes.
+            </summary>
+            <param name="time">The time to advance this channel about.</param>
+        </member>
+        <member name="P:Fusee.Xirkit.Channel`1.Duration">
+            <summary>
+            Retrieves the overall duration of this channel.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Channel`1.AddKeyframe(Fusee.Xirkit.Keyframe{`0})">
+            <summary>
+            Adds a keyframe to this channel.
+            </summary>
+            <param name="keyframe">The keyframe.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Channel`1.AddKeyframe(System.Single,`0)">
+            <summary>
+            Creates a new Keyframe and add's him to the channel.
+            </summary>
+            <param name="time">The time of the new keyframe.</param>
+            <param name="value">The value of the new keyframe.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Channel`1.RemoveKeyframe(System.Single)">
+            <summary>
+            Removes a keyframe at a speciffic time (time = key).
+            </summary>
+            <param name="time">The time of the keyframe that has to be removed.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Channel`1.GetValueAt(System.Single)">
+            <summary>
+            Returns the value of a keyframe at a specific time.
+            </summary>
+            <param name="time">The time.</param>
+            <returns>The calculated value</returns>
+        </member>
+        <member name="M:Fusee.Xirkit.Channel`1.ContainsKey(Fusee.Xirkit.Keyframe{`0})">
+            <summary>
+            Determines whether the channel contains a keyframe that has the same key.
+            </summary>
+            <param name="keyframe">The keyframe that will be tested.</param>
+            <returns>true = there is a keyframe with the same key | false = there no keyframe with the same key</returns>
+        </member>
+        <member name="M:Fusee.Xirkit.Channel`1.ContainsKey(System.Single)">
+            <summary>
+            Determines whether the channel contains a keyframe that has the same time.
+            </summary>
+            <param name="time">The time that will be tested.</param>
+            <returns>true = there is a keyframe with the same key | false = there no keyframe with the same key</returns>
+        </member>
+        <member name="P:Fusee.Xirkit.Channel`1.Value">
+            <summary>
+            Gets the last calculated value.
+            </summary>
+        </member>
+        <member name="T:Fusee.Xirkit.ChannelBase">
+            <summary>
+            Base class containing functionality common to all Channel types, no matter 
+            of the type of the values of the containing key frames.
+            </summary>
+        </member>
+        <member name="F:Fusee.Xirkit.ChannelBase._time">
+            <summary>
+            The _time in the BaseChannel
+            </summary>
+        </member>
+        <member name="P:Fusee.Xirkit.ChannelBase.Time">
+            <summary>
+            Gets or sets the time of the Channel.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.ChannelBase.SetTick(System.Single)">
+            <summary>
+            Increments the current time and advances between the best fitting keyframes.
+            </summary>
+            <param name="time">The time to advance this channel about.</param>
+        </member>
+        <member name="P:Fusee.Xirkit.ChannelBase.Duration">
+            <summary>
+            Retrieves the overall duration of this channel.
+            </summary>
+        </member>
+        <member name="T:Fusee.Xirkit.Circuit">
+            <summary>
+            A Circuit contains arbitrary objects. Connections between the objects' members (fields and properties) automatically
+            handle value propagation - if a source value changes, all the connected members will be set to the updated value.
+            </summary>
+            <remarks>
+            <para>
+            This is the main object of the Xirkit package. Compare a Circuit to a real electronic circuit with the electronic
+            components being instances of objects, their pins welded to the board being instances of <see cref="T:Fusee.Xirkit.IInPin"/> 
+            and <see cref="T:Fusee.Xirkit.IOutPin"/> connected to each others by conductive paths. Instead of electricity floating along 
+            the connections, a Circuit instance transmits values of certain types from node to node. If you are familiar
+            with CINEMA 4D's XPresso, you know what a Circuit is. You can also compare Xirkit to WPF's Dependency Properties.
+            </para>
+            <para>
+            To build up a Circuit in code, create a new Circuit. For each arbitrary object that should be connected in the Circuit,
+            create a hosting <see cref="T:Fusee.Xirkit.Node"/> instance, passing the participating object to the Node's constructor. Use
+            <see cref="M:Fusee.Xirkit.Circuit.AddNode(Fusee.Xirkit.Node)"/> to add each new node (with the hosted object). Then use <see cref="M:Fusee.Xirkit.Node.Attach(System.String,Fusee.Xirkit.Node,System.String)"/> to connect
+            members (fields and properties) of objects contained in two different nodes to each others. 
+            </para>
+            <para>
+            Technically a Circuit is a container filled with <see cref="T:Fusee.Xirkit.Node"/> instances that are related to each others by connected (in- and out-) pins.
+            A number of these nodes are specified as root nodes. Whenever a circuit is executed by calling its <see cref="M:Fusee.Xirkit.Circuit.Execute"/> method,
+            the values of all out-pins at the root nodes are propagated (and possibly converted) the their connected in-pins, 
+            which in turn might trigger subsequent propagation along the graph. Nodes exposing the <see cref="T:Fusee.Xirkit.ICalculationPerformer"/> 
+            interface are triggered to perform their calculation before the values at their out-pins are further propagated.
+            </para>
+            </remarks>
+        </member>
+        <member name="P:Fusee.Xirkit.Circuit.NodeList">
+            <summary>
+            Gets list of nodes within this Circuit
+            </summary>
+            <value>
+            The node list.
+            </value>
+        </member>
+        <member name="P:Fusee.Xirkit.Circuit.RootList">
+            <summary>
+            Gets list of root nodes within this Circuit. Each root node should additionally be part of the node list.
+            </summary>
+            <value>
+            The root list.
+            </value>
+        </member>
+        <member name="M:Fusee.Xirkit.Circuit.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.Circuit"/> class.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Circuit.AddRoot(Fusee.Xirkit.Node)">
+            <summary>
+            Adds a node to list of root nodes. Root nodes are the starting point of the 
+            value propagation when a graph is executed (when its <see cref="M:Fusee.Xirkit.Circuit.Execute"/> method is called).
+            </summary>
+            <param name="root">A Node object to be added to the list of root nodes.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Circuit.AddNode(Fusee.Xirkit.Node)">
+            <summary>
+            Adds node to the circuit. The node only takes part in an execution as long as it is either
+            also listed as a root node or it has in-pins connected to other nodes in the list.
+            </summary>
+            <param name="node">The node.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Circuit.Reset">
+            <summary>
+            Resets all nodes within this circuit.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Circuit.Execute">
+            <summary>
+            Executes this circuit. 
+            </summary>
+            <remarks>
+            Propagates the values of all out-pins at the root nodes to the their connected in-pins. If these nodes have out-pins 
+            connected to subsequent nodes' in-pins, their values will be further propagated. Nodes exposing the 
+            <see cref="T:Fusee.Xirkit.ICalculationPerformer"/> interface are triggered to perform their calculation before 
+            the values at their out-pins are further propagated.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Xirkit.Circuit.DeleteRoot(System.Int32)">
+            <summary>
+            This method is defunkt since a user has no idea of what to specify at "pos".
+            </summary>
+            <param name="pos">The position.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Circuit.DeleteNode(System.Int32)">
+            <summary>
+            This method is defunkt since a user has no idea of what to specify at "pos".
+            </summary>
+            <param name="pos">The position.</param>
+        </member>
+        <member name="T:Fusee.Xirkit.FieldAccesssor`1">
+            <summary>
+            Member Accessor implementation specialized on accessing fields.
+            </summary>
+            <typeparam name="T">The type of the pin.</typeparam>
+            <seealso cref="T:Fusee.Xirkit.IMemberAccessor`1"/>
+        </member>
+        <member name="M:Fusee.Xirkit.FieldAccesssor`1.#ctor(System.Reflection.FieldInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.FieldAccesssor`1"/> class.
+            </summary>
+            <param name="fieldInfo">The field information.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.FieldAccesssor`1.Set(System.Object,`0)">
+            <summary>
+            Sets the specified value to the given object. This instance holds information about which
+            field is to be filled with the value and how to perform this assignment.
+            </summary>
+            <param name="o">The object on which the field identified with this instance's field accessor the given value is to be assigned to.</param>
+            <param name="val">The value that should be assigned.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.FieldAccesssor`1.Get(System.Object)">
+            <summary>
+            Retrieves the value currently stored in the object o. his instance holds information about which
+            field of o the value should be retrieved from and how to perform this retrieval.
+            </summary>
+            <param name="o">The object from which the field identified with this instance's field accessor the value is to be retrieved from.</param>
+            <returns>
+            The value currently stored in o's field.
+            </returns>
+        </member>
+        <member name="T:Fusee.Xirkit.ConvertingFieldAccessor`2">
+            <summary>
+            Member Accessor implementation specialized on accessing fields where the type of the pin and the actual type of the field are different.
+            The accsessor performs the conversion operation specefied when performing its set or get operations.
+            </summary>
+            <typeparam name="TPin">The type of the pin.</typeparam>
+            <typeparam name="TObj">The type of the field.</typeparam>
+        </member>
+        <member name="M:Fusee.Xirkit.ConvertingFieldAccessor`2.#ctor(System.Reflection.FieldInfo,Fusee.Math.Core.Converter{`0,`1},Fusee.Math.Core.Converter{`1,`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.ConvertingFieldAccessor`2"/> class.
+            </summary>
+            <param name="fieldInfo">The field information.</param>
+            <param name="p2o">The conversion operation to convert values from the pin type to the field type.</param>
+            <param name="o2p">The inverse conversion operation (from field to pin).</param>
+        </member>
+        <member name="M:Fusee.Xirkit.ConvertingFieldAccessor`2.Set(System.Object,`0)">
+            <summary>
+            Sets the specified value to the given object. This instance holds information about which
+            field is to be filled with the value and how to perform this assignment.
+            </summary>
+            <param name="o">The object on which the field identified with this instance's field accessor the given value is to be assigned to.</param>
+            <param name="val">The value that should be assigned.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.ConvertingFieldAccessor`2.Get(System.Object)">
+            <summary>
+            Retrieves the value currently stored in the object o. his instance holds information about which
+            field of o the value should be retrieved from and how to perform this retrieval.
+            </summary>
+            <param name="o">The object from which the field identified with this instance's field accessor the value is to be retrieved from.</param>
+            <returns>
+            The value currently stored in o's field.
+            </returns>
+        </member>
+        <member name="T:Fusee.Xirkit.ICalculationPerformer">
+            <summary>
+            Users should implement this interface on objects if a custom calculation is to be performed whenever the object is used
+            within the node of a circuit.
+            </summary>
+            <remarks>
+             When an instance of this interface is passed to the constructor of <see cref="T:Fusee.Xirkit.Node"/> 
+            its calculation performing capability is recognized and triggered when a circuit containting that node is executed.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Xirkit.ICalculationPerformer.PerformCalculation">
+            <summary>
+            User-defined calculation to be performed on Circuit execution.
+            </summary>
+            <seealso cref="M:Fusee.Xirkit.Circuit.Execute"/>
+        </member>
+        <member name="T:Fusee.Xirkit.ReceivedValueHandler">
+            <summary>
+            Event handler type. Methods whith this signature can be registered on the <see cref="E:Fusee.Xirkit.IInPin.ReceivedValue"/> event.
+            </summary>
+            <param name="inPin">The in-pin receiving a value.</param>
+            <param name="args">The <see cref="T:System.EventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="T:Fusee.Xirkit.IInPin">
+            <summary>
+            Interface used to handle incoming pins to nodes. This interface contains all relevant parts of an in-pin
+            implementation not actually bound to the type of the pin.
+            </summary>
+            <remarks>
+            This interface allows in-pins of different types to  be handled similarly (e.g. stored in an array). 
+            <see cref="T:Fusee.Xirkit.InPin`1"/> for all implementation parts
+            bound to a concrete pin type.
+            </remarks> 
+        </member>
+        <member name="P:Fusee.Xirkit.IInPin.Member">
+            <summary>
+            Gets the name of the member or the member chain.
+            </summary>
+            <value>
+            The member' name.
+            </value>
+        </member>
+        <member name="E:Fusee.Xirkit.IInPin.ReceivedValue">
+            <summary>
+            Occurs when this pin reveived a value.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.IInPin.GetPinType">
+            <summary>
+            Retrieves the type discription of the pin.
+            </summary>
+            <returns>The pin's type</returns>
+        </member>
+        <member name="T:Fusee.Xirkit.IMemberAccessor`1">
+            <summary>
+            Base interface for all accessors. An accessor implements the connections between the Pin 
+            (<see cref="T:Fusee.Xirkit.IInPin"/> or <see cref="T:Fusee.Xirkit.IOutPin"/>) of a <see cref="T:Fusee.Xirkit.Node"/> and a member
+            (such as a Field or a Property) of the object "hosted" by the Node.
+            </summary>
+            <typeparam name="T">The type of the pin. This is not necessarily the exact type
+            of the member exposed by the object due to Xirkits ability to perform data conversions.</typeparam>
+        </member>
+        <member name="M:Fusee.Xirkit.IMemberAccessor`1.Set(System.Object,`0)">
+            <summary>
+            Sets the specified value to the given object. This instance holds information about which 
+            member is to be filled with the value and how to perform this assignment.
+            </summary>
+            <param name="o">The object on which the member identified with this instance's member accessor the given value is to be assigned to.</param>
+            <param name="val">The value that should be assigned.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.IMemberAccessor`1.Get(System.Object)">
+            <summary>
+            Retrieves the value currently stored in the object o. his instance holds information about which 
+            member of o the value should be retrieved from and how to perform this retrieval.
+            </summary>
+            <param name="o">The object from which the member identified with this instance's member accessor the value is to be retrieved from.</param>
+            <returns>The value currently stored in o's member.</returns>
+        </member>
+        <member name="T:Fusee.Xirkit.InPin`1">
+            <summary>
+            Class representing incoming pins to nodes. 
+            </summary>
+            <typeparam name="T">The type of the values transmitted over this pin.</typeparam>
+            <seealso cref="T:Fusee.Xirkit.IInPin"/>
+            <seealso cref="T:Fusee.Xirkit.Pin"/>
+        </member>
+        <member name="P:Fusee.Xirkit.InPin`1.MemberAccessor">
+            <summary>
+            Gets or sets the member accessor.
+            </summary>
+            <value>
+            The member accessor.
+            </value>
+        </member>
+        <member name="M:Fusee.Xirkit.InPin`1.#ctor(Fusee.Xirkit.Node,System.String,Fusee.Xirkit.IMemberAccessor{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.InPin`1"/> class.
+            </summary>
+            <param name="n">The node this pin should belong to.</param>
+            <param name="member">The name of the member or the member chain within the object hosted by the node n.</param>
+            <param name="memberAccessor">The member accessor used to deliver incoming values from the in-pin to the specified member of the node.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.InPin`1.SetValue(`0)">
+            <summary>
+            Sets the value. Triggers the <see cref="E:Fusee.Xirkit.InPin`1.ReceivedValue"/> event.
+            </summary>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.InPin`1.GetPinType">
+            <summary>
+            Retrieves the type discription of the pin.
+            </summary>
+            <returns>
+            The pin's type
+            </returns>
+        </member>
+        <member name="E:Fusee.Xirkit.InPin`1.ReceivedValue">
+            <summary>
+            Occurs when this pin reveived a value.
+            </summary>
+        </member>
+        <member name="T:Fusee.Xirkit.IOutPin">
+            <summary>
+            Interface used to handle incoming pins to nodes. This interface contains all relevant parts of an out-pin
+            implementation not actually bound to the type of the pin 
+            </summary>
+            <remarks>
+            This interface allows out-pins of different types to  be handled similarly (e.g. stored in an array). 
+            <see cref="T:Fusee.Xirkit.OutPin`1"/> for all implementation parts bound to a concrete pin type.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Xirkit.IOutPin.GetPinType">
+            <summary>
+            Retrieves the type discription of the pin.
+            </summary>
+            <returns>The pin's type</returns>
+        </member>
+        <member name="P:Fusee.Xirkit.IOutPin.Member">
+            <summary>
+            Gets the name of the member or the member chain.
+            </summary>
+            <value>
+            The member' name.
+            </value>
+        </member>
+        <member name="M:Fusee.Xirkit.IOutPin.Propagate">
+            <summary>
+            Propagates the value connected to this out-pin to all connected in-pins
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.IOutPin.Attach(Fusee.Xirkit.IInPin)">
+            <summary>
+            Attaches the specified in-pin to this out-pin.
+            </summary>
+            <param name="other">The in in-pin to attach to.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.IOutPin.Detach(Fusee.Xirkit.IInPin)">
+            <summary>
+            Detaches the specified (and previously attached) in-pin from this out-pin
+            </summary>
+            <param name="other">The in-pin to detach from.</param>
+        </member>
+        <member name="T:Fusee.Xirkit.Keyframe`1">
+            <summary>
+            This Class represents a Keyframe it has a time and a Value.
+            </summary>
+            <typeparam name="TValue">The type of the value.</typeparam>
+        </member>
+        <member name="M:Fusee.Xirkit.Keyframe`1.#ctor(System.Single,`0)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.Keyframe`1"/> class.
+            </summary>
+            <param name="time">The time of the keyframe.</param>
+            <param name="value">The value of the keyframe.</param>
+        </member>
+        <member name="P:Fusee.Xirkit.Keyframe`1.Time">
+            <summary>
+            Gets or sets the time.
+            </summary>
+            <value>
+            The new time.
+            </value>
+        </member>
+        <member name="P:Fusee.Xirkit.Keyframe`1.Value">
+            <summary>
+            Gets or sets the value.
+            </summary>
+            <value>
+            The new value.
+            </value>
+        </member>
+        <member name="T:Fusee.Xirkit.Lerp">
+            <summary>
+            provides different LerpFunctions that can be used in a channel. A Lerp Function represents a linear interpolataion between 2 points in a timeline.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Lerp.DoubleLerp(System.Double,System.Double,System.Single,System.Single)">
+            <summary>
+            Lerp Function for Doubles.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Lerp.IntLerp(System.Int32,System.Int32,System.Single,System.Single)">
+            <summary>
+            Lerp Function for Int.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Lerp.FloatLerp(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Lerp Function for Float.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Lerp.Float2Lerp(Fusee.Math.Core.float2,Fusee.Math.Core.float2,System.Single,System.Single)">
+            <summary>
+            Lerp Function for Float2.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Lerp.Float3Lerp(Fusee.Math.Core.float3,Fusee.Math.Core.float3,System.Single,System.Single)">
+            <summary>
+            Lerp Function for float3 values. Linearly interpolates the three components independently.
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Lerp.Float3QuaternionSlerp(Fusee.Math.Core.float3,Fusee.Math.Core.float3,System.Single,System.Single)">
+            <summary>
+            Slerp Function for float3 using quaternion interpolation. Useful if the given float3 values contain euler angles in Pitch(x)/Yaw(y)/Roll(z) order.
+            The euler angle set returned by this method is on the shortest spherical path between the two parameter euler angle sets.
+            Note that using linear interpolation <see cref="M:Fusee.Xirkit.Lerp.Float3Lerp(Fusee.Math.Core.float3,Fusee.Math.Core.float3,System.Single,System.Single)"/> of angle values will NOT yield in a path lying on a great circle between the two parameters. Instead, using
+            linear interpolation, the interpolated values will describe a curve called loxodrome which spirals around the poles (due to gimbal lock). 
+            </summary>
+        </member>
+        <member name="M:Fusee.Xirkit.Lerp.Float4Lerp(Fusee.Math.Core.float4,Fusee.Math.Core.float4,System.Single,System.Single)">
+            <summary>
+            Lerp Function for Float4s.
+            </summary>
+        </member>
+        <member name="T:Fusee.Xirkit.ListSort`1">
+            <summary>
+            This is needed to sort the List in the Channel Class.
+            </summary>
+            <typeparam name="TValue">The type of the value.</typeparam>
+        </member>
+        <member name="M:Fusee.Xirkit.ListSort`1.Compare(Fusee.Xirkit.Keyframe{`0},Fusee.Xirkit.Keyframe{`0})">
+            <summary>
+            Compares 2 Objekts and shows through the returned value, wheater an Objekt is smaller, bigger or equals the other Objekts.
+            </summary>
+            <param name="x">The first Objekt that shall be compared.</param>
+            <param name="y">The second Objekt that shall be compared.</param>
+        </member>
+        <member name="T:Fusee.Xirkit.Node">
+            <summary>
+            Major building block of the Xirkit library. Each <see cref="T:Fusee.Xirkit.Circuit"/> contains Node instances.
+            </summary>
+            <remarks>
+            A single object instance of any type can be hosted inside a node. This way any arbitrary object 
+            can participate in a Circuit. This makes the Xirkit library extremely versatile since it can
+            handle any type of object out of the box without any further 
+            Node instances within a <see cref="T:Fusee.Xirkit.Circuit"/> are typically interconnected using in-pins and out-pins.
+            The internal connection from pins to actual members (properties and fields) of the contained object
+            are done using <see cref="T:Fusee.Xirkit.IMemberAccessor`1"/>s.
+            </remarks>
+        </member>
+        <member name="P:Fusee.Xirkit.Node.O">
+            <summary>
+            Gets or sets the object to host by this node.
+            </summary>
+            <value>
+            The object to be hosted.
+            </value>
+        </member>
+        <member name="M:Fusee.Xirkit.Node.#ctor(System.Object)">
+            <summary>
+            Constructs a new node
+            </summary>
+            <param name="o">The object to be hoste</param>
+        </member>
+        <member name="M:Fusee.Xirkit.Node.Reset">
+            <summary>
+            Resets this instance by considering all in-pins to contain "dirty" values.
+            </summary>
+            <remarks>
+            Keeping a dirty/actual state on the in-pins is necessary if the node hosts
+            an instance of <see cref="T:Fusee.Xirkit.ICalculationPerformer"/>. In this case the calculation
+            should only be performed once in an execution step and not each time an in-pin
+            changes its value.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Xirkit.Node.Attach(System.String,Fusee.Xirkit.Node,System.String)">
+            <summary>
+            Attaches this Node's object's member (speceified by thisMember) to the the specified member of the object hosted by the other node. 
+            A member can be any field or property.
+            </summary>
+            <param name="thisMember">The member of this node to attach.</param>
+            <param name="other">The other node.</param>
+            <param name="otherMember">The other node's object's (sic) member.</param>
+            <remarks>
+            This is a high-level method users can call to do the wiring inside a <see cref="T:Fusee.Xirkit.Circuit"/>. It creates all the necessary in- and out-pins
+            togegher with their respective member accessors.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Xirkit.Node.GetOutPin(System.String)">
+            <summary>
+            Finds an existing out-pin already present an wired to the given member (field or property).
+            If no such out-pin exists, a new one is created.
+            </summary>
+            <param name="member">The member.</param>
+            <returns>A newly created or already existing out-pin</returns>
+        </member>
+        <member name="M:Fusee.Xirkit.Node.GetInPin(System.String,System.Type)">
+            <summary>
+            Create a new in-pin for the given member (field or property). If the member is already exposed by an in-pin
+            an exception is thrown because a member cannot be governed by two in-pins. If a non-null target type is specified,
+            the member will be connected to the pin using <see cref="T:Fusee.Xirkit.ConvertingFieldAccessor`2"/> or 
+            <see cref="T:Fusee.Xirkit.ConvertingPropertyAccessor`2"/>.
+            </summary>
+            <param name="member">The member.</param>
+            <param name="targetType">Type of the target.</param>
+            <returns></returns>
+            <exception cref="T:System.Exception">Member  + member +  already connected as InPin!</exception>
+        </member>
+        <member name="M:Fusee.Xirkit.Node.Propagate">
+            <summary>
+            Propagates the values at the object's members' to all in-pins connected to each out-pin connected
+            to a member of this Node's hosted object.
+            </summary>
+        </member>
+        <member name="P:Fusee.Xirkit.Node.OutPins">
+            <summary>
+            Gets the out pins.
+            </summary>
+            <value>
+            The out pins.
+            </value>
+        </member>
+        <member name="P:Fusee.Xirkit.Node.InPins">
+            <summary>
+            Gets the in pins.
+            </summary>
+            <value>
+            The in pins.
+            </value>
+        </member>
+        <member name="P:Fusee.Xirkit.Node.AllPinsActual">
+            <summary>
+            Gets a value indicating whether all in-pins have been updated actual since the last call to <see cref="M:Fusee.Xirkit.Node.Reset"/>.
+            </summary>
+            <value>
+              <c>true</c> if all pins are actual; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Xirkit.Node.RemoveAllPins">
+            <summary>
+            Removes all pins.
+            </summary>
+        </member>
+        <member name="T:Fusee.Xirkit.OutPin`1">
+            <summary>
+            Class representing outgoing pins to nodes. 
+            </summary>
+            <typeparam name="T">The type of the values transmitted over this pin.</typeparam>
+            <seealso cref="T:Fusee.Xirkit.IOutPin"/>
+            <seealso cref="T:Fusee.Xirkit.Pin"/>
+        </member>
+        <member name="P:Fusee.Xirkit.OutPin`1.MemberAccessor">
+            <summary>
+            Gets or sets the member accessor.
+            </summary>
+            <value>
+            The member accessor.
+            </value>
+        </member>
+        <member name="M:Fusee.Xirkit.OutPin`1.#ctor(Fusee.Xirkit.Node,System.String,Fusee.Xirkit.IMemberAccessor{`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.OutPin`1"/> class.
+            </summary>
+            <param name="n">The node this out-pin should be connected to.</param>
+            <param name="member">The member (property or field) exposed by this out-pin.</param>
+            <param name="memberAccessor">The member accessor used to write data to the member.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.OutPin`1.Attach(Fusee.Xirkit.IInPin)">
+            <summary>
+            Attaches the specified in-pin to this out-pin.
+            </summary>
+            <param name="other">The in in-pin to attach to.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.OutPin`1.Detach(Fusee.Xirkit.IInPin)">
+            <summary>
+            Detaches the specified (and previously attached) in-pin from this out-pin
+            </summary>
+            <param name="other">The in-pin to detach from.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.OutPin`1.GetValue">
+            <summary>
+            Retrieves the value currently stored in the member (field or property) connected to this out-pin.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Xirkit.OutPin`1.Propagate">
+            <summary>
+            Propagates the value connected to this out-pin to all connected in-pins
+            </summary>
+        </member>
+        <member name="P:Fusee.Xirkit.OutPin`1.InPins">
+            <summary>
+            Gets the in-pins connected to this out-pin.
+            </summary>
+            <value>
+            The in-pins.
+            </value>
+        </member>
+        <member name="M:Fusee.Xirkit.OutPin`1.GetPinType">
+            <summary>
+            Retrieves the type discription of the pin.
+            </summary>
+            <returns>
+            The pin's type
+            </returns>
+        </member>
+        <member name="T:Fusee.Xirkit.Pin">
+            <summary>
+            A pin is a connection point where <see cref="T:Fusee.Xirkit.Node"/> instances can be connected to each others.
+            Pin connections carry values of certain types. There are in-pins and out-pins. One out-pin
+            can be connected to one or more in-pins but each in-pin can only be connected to one out-pin.
+            </summary>
+            <remarks>
+            This calss contains base implementations similar on all pin types, no matter which type 
+            its value is or whether it's an in- or an out-pin. It is a building block to create various 
+            pin types used within Xirkit.
+            </remarks>
+            <seealso cref="T:Fusee.Xirkit.InPin`1"/>
+            <seealso cref="T:Fusee.Xirkit.OutPin`1"/>
+            <seealso cref="T:Fusee.Xirkit.IInPin"/>
+            <seealso cref="T:Fusee.Xirkit.IOutPin"/>
+        </member>
+        <member name="P:Fusee.Xirkit.Pin.N">
+            <summary>
+            Gets the Node this pin is accessing.
+            </summary>
+            <value>
+            The Node.
+            </value>
+        </member>
+        <member name="P:Fusee.Xirkit.Pin.Member">
+            <summary>
+            Gets the name of the member or the member chain.
+            </summary>
+            <value>
+            The member' name.
+            </value>
+        </member>
+        <member name="M:Fusee.Xirkit.Pin.#ctor(Fusee.Xirkit.Node,System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.Pin"/> class.
+            </summary>
+            <param name="n">The node this pin should belong to.</param>
+            <param name="member">The name of the member or the member chain within the object hosted by the node n.</param>
+        </member>
+        <member name="T:Fusee.Xirkit.PinFactory">
+            <summary>
+            This class' static member function creates Pins depending on the type of the member (int, double, string, ...) and also 
+            depending on whether the memeber is a propery (with a setter and getter) or a simple field.
+            </summary>
+        </member>
+        <member name="T:Fusee.Xirkit.PropertyAccessor`1">
+            <summary>
+            Member Accessor implementation specialized on accessing properties (using set and get).
+            </summary>
+            <typeparam name="T">The type of the pin.</typeparam>
+            <seealso cref="T:Fusee.Xirkit.IMemberAccessor`1"/>    
+        </member>
+        <member name="M:Fusee.Xirkit.PropertyAccessor`1.#ctor(System.Reflection.PropertyInfo)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.PropertyAccessor`1"/> class.
+            </summary>
+            <param name="propertyInfo">The property information.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.PropertyAccessor`1.Set(System.Object,`0)">
+            <summary>
+            Sets the specified value to the given object. This instance holds information about which
+            property is to be filled with the value and how to perform this assignment.
+            </summary>
+            <param name="o">The object on which the property identified with this instance's property accessor the given value is to be assigned to.</param>
+            <param name="val">The value that should be assigned.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.PropertyAccessor`1.Get(System.Object)">
+            <summary>
+            Retrieves the value currently stored in the object o. his instance holds information about which
+            property of o the value should be retrieved from and how to perform this retrieval.
+            </summary>
+            <param name="o">The object from which the property identified with this instance's property accessor the value is to be retrieved from.</param>
+            <returns>
+            The value currently stored in o's property.
+            </returns>
+        </member>
+        <member name="T:Fusee.Xirkit.ConvertingPropertyAccessor`2">
+            <summary>
+            Member Accessor implementation specialized on accessing properties (using set and get) where the type of the pin and the actual type of the field are different.
+            The accsessor performs the conversion operation specefied when performing its set or get operations.
+            </summary>
+            <typeparam name="TPin">The type of the pin.</typeparam>
+            <typeparam name="TObj">The type of the field.</typeparam>
+        </member>
+        <member name="M:Fusee.Xirkit.ConvertingPropertyAccessor`2.#ctor(System.Reflection.PropertyInfo,Fusee.Math.Core.Converter{`0,`1},Fusee.Math.Core.Converter{`1,`0})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Xirkit.ConvertingPropertyAccessor`2"/> class.
+            </summary>
+            <param name="propertyInfo">The field information.</param>
+            <param name="p2o">The conversion operation to convert values from the pin type to the field type.</param>
+            <param name="o2p">The inverse conversion operation (from field to pin).</param>
+        </member>
+        <member name="M:Fusee.Xirkit.ConvertingPropertyAccessor`2.Set(System.Object,`0)">
+            <summary>
+            Sets the specified value to the given object. This instance holds information about which
+            property is to be filled with the value and how to perform this assignment.
+            </summary>
+            <param name="o">The object on which the property identified with this instance's property accessor the given value is to be assigned to.</param>
+            <param name="val">The value that should be assigned.</param>
+        </member>
+        <member name="M:Fusee.Xirkit.ConvertingPropertyAccessor`2.Get(System.Object)">
+            <summary>
+            Retrieves the value currently stored in the object o. his instance holds information about which
+            property of o the value should be retrieved from and how to perform this retrieval.
+            </summary>
+            <param name="o">The object from which the property identified with this instance's property accessor the value is to be retrieved from.</param>
+            <returns>
+            The value currently stored in o's property.
+            </returns>
+        </member>
+    </members>
+</doc>

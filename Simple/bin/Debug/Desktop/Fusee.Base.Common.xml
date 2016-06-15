@@ -1,0 +1,1336 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fusee.Base.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Fusee.Base.Common.InjectMeAttribute">
+            <summary>
+            Use the InjectMe attribute to mark fields, properties or parameters of methods to be injectable by some
+            (soon to be implemented) dependency injection framework. For the time being these values need to be set
+            hardwired somewhere and the attribute is just intended as a markter.
+            </summary>
+        </member>
+        <member name="T:Fusee.Base.Common.ColorUint">
+            <summary>
+            Represents a 32-bit color (4 bytes) in the form of RGBA (in byte order: R, G, B, A).
+            Seen as a 32 bit unsigned integer, each color is in the form AARRGGBB - so the 
+            most signifcant byte is Alpha and the least significatn byte is the blue channel
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ColorUint.R">
+            <summary>
+            The red component of the color.
+            </summary> 
+        </member>
+        <member name="F:Fusee.Base.Common.ColorUint.G">
+            <summary>
+            The green component of the color.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ColorUint.B">
+            <summary>
+            The blue component of the color.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ColorUint.A">
+            <summary>
+            The alpha component of the color.
+            </summary>
+        </member>
+        <member name="P:Fusee.Base.Common.ColorUint.Item(System.Int32)">
+            <summary>
+            Gets or sets the component at the specified index.
+            </summary>
+            <value>
+            The value of the alpha, red, green, or blue component, depending on the index.
+            </value>
+            <param name="index">The index of the component to access. Use 0 for the alpha component, 1 for the red component, 2 for the green component, and 3 for the blue component.</param>
+            <returns>
+            The value of the component at the specified index.
+            </returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">Thrown when the <paramref name="index"/> is out of the range [0, 3].</exception>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(System.Byte)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint"/> struct.
+            </summary>
+            <param name="value">The value that will be assigned to all components.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint"/> struct.
+            
+            </summary>
+            <param name="value">The value that will be assigned to all components.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(System.Byte,System.Byte,System.Byte,System.Byte)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint"/> struct.
+            </summary>
+            <param name="red">The red component of the color.</param>
+            <param name="green">The green component of the color.</param>
+            <param name="blue">The blue component of the color.</param>
+            <param name="alpha">The alpha component of the color.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint"/> struct.
+            </summary>
+            <param name="red">The red component of the color.</param>
+            <param name="green">The green component of the color.</param>
+            <param name="blue">The blue component of the color.</param>
+            <param name="alpha">The alpha component of the color.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(Fusee.Math.Core.float4)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint"/> struct.
+            </summary>
+            <param name="value">The red, green, blue, and alpha components of the color.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(Fusee.Math.Core.float3,System.Single)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint"/> struct.
+            </summary>
+            <param name="value">The red, green, and blue compoennts of the color.</param>
+            <param name="alpha">The alpha component of the color.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(System.UInt32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint"/> struct.
+            </summary>
+            <param name="rgba">A packed integer containing all four color components in RGBA order.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint"/> struct.
+            </summary>
+            <param name="rgba">A packed integer containing all four color components in RGBA order.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(System.Single[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint"/> struct.
+            </summary>
+            <param name="values">The values to assign to the red, green, and blue, alpha components of the color. This must be an array with four elements.</param><exception cref="T:System.ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception><exception cref="T:System.ArgumentOutOfRangeException">Thrown when <paramref name="values"/> contains more or less than four elements.</exception>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(System.Byte[])">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint"/> struct.
+            </summary>
+            <param name="values">The values to assign to the alpha, red, green, and blue components of the color. This must be an array with four elements.</param><exception cref="T:System.ArgumentNullException">Thrown when <paramref name="values"/> is <c>null</c>.</exception><exception cref="T:System.ArgumentOutOfRangeException">Thrown when <paramref name="values"/> contains more or less than four elements.</exception>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.#ctor(System.Byte[],System.Int32,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.ColorUint" /> struct.
+            </summary>
+            <param name="copyFrom">The array to copy from.</param>
+            <param name="index">The index where to start copying color data.</param>
+            <param name="noAlpha">if set to <c>true</c> do not copy any alpha value.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Explicit(Fusee.Base.Common.ColorUint)~Fusee.Math.Core.float3">
+            <summary>
+            Performs an explicit conversion from <see cref="T:Fusee.Engine.ColorUint"/> to <see cref="T:Fusee.Math.float3"/>.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Explicit(Fusee.Base.Common.ColorUint)~Fusee.Math.Core.float4">
+            <summary>
+            Performs an explicit conversion from <see cref="T:Fusee.Engine.ColorUint"/> to <see cref="T:Fusee.Math.float4"/>.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Explicit(Fusee.Math.Core.float3)~Fusee.Base.Common.ColorUint">
+            <summary>
+            Performs an explicit conversion from <see cref="T:Fusee.Math.float3"/> to <see cref="T:Fusee.Engine.ColorUint"/>.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Explicit(Fusee.Math.Core.float4)~Fusee.Base.Common.ColorUint">
+            <summary>
+            Performs an explicit conversion from <see cref="T:Fusee.Math.float4"/> to <see cref="T:Fusee.Engine.ColorUint"/>.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Explicit(Fusee.Base.Common.ColorUint)~System.UInt32">
+            <summary>
+            Performs an explicit conversion from <see cref="T:System.Int32"/> to <see cref="T:Fusee.Engine.ColorUint"/>.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Explicit(System.UInt32)~Fusee.Base.Common.ColorUint">
+            <summary>
+            Performs an explicit conversion from <see cref="T:System.Int32"/> to <see cref="T:Fusee.Engine.ColorUint"/>.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Explicit(Fusee.Base.Common.ColorUint)~System.Int32">
+            <summary>
+            Performs an explicit conversion from <see cref="T:System.Int32"/> to <see cref="T:Fusee.Engine.ColorUint"/>.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Explicit(System.Int32)~Fusee.Base.Common.ColorUint">
+            <summary>
+            Performs an explicit conversion from <see cref="T:System.Int32"/> to <see cref="T:Fusee.Engine.ColorUint"/>.
+            </summary>
+            <param name="value">The value.</param>
+            <returns>
+            The result of the conversion.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Addition(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Adds two colors.
+            </summary>
+            <param name="left">The first color to add.</param><param name="right">The second color to add.</param>
+            <returns>
+            The sum of the two colors.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_UnaryPlus(Fusee.Base.Common.ColorUint)">
+            <summary>
+            Assert a color (return it unchanged).
+            </summary>
+            <param name="value">The color to assert (unchange).</param>
+            <returns>
+            The asserted (unchanged) color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Subtraction(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Subtracts two colors.
+            </summary>
+            <param name="left">The first color to subtract.</param><param name="right">The second color to subtract.</param>
+            <returns>
+            The difference of the two colors.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_UnaryNegation(Fusee.Base.Common.ColorUint)">
+            <summary>
+            Negates a color.
+            </summary>
+            <param name="value">The color to negate.</param>
+            <returns>
+            A negated color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Multiply(System.Single,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Scales a color.
+            </summary>
+            <param name="scale">The factor by which to scale the color.</param><param name="value">The color to scale.</param>
+            <returns>
+            The scaled color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Multiply(Fusee.Base.Common.ColorUint,System.Single)">
+            <summary>
+            Scales a color.
+            </summary>
+            <param name="value">The factor by which to scale the color.</param><param name="scale">The color to scale.</param>
+            <returns>
+            The scaled color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Multiply(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Modulates two colors.
+            </summary>
+            <param name="left">The first color to modulate.</param><param name="right">The second color to modulate.</param>
+            <returns>
+            The modulated color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Equality(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Tests for equality between two objects.
+            </summary>
+            <param name="left">The first value to compare.</param><param name="right">The second value to compare.</param>
+            <returns>
+            <c>true</c> if <paramref name="left"/> has the same value as <paramref name="right"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.op_Inequality(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Tests for inequality between two objects.
+            </summary>
+            <param name="left">The first value to compare.</param><param name="right">The second value to compare.</param>
+            <returns>
+            <c>true</c> if <paramref name="left"/> has a different value than <paramref name="right"/>; otherwise, <c>false</c>.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.ToBgra">
+            <summary>
+            Converts the color into a packed integer.
+            </summary>
+            <returns>
+            A packed integer containing all four color components.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.ToRgba">
+            <summary>
+            Converts the color into a packed integer.
+            </summary>
+            <returns>
+            A packed integer containing all four color components.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Tofloat3">
+            <summary>
+            Converts the color into a three component vector.
+            </summary>
+            <returns>
+            A three component vector containing the red, green, and blue components of the color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Tofloat4">
+            <summary>
+            Converts the color into a four component vector.
+            </summary>
+            <returns>
+            A four component vector containing all four color components.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.ToArray">
+            <summary>
+            Creates an array containing the elements of the color.
+            </summary>
+            <returns>
+            A four-element array containing the components of the color in RGBA order.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.ToCss">
+            <summary>
+            Converts the color to a string capbable of being used in html/css declarations, like #FF0000 for red or #0000FF for blue.
+            </summary>
+            <returns>A seven charcacter string (# followed by two hex digits for each color channel, red, green and blue).</returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.GetBrightness">
+            <summary>
+            Gets the brightness.
+            </summary>
+            <returns>
+            The Hue-Saturation-Brightness (HSB) saturation for this <see cref="T:Fusee.Engine.ColorUint"/>
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.GetHue">
+            <summary>
+            Gets the hue.
+            </summary>
+            <returns>
+            The Hue-Saturation-Brightness (HSB) saturation for this <see cref="T:Fusee.Engine.ColorUint"/>
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.GetSaturation">
+            <summary>
+            Gets the saturation.
+            </summary>
+            <returns>
+            The Hue-Saturation-Brightness (HSB) saturation for this <see cref="T:Fusee.Engine.ColorUint"/>
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Add(Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Adds two colors.
+            </summary>
+            <param name="left">The first color to add.</param><param name="right">The second color to add.</param><param name="result">When the method completes, completes the sum of the two colors.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Add(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Adds two colors.
+            </summary>
+            <param name="left">The first color to add.</param><param name="right">The second color to add.</param>
+            <returns>
+            The sum of the two colors.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Subtract(Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Subtracts two colors.
+            </summary>
+            <param name="left">The first color to subtract.</param><param name="right">The second color to subtract.</param><param name="result">WHen the method completes, contains the difference of the two colors.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Subtract(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Subtracts two colors.
+            </summary>
+            <param name="left">The first color to subtract.</param><param name="right">The second color to subtract</param>
+            <returns>
+            The difference of the two colors.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Modulate(Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Modulates two colors.
+            </summary>
+            <param name="left">The first color to modulate.</param><param name="right">The second color to modulate.</param><param name="result">When the method completes, contains the modulated color.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Modulate(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Modulates two colors.
+            </summary>
+            <param name="left">The first color to modulate.</param><param name="right">The second color to modulate.</param>
+            <returns>
+            The modulated color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Scale(Fusee.Base.Common.ColorUint@,System.Single,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Scales a color.
+            </summary>
+            <param name="value">The color to scale.</param><param name="scale">The amount by which to scale.</param><param name="result">When the method completes, contains the scaled color.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Scale(Fusee.Base.Common.ColorUint,System.Single)">
+            <summary>
+            Scales a color.
+            </summary>
+            <param name="value">The color to scale.</param><param name="scale">The amount by which to scale.</param>
+            <returns>
+            The scaled color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Negate(Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Negates a color.
+            </summary>
+            <param name="value">The color to negate.</param><param name="result">When the method completes, contains the negated color.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Negate(Fusee.Base.Common.ColorUint)">
+            <summary>
+            Negates a color.
+            </summary>
+            <param name="value">The color to negate.</param>
+            <returns>
+            The negated color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Clamp(Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Restricts a value to be within a specified range.
+            </summary>
+            <param name="value">The value to clamp.</param><param name="min">The minimum value.</param><param name="max">The maximum value.</param><param name="result">When the method completes, contains the clamped value.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.FromBgra(System.Int32)">
+            <summary>
+            Converts the color from a packed BGRA integer.
+            </summary>
+            <param name="color">A packed integer containing all four color components in BGRA order</param>
+            <returns>
+            A color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.FromBgra(System.UInt32)">
+            <summary>
+            Converts the color from a packed BGRA integer.
+            </summary>
+            <param name="color">A packed integer containing all four color components in BGRA order</param>
+            <returns>
+            A color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.FromRgba(System.Int32)">
+            <summary>
+            Converts the color from a packed BGRA integer.
+            </summary>
+            <param name="color">A packed integer containing all four color components in RGBA order</param>
+            <returns>
+            A color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.FromRgba(System.UInt32)">
+            <summary>
+            Converts the color from a packed BGRA integer.
+            </summary>
+            <param name="color">A packed integer containing all four color components in RGBA order</param>
+            <returns>
+            A color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Clamp(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Restricts a value to be within a specified range.
+            </summary>
+            <param name="value">The value to clamp.</param><param name="min">The minimum value.</param><param name="max">The maximum value.</param>
+            <returns>
+            The clamped value.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Lerp(Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@,System.Single,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Performs a linear interpolation between two colors.
+            </summary>
+            <param name="start">Start color.</param><param name="end">End color.</param><param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param><param name="result">When the method completes, contains the linear interpolation of the two colors.</param>
+            <remarks>
+            This method performs the linear interpolation based on the following formula.
+            <code>
+            start + (end - start) * amount
+            </code>
+                        Passing <paramref name="amount"/> a value of 0 will cause <paramref name="start"/> to be returned; a value of 1 will cause <paramref name="end"/> to be returned.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Lerp(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint,System.Single)">
+            <summary>
+            Performs a linear interpolation between two colors.
+            
+            </summary>
+            <param name="start">Start color.</param><param name="end">End color.</param><param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
+            <returns>
+            The linear interpolation of the two colors.
+            </returns>
+            
+            <remarks>
+            This method performs the linear interpolation based on the following formula.
+            
+            <code>
+            start + (end - start) * amount
+            </code>
+            
+                        Passing <paramref name="amount"/> a value of 0 will cause <paramref name="start"/> to be returned; a value of 1 will cause <paramref name="end"/> to be returned.
+            
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.SmoothStep(Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@,System.Single,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Performs a cubic interpolation between two colors.
+            
+            </summary>
+            <param name="start">Start color.</param><param name="end">End color.</param><param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param><param name="result">When the method completes, contains the cubic interpolation of the two colors.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.SmoothStep(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint,System.Single)">
+            <summary>
+            Performs a cubic interpolation between two colors.
+            
+            </summary>
+            <param name="start">Start color.</param><param name="end">End color.</param><param name="amount">Value between 0 and 1 indicating the weight of <paramref name="end"/>.</param>
+            <returns>
+            The cubic interpolation of the two colors.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Max(Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Returns a color containing the smallest components of the specified colorss.
+            
+            </summary>
+            <param name="left">The first source color.</param><param name="right">The second source color.</param><param name="result">When the method completes, contains an new color composed of the largest components of the source colorss.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Max(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Returns a color containing the largest components of the specified colorss.
+            
+            </summary>
+            <param name="left">The first source color.</param><param name="right">The second source color.</param>
+            <returns>
+            A color containing the largest components of the source colors.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Min(Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Returns a color containing the smallest components of the specified colors.
+            
+            </summary>
+            <param name="left">The first source color.</param><param name="right">The second source color.</param><param name="result">When the method completes, contains an new color composed of the smallest components of the source colors.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Min(Fusee.Base.Common.ColorUint,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Returns a color containing the smallest components of the specified colors.
+            
+            </summary>
+            <param name="left">The first source color.</param><param name="right">The second source color.</param>
+            <returns>
+            A color containing the smallest components of the source colors.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.AdjustContrast(Fusee.Base.Common.ColorUint@,System.Single,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Adjusts the contrast of a color.
+            
+            </summary>
+            <param name="value">The color whose contrast is to be adjusted.</param><param name="contrast">The amount by which to adjust the contrast.</param><param name="result">When the method completes, contains the adjusted color.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.AdjustContrast(Fusee.Base.Common.ColorUint,System.Single)">
+            <summary>
+            Adjusts the contrast of a color.
+            
+            </summary>
+            <param name="value">The color whose contrast is to be adjusted.</param><param name="contrast">The amount by which to adjust the contrast.</param>
+            <returns>
+            The adjusted color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.AdjustSaturation(Fusee.Base.Common.ColorUint@,System.Single,Fusee.Base.Common.ColorUint@)">
+            <summary>
+            Adjusts the saturation of a color.
+            
+            </summary>
+            <param name="value">The color whose saturation is to be adjusted.</param><param name="saturation">The amount by which to adjust the saturation.</param><param name="result">When the method completes, contains the adjusted color.</param>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.AdjustSaturation(Fusee.Base.Common.ColorUint,System.Single)">
+            <summary>
+            Adjusts the saturation of a color.
+            
+            </summary>
+            <param name="value">The color whose saturation is to be adjusted.</param><param name="saturation">The amount by which to adjust the saturation.</param>
+            <returns>
+            The adjusted color.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.ToString">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            
+            </summary>
+            
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.ToString(System.String)">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            
+            </summary>
+            <param name="format">The format.</param>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.ToString(System.IFormatProvider)">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            
+            </summary>
+            <param name="formatProvider">The format provider.</param>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.ToString(System.String,System.IFormatProvider)">
+            <summary>
+            Returns a <see cref="T:System.String"/> that represents this instance.
+            
+            </summary>
+            <param name="format">The format.</param><param name="formatProvider">The format provider.</param>
+            <returns>
+            A <see cref="T:System.String"/> that represents this instance.
+            
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.GetHashCode">
+            <summary>
+            Returns a hash code for this instance.
+            
+            </summary>
+            
+            <returns>
+            A hash code for this instance, suitable for use in hashing algorithms and data structures like a hash table.
+            
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Equals(Fusee.Base.Common.ColorUint)">
+            <summary>
+            Determines whether the specified <see cref="T:Fusee.Engine.ColorUint"/> is equal to this instance.
+            
+            </summary>
+            <param name="other">The <see cref="T:Fusee.Engine.ColorUint"/> to compare with this instance.</param>
+            <returns>
+            <c>true</c> if the specified <see cref="T:Fusee.Engine.ColorUint"/> is equal to this instance; otherwise, <c>false</c>.
+            
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.ColorUint.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object"/> is equal to this instance.
+            
+            </summary>
+            <param name="value">The <see cref="T:System.Object"/> to compare with this instance.</param>
+            <returns>
+            <c>true</c> if the specified <see cref="T:System.Object"/> is equal to this instance; otherwise, <c>false</c>.
+            
+            </returns>
+        </member>
+        <member name="T:Fusee.Base.Common.FileMode">
+            <summary>
+            Keep this binary compatible with System.IO.FileMode (unsupported on portable libraries).
+            </summary>
+        </member>
+        <member name="T:Fusee.Base.Common.GlyphInfo">
+            <summary>
+                A struct for saving character information needed for proccesing a font.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.GlyphInfo.CharCode">
+            <summary>
+            The unicode character code this information is for.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.GlyphInfo.AdvanceX">
+            <summary>
+            The amount to advance the pen horizontally when drawing this glyph.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.GlyphInfo.AdvanceY">
+            <summary>
+            The amount to advance the pen vertically when drawing this glyph. 
+            Typically 0 for western fonts/script systems.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.GlyphInfo.Width">
+            <summary>
+            The width of this glyph. 
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.GlyphInfo.Height">
+            <summary>
+            The height of this glyph.
+            </summary>
+        </member>
+        <member name="T:Fusee.Base.Common.IFontImp">
+            <summary>
+            Common functionality that needs to be provided by a Font implementor.
+            </summary>
+        </member>
+        <member name="P:Fusee.Base.Common.IFontImp.UseKerning">
+            <summary>
+                Gets or sets a value indicating whether the kerning definition of a font should be used.
+            </summary>
+            <value>
+                <c>true</c> if the kerning definition of a font should be used; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Base.Common.IFontImp.PixelHeight">
+            <summary>
+            Gets or sets the size in pixels.
+            </summary>
+            <value>
+            The vertical size of the font in pixels.
+            </value>
+        </member>
+        <member name="M:Fusee.Base.Common.IFontImp.GetGlyphInfo(System.UInt32)">
+            <summary>
+            Gets the character information.
+            </summary>
+            <param name="c">The character to retrieve information.</param>
+            <returns>An information record about the character.</returns>
+        </member>
+        <member name="M:Fusee.Base.Common.IFontImp.RenderGlyph(System.UInt32,System.Int32@,System.Int32@)">
+            <summary>
+                Renders the given glyph.
+            </summary>
+            <param name="c">The character code (Unicode) of the character to render.</param>
+            <param name="bitmapLeft">
+                The x-Bearing of the glyph on the bitmap (in pixels). The number of pixels from the left border of the image 
+                to the leftmost pixel of the glyph within the rendered image.
+            </param>
+            <param name="bitmapTop">
+                The y-Bearing of the glyph on the bitmap (in pixels). The number of pixels from the character's origin 
+                (base line) of the image to the topmost pixel of the glyph within the rendered image.
+            </param>
+            <returns>
+                An image data structure containing an image of the given character.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.IFontImp.GetKerning(System.UInt32,System.UInt32)">
+            <summary>
+            Gets the kerning offset between a pair of two consecutive characters in a text string.
+            </summary>
+            <param name="leftC">The left character.</param>
+            <param name="rightC">The right character.</param>
+            <returns>An offset to add to the normal advance. Typically negative since kerning rather compacts text lines.</returns>
+        </member>
+        <member name="T:Fusee.Base.Common.StreamAssetProvider">
+            <summary>
+            Asset provider base class for implementing asset providers based on streams. 
+            Used to implement FileAssetProvider and Android ApkAssetProviders.
+            </summary>
+        </member>
+        <member name="M:Fusee.Base.Common.StreamAssetProvider.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Base.Common.StreamAssetProvider" /> class.
+            </summary>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Fusee.Base.Common.StreamAssetProvider.CanHandleType(System.Type)">
+            <summary>
+            Determines whether this instance can handle assets of the specified type (in general).
+            </summary>
+            <param name="type">The asset type  in question (such as typeof(ImageDate, Font, Sound, ...)).</param>
+            <returns>
+            true if this instance can handle the specified type. false otherwise.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.StreamAssetProvider.GetStream(System.String)">
+            <summary>
+            Implement this on a given platform to create a stream for the asset identified by id.
+            </summary>
+            <param name="id">The asset identifier.</param>
+            <returns>Implementors should return null if the asset cannot be retrieved.</returns>
+        </member>
+        <member name="M:Fusee.Base.Common.StreamAssetProvider.GetAsset(System.String,System.Type)">
+            <summary>
+            Retrieves the asset identified by the given string.
+            </summary>
+            <param name="id">The identifier string.</param>
+            <param name="type">The type of the asset.</param>
+            <returns>
+            The asset, if this provider can akquire an asset with the given id and the given type. Ohterwise null.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Fusee.Base.Common.StreamAssetProvider.CanGet(System.String,System.Type)">
+            <summary>
+            Determines whether this asset provider can get the specified asset without actually getting it.
+            </summary>
+            <param name="id">The identifier string.</param>
+            <param name="type">The expected type of the asset.</param>
+            <returns>
+            true if this asset will produce a result. Otherwise false.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.StreamAssetProvider.CheckExists(System.String)">
+            <summary>
+            Checks the existance of the identified asset. Implement this on a given platform.
+            </summary>
+            <param name="id">The asset identifier.</param>
+            <returns>Implementors should return true if a stream can be created.</returns>
+        </member>
+        <member name="M:Fusee.Base.Common.StreamAssetProvider.BeginGetAsset(System.String,Fusee.Base.Common.GetCallback)">
+            <summary>
+            Asynchronous get method.
+            </summary>
+            <param name="id">The identifier string.</param>
+            <param name="getCallback">Code to call when the loading is done.</param>
+            <exception cref="T:System.NotImplementedException"></exception>
+            <remarks>
+            The design doesn't follow any of the standard .NET asynchronous patterns like APM, EAP, or TAP.
+            It's close to JavaScript where you just provide an "onLoad" handler that's called when the object
+            is retrieved and decoded. This is to enable AssetProviders to be implemented using standard
+            JavaScript DOM objects like Image. See the article
+            <a href="https://msdn.microsoft.com/en-us/library/hh873178(v=vs.110).aspx">Interop with Other Asynchronous Patterns and Types</a>
+            to get an idea how to map this pattern, which is similar to APM (albeit simpler), to the currently en-vogue TAP (async/await) pattern.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Common.StreamAssetProvider.RegisterTypeHandler(Fusee.Base.Common.AssetHandler)">
+            <summary>
+            Registers the given asset type handler.
+            </summary>
+            <param name="handler">The handler.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+            <remarks>
+            This method is rather for internal purposes. While an asset provider typically implements access to
+            a given kind of asset storage, sometimes its hard to implement asset type handlers (decoders) capable of handling
+            a certain type without knowing much about the contents (like images, etc).
+            </remarks>
+        </member>
+        <member name="T:Fusee.Base.Common.GetCallbackState">
+            <summary>
+            The state of the asset akquisition process.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.GetCallbackState.Progress">
+            <summary>
+            Asset akquisition is in progress. o (<see cref="T:Fusee.Base.Common.GetCallbackState"/>)contains an integer specifying the progress in percent (100 == done).
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.GetCallbackState.Error">
+            <summary>
+            An error occured while akquiring the asset. o (<see cref="T:Fusee.Base.Common.GetCallbackState"/>) contains a string containting the message.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.GetCallbackState.Done">
+            <summary>
+            Akquisition ended successfully. o contains the object of the type passed to <see cref="T:Fusee.Base.Common.GetCallback"/>.
+            </summary>
+        </member>
+        <member name="T:Fusee.Base.Common.GetCallback">
+            <summary>
+            Used for asynchronous handling. <see cref="M:Fusee.Base.Common.IAssetProvider.BeginGetAsset(System.String,Fusee.Base.Common.GetCallback)" />.
+            </summary>
+            <param name="state">The state.</param>
+            <param name="o">The asset that was just retrieved.</param>
+            <param name="type">The type of the asset.</param>
+        </member>
+        <member name="T:Fusee.Base.Common.AssetDecoder">
+            <summary>
+            Type used in <see cref="M:Fusee.Base.Common.IAssetProvider.RegisterTypeHandler(Fusee.Base.Common.AssetHandler)"/>.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="storage">An opaque object containing the data. The actual type of the storage depends on the AssetProvider.
+            Many providers use a stream.</param>
+            <returns>The asset cast to <see cref="T:System.Object"/></returns>
+        </member>
+        <member name="T:Fusee.Base.Common.AssetChecker">
+            <summary>
+            Type used in <see cref="M:Fusee.Base.Common.IAssetProvider.RegisterTypeHandler(Fusee.Base.Common.AssetHandler)"/>.
+            </summary>
+            <param name="id">The identifier.</param>
+            <returns>True if the corresponding <see cref="T:Fusee.Base.Common.AssetDecoder"/> will probably handle the requested asset.</returns>
+        </member>
+        <member name="T:Fusee.Base.Common.AssetHandler">
+            <summary>
+            Structure containing an asset handler - typically used by implementation projects knowing how 
+            to decode an assset of a given type using a serialization format (e.g. a stream or a memory location)
+            defined by the platform.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.AssetHandler.ReturnedType">
+            <summary>
+            The type of asset returnded by the decoder
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.AssetHandler.Decoder">
+            <summary>
+            A method capable of decoding an asset into the returned type from 
+            the opaque storage.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.AssetHandler.Checker">
+            <summary>
+            A method delivering a boolean value if an asset with the given id will be 
+            handled by the decoder.
+            </summary>
+        </member>
+        <member name="T:Fusee.Base.Common.IAssetProvider">
+            <summary>
+            An AssetProvider knows how to akquire assets of certain types from a certain kind of storage.
+            </summary>
+            <remarks>
+            In a normal world, a good design would separate the many aspects of asset akquisition (storage,
+            serialization, codec, asynchronicity). Unfortunately, in JavaScript-Land, it's all mixed (or should I say messed) up.
+            You tell the JavaScript API "get me an image" and JavaScript magically loads the raw image 
+            data, converts it to a two-dimensional pixel array and calls a user-provided callback when its all done. 
+            No way to replace a single step by something self-provided. 
+            So this is FUSEE's pitiful approach for an asset akquisition abstraction which is capable of 
+            being implemented by poorly designed JavaScript APIs.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Common.IAssetProvider.CanHandleType(System.Type)">
+            <summary>
+            Determines whether this instance can handle assets of the specified type (in general).
+            </summary>
+            <param name="type">The asset type  in question (such as typeof(ImageDate, Font, Sound, ...)).</param>
+            <returns>true if this instance can handle the specified type. false otherwise.</returns>
+        </member>
+        <member name="M:Fusee.Base.Common.IAssetProvider.GetAsset(System.String,System.Type)">
+            <summary>
+            Retrieves the asset identified by the given string.
+            </summary>
+            <param name="id">The identifier string.</param>
+            <param name="type">The type of the asset.</param>
+            <returns>The asset, if this provider can akquire an asset with the given id and the given type. Ohterwise null.</returns>
+        </member>
+        <member name="M:Fusee.Base.Common.IAssetProvider.CanGet(System.String,System.Type)">
+            <summary>
+            Determines whether this asset provider can get the specified asset without actually getting it.
+            </summary>
+            <param name="id">The identifier string.</param>
+            <param name="type">The expected type of the asset.</param>
+            <returns>
+            true if this asset will produce a result. Otherwise false.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Common.IAssetProvider.BeginGetAsset(System.String,Fusee.Base.Common.GetCallback)">
+            <summary>
+            Asynchronous get method. 
+            </summary>
+            <param name="id">The identifier string.</param>
+            <param name="getCallback">Code to call when the loading is done.</param>
+            <remarks>
+            The design doesn't follow any of the standard .NET asynchronous patterns like APM, EAP, or TAP.
+            It's close to JavaScript where you just provide an "onLoad" decoder that's called when the object
+            is retrieved and decoded. This is to enable AssetProviders to be implemented using standard 
+            JavaScript DOM objects like Image. See the article
+            <a href="https://msdn.microsoft.com/en-us/library/hh873178(v=vs.110).aspx">Interop with Other Asynchronous Patterns and Types</a>
+            to get an idea how to map this pattern, which is similar to APM (albeit simpler), to the currently en-vogue TAP (async/await) pattern.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Common.IAssetProvider.RegisterTypeHandler(Fusee.Base.Common.AssetHandler)">
+            <summary>
+            Registers the given asset type decoder.
+            </summary>
+            <param name="handler">The handler.</param>
+            <remarks>
+            This method is rather for internal purposes. While an asset provider typically implements access to
+            a given kind of asset storage, sometimes its hard to implement asset type handlers (decoders) capable of handling
+            a certain type without knowing much about the contents (like images, etc).
+            </remarks>
+        </member>
+        <member name="T:Fusee.Base.Common.IIOImp">
+            <summary>
+            Contract for all IO related functionality that is not supported by portable libraries.
+            Implement this interface in a platform dependent implementation library for each
+            platform that needs to be supported.
+            </summary>
+        </member>
+        <member name="M:Fusee.Base.Common.IIOImp.StreamFromFile(System.String,Fusee.Base.Common.FileMode)">
+            <summary>
+            Opens a file and returns its contents as a <see cref="T:System.IO.Stream" />.
+            </summary>
+            <param name="path">The path to the file to open.</param>
+            <param name="mode">The file mode (read, write, append).</param>
+            <returns>
+            The stream specified by path.
+            </returns>
+        </member>
+        <member name="T:Fusee.Base.Common.ImagePixelFormat">
+            <summary>
+            The Enumerator specifying the PixelFormat of an Image.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ImagePixelFormat.RGBA">
+            <summary>
+            Used for images containing an alpha-channel. Each pixel consists of four bytes.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ImagePixelFormat.RGB">
+            <summary>
+            Used for images without an alpha-channel. Each pixel consists of three bytes.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ImagePixelFormat.Intensity">
+            <summary>
+            Used for Images containing a single grey-scale value per-pixel. Each pixel consists of one byte.
+            </summary>
+        </member>
+        <member name="T:Fusee.Base.Common.ImageData">
+            <summary>
+            Struct containing Image Data for further processing (e.g. texturing)
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ImageData.Width">
+            <summary>
+            The width in pixel units. 
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ImageData.Height">
+            <summary>
+            The height in pixel units.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ImageData.PixelFormat">
+            <summary>
+            The PixelFormat of the Image.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ImageData.Stride">
+            <summary>
+            Number of bytes in one row. 
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.ImageData.PixelData">
+            <summary>
+            The pixel data array.
+            </summary>
+        </member>
+        <member name="P:Fusee.Base.Common.ImageData.BytesPerPixel">
+            <summary>
+            Returns the byes per pixel with respect to the <see cref="F:Fusee.Base.Common.ImageData.PixelFormat"/>.
+            </summary>
+            <value>
+            The number of bytes each pixel consists of.
+            </value>
+            <exception cref="T:System.ArgumentOutOfRangeException">For unknown pixel formats.</exception>
+        </member>
+        <member name="P:Fusee.Base.Common.ImageData.HasAlpha">
+            <summary>
+            Gets a value indicating whether this instance has alpha with respect to the <see cref="F:Fusee.Base.Common.ImageData.PixelFormat"/>.
+            </summary>
+            <value>
+              <c>true</c> if this instance has alpha; otherwise, <c>false</c>.
+            </value>
+            <exception cref="T:System.ArgumentOutOfRangeException">For unknown pixel formats.</exception>
+        </member>
+        <member name="M:Fusee.Base.Common.ImageData.GetPixel(System.Int32,System.Int32)">
+            <summary>
+            Gets the pixel color at the specified position.
+            </summary>
+            <param name="x">The x-coordinate (in pixels).</param>
+            <param name="y">The y-coordinate (in pixels).</param>
+            <returns>The color at the given position.</returns>
+        </member>
+        <member name="P:Fusee.Base.Common.ImageData.IsEmpty">
+            <summary>
+            Checks if an image contains no data by checking if <see cref="F:Fusee.Base.Common.ImageData.Width"/> or <see cref="F:Fusee.Base.Common.ImageData.Height"/> is 0.
+            </summary>
+            <value>
+            <c>true</c> if this instance is empty; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Base.Common.ImageData.ClipBlt(System.Int32@,System.Int32,System.Int32@,System.Int32,System.Int32@)">
+            <summary>
+            Performs clipping along one dimension of a blt operation.
+            </summary>
+            <param name="iDst">The destination coordinate.</param>
+            <param name="sizeDst">The size of the destination buffer.</param>
+            <param name="iSrc">The source coordinate.</param>
+            <param name="sizeSrc">The size of the source coordinate.</param>
+            <param name="sizeBlk">The size of the block to copy.</param>
+            <remarks>
+               All parameters decorated with "ref" might be altered to avoid out-of-bounds indices.
+               If the resulting number of items to copy is 0, only sizeBlk will be set to 0. No other
+               ref-parameter will be altered then.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Common.ImageData.Blt(Fusee.Base.Common.ImageData,System.Int32,System.Int32,Fusee.Base.Common.ImageData,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Copys a rectangular block of pixel data from a source image to a destiation image (Blt = BlockTransfer).
+            </summary>
+            <param name="dst">The destination image.</param>
+            <param name="xDst">The x destination coordinate (where to place the block within dst).</param>
+            <param name="yDst">The y destination coordinate (where to place the block within dst).</param>
+            <param name="src">The source image.</param>
+            <param name="xSrc">The x source coordinate (where to start copying from within src).</param>
+            <param name="ySrc">The y source coordinate (where to start copying from within src).</param>
+            <param name="width">The width of the block to copy. (default is src.Width).</param>
+            <param name="height">The height of the block to copy (default is src.Height).</param>
+            <remarks>
+                All specified parameters are clipped to avoid out-of-bounds indices. No warnings or exceptions are issued
+                in case clipping results in a smaller or an empty block.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Common.ImageData.MemSet(System.Byte[],System.Byte)">
+            <summary>
+            Sets each byte in an array to the given value.
+            </summary>
+            <param name="array">The array to fill.</param>
+            <param name="value">The contents.</param>
+            <exception cref="T:System.ArgumentNullException">The array must not be null.</exception>
+            <remarks>
+               Implementation note: There is no "canonical" way in .NET to initialize an array like "memset" in C.
+               This implementation is a tradeof between performance and NOT relying on things like "unsafe" or "IL emit".
+               See the discussion on <a href="http://stackoverflow.com/questions/1897555/what-is-the-equivalent-of-memset-in-c">
+               StackOverflow (1897555)</a>
+               where this implementation is taken from but where you can also find faster but less portable implementations.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Common.ImageData.MemSet(System.Byte[],System.Byte[])">
+            <summary>
+            Sets the contents of a byte array to a given pattern.
+            </summary>
+            <param name="array">The array to fill.</param>
+            <param name="value">The (multi-byte) pattern value.</param>
+            <exception cref="T:System.ArgumentNullException">
+            Array and value must not be null and not empty.
+            </exception>
+            <remarks>
+                See remarks on <see cref="M:Fusee.Base.Common.ImageData.MemSet(System.Byte[],System.Byte)"/> for implementation details.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Common.ImageData.CreateImage(System.Int32,System.Int32,Fusee.Base.Common.ColorUint)">
+            <summary>
+            Creates an image and fills it with the given color.
+            </summary>
+            <param name="width">The width (in pixels) of the image to create.</param>
+            <param name="height">The height (in pixels) of the image to create.</param>
+            <param name="color">The color to fill the image with.</param>
+            <returns>The newly created image.</returns>
+        </member>
+        <member name="T:Fusee.Base.Common.Path">
+            <summary>
+            Methods to perform various operations on strings resembling file paths.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.Path.AltDirectorySeparatorChar">
+            <summary>
+            The alternative directory separator character ('/' on windows).
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.Path.DirectorySeparatorChar">
+            <summary>
+            The directory separator character ('\' on windows, '/' on most other platforms).
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.Path.PathSeparator">
+            <summary>
+            The path separator character (';' on most platforms)
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.Path.DirectorySeparatorStr">
+            <summary>
+            The directory separator as a string.
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Common.Path.VolumeSeparatorChar">
+            <summary>
+            The volume separator character (':' on windows).
+            </summary>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.ChangeExtension(System.String,System.String)">
+            <summary>
+            Changes the file extension (".txt") of a path.
+            </summary>
+            <param name="path">The path.</param>
+            <param name="extension">The extension.</param>
+            <returns>The path with the exchanged file extension.</returns>
+            <exception cref="T:System.ArgumentException">Illegal characters in path.</exception>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.Combine(System.String,System.String)">
+            <summary>
+            Combines two paths. Considers potential trailing directory separators.
+            </summary>
+            <param name="path1">Path #1. Leftmost part of the result.</param>
+            <param name="path2">Path #2. Rightmost part of the result.</param>
+            <returns>The combined path.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            path1
+            or
+            path2
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Illegal characters in path.
+            or
+            Illegal characters in path.
+            </exception>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.GetDirectoryName(System.String)">
+            <summary>
+            Extracts the directory name from a given path (which is potentially a path to a file).
+            </summary>
+            <param name="path">The path to extrect from.</param>
+            <returns>The directory name.</returns>
+            <exception cref="T:System.ArgumentException">
+            Invalid path
+            or
+            Argument string consists of whitespace characters only.
+            or
+            Path contains invalid characters
+            </exception>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.GetExtension(System.String)">
+            <summary>
+            Retrieves the file extension (e.g. ".txt") from a given path.
+            </summary>
+            <param name="path">The path to get the extension from.</param>
+            <returns>The extension.</returns>
+            <exception cref="T:System.ArgumentException">Illegal characters in path.</exception>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.GetFileName(System.String)">
+            <summary>
+            Retrieves a file name from the given path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The file name</returns>
+            <exception cref="T:System.ArgumentException">Illegal characters in path.</exception>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.GetFileNameWithoutExtension(System.String)">
+            <summary>
+            Retrieves the file name without extension from a given path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The file name without extension.</returns>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.GetPathRoot(System.String)">
+            <summary>
+            Retrieves the path root from a given path.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>The path root.</returns>
+            <exception cref="T:System.ArgumentException">The specified path is not of a legal form.</exception>
+            <exception cref="T:System.NotImplementedException"> return Directory.GetCurrentDirectory().Substring(0, 2); </exception>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.HasExtension(System.String)">
+            <summary>
+            Determines whether the specified path has an extension.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>true if the path has an extenstion, otherwise false.</returns>
+            <exception cref="T:System.ArgumentException">Illegal characters in path.</exception>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.IsPathRooted(System.String)">
+            <summary>
+            Determines whether the specified path has a root.
+            </summary>
+            <param name="path">The path.</param>
+            <returns>true if the path has a root, otherwise false.</returns>
+            <exception cref="T:System.ArgumentException">Illegal characters in path.</exception>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.GetInvalidFileNameChars">
+            <summary>
+            Gets the invalid file name chars.
+            </summary>
+            <returns>An array containing characters that must NOT be used in file names</returns>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.GetInvalidPathChars">
+            <summary>
+            Gets the invalid path chars.
+            </summary>
+            <returns>An array containing characters that must NOT be used in path names</returns>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.Combine(System.String[])">
+            <summary>
+            Combines an arbitrary number of paths. Considers potential trailing directory separators.
+            </summary>
+            <param name="paths">The paths.</param>
+            <returns>The combined path.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            paths  or  one of the paths contains a null value
+            </exception>
+            <exception cref="T:System.ArgumentException">Illegal characters in path.</exception>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.Combine(System.String,System.String,System.String)">
+            <summary>
+            Combines three paths. Considers potential trailing directory separators.
+            </summary>
+            <param name="path1">Path #1. Leftmost part of the result.</param>
+            <param name="path2">Path #2.</param>
+            <param name="path3">Path #3. Rightmost part of the result.</param>
+            <returns>The combined path.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            path1
+            or
+            path2
+            or
+            path3
+            </exception>
+            <exception cref="T:System.ArgumentException">
+            Illegal characters in path1.
+            or
+            Illegal characters in path2.
+            or
+            Illegal characters in path3.
+            </exception>
+        </member>
+        <member name="M:Fusee.Base.Common.Path.Combine(System.String,System.String,System.String,System.String)">
+            <summary>
+            Combines three paths. Considers potential trailing directory separators.
+            </summary>
+            <param name="path1">Path #1. Leftmost part of the result.</param>
+            <param name="path2">Path #2.</param>
+            <param name="path3">Path #3.</param>
+            <param name="path4">Path #4. Rightmost part of the result.</param>
+            <returns>The combined path.</returns>
+            <exception cref="T:System.ArgumentNullException">
+            path1
+            or
+            path2
+            or
+            path3
+            or
+            path4
+            </exception>
+        </member>
+    </members>
+</doc>

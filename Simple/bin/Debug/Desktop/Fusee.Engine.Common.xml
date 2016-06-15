@@ -1,0 +1,4039 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fusee.Engine.Common</name>
+    </assembly>
+    <members>
+        <member name="T:Fusee.Engine.Common.FuseeApplicationAttribute">
+            <summary>
+            Use the FuseeApplication attribute to mark RenderCanvas derivatives as applications that can be collected
+            by Application browsers.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.FuseeApplicationAttribute.Name">
+            <summary>
+            The name of the currently selected application.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.FuseeApplicationAttribute.Description">
+            <summary>
+            The description of the currently selected application.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.FuseeApplicationAttribute.Width">
+            <summary>
+            The width of the application's window.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.FuseeApplicationAttribute.Height">
+            <summary>
+            The height of the application's window.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.FuseeApplicationAttribute.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.Common.FuseeApplicationAttribute"/> class.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IAudioStreamImp">
+            <summary>
+                Loaded files with
+                <see>
+                    <cref>Audio</cref>
+                </see>
+                class can be controlled via this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> interface.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IAudioStreamImp.Volume">
+            <summary>
+                Gets or sets the volume of this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> (0 - 100).
+            </summary>
+            <value>
+                The volume of this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> (0 - 100).
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IAudioStreamImp.Loop">
+            <summary>
+                Gets or sets a value indicating whether this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> shall be looped.
+            </summary>
+            <value>
+                <c>true</c> if this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> shall be looped; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IAudioStreamImp.Panning">
+            <summary>
+                Gets or sets the panning of this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> (-100 to +100).
+            </summary>
+            <value>
+                The panning of this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> (-100 to +100).
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioStreamImp.Play">
+            <summary>
+                Plays this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" />.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioStreamImp.Play(System.Boolean)">
+            <summary>
+                Plays this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" />.
+            </summary>
+            <param name="loop"><c>true</c> if this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> shall be looped; otherwise, <c>false</c>.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioStreamImp.Pause">
+            <summary>
+                Pauses this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" />.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioStreamImp.Stop">
+            <summary>
+                Stops this <see cref="T:Fusee.Engine.Common.IAudioStreamImp" />.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.DeviceCategory">
+            <summary>
+            Symbolic value describing the general nature of an input device.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.DeviceCategory.Mouse">
+            <summary>
+            The input device is a mouse. A mouse exhibits two axes 'X' and 'Y', one axis 'Wheel', 
+            three buttons 'Left', 'Middle', and 'Right'.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.DeviceCategory.Keyboard">
+            <summary>
+            A keyboard input device exhibits the buttons defined in <see cref="T:Fusee.Engine.Common.KeyCodes"/>.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.DeviceCategory.GameController">
+            <summary>
+            A Game controller exhibits the axes defined in <see cref="T:Fusee.Engine.Common.ControllerButton"/>.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.DeviceCategory.Touch">
+            <summary>
+            A touch input device.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.DeviceCategory.Kinect">
+            <summary>
+            A Kinect Input device.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.DeviceCategory.Skeleton">
+            <summary>
+            A skeleton input device.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.DeviceCategory.SixDOF">
+            <summary>
+            A six-degrees-of-freedom input device such as a spacemouse.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.DeviceCategory.Other">
+            <summary>
+            Other kind of input.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.AxisNature">
+            <summary>
+            Symbolic value describing the nature of the axis (the typical usage of this axis in applications).
+            Use this value to query unkown devices/axes.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisNature.Position">
+            <summary>
+            The axis' values rather describe absolute situations like a positon or a rotation
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisNature.Speed">
+            <summary>
+            The axis' values rather describe velocities to be applied to objects like positional or angualar speed. 
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisNature.Unknown">
+            <summary>
+            This input device's axis' typical usage is not known.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.AxisDirection">
+            <summary>
+            Symbolic value describing the logical direction of an input axis.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDirection.X">
+            <summary>
+            Axis directs towards X (first component of a compound axis).
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDirection.Y">
+            <summary>
+            Axis directs towards Y (second component of a compound axis).
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDirection.Z">
+            <summary>
+            Axis directs towards Z (third component of a compound axis).
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDirection.Unknown">
+            <summary>
+            The axis' direction is unknown.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.AxisBoundedType">
+            <summary>
+            Symbolic value describing if and how the values produced by this axis are bound.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisBoundedType.Unbound">
+            <summary>
+            The axis values are not bound.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisBoundedType.Constant">
+            <summary>
+            The axis values are bound by constant values. The values can be read from <see cref="F:Fusee.Engine.Common.AxisDescription.MaxValueOrAxis"/> 
+            and <see cref="F:Fusee.Engine.Common.AxisDescription.MinValueOrAxis"/>.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisBoundedType.OtherAxis">
+            <summary>
+            This axis' values are bound by the values from other axes (and may possibly change over time). The bounding axes'
+            Ids can be read from <see cref="F:Fusee.Engine.Common.AxisDescription.MaxValueOrAxis"/> and <see cref="F:Fusee.Engine.Common.AxisDescription.MinValueOrAxis"/> (cast to integer).
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.AxisDescription">
+            <summary>
+            A structure describing an input device's axis.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDescription.Name">
+            <summary>
+            The human readable name of the axis.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDescription.Id">
+            <summary>
+            The identifier of the axis. Use this identifier to query values.
+            An axis' Id might be different than the order of occurrence (index) of the axis
+            when enumerated from the device.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDescription.Direction">
+            <summary>
+            The direction of the axis (used with devices exhibiting two- or more-dimensional input such as joysticks on gamepads, mouse, etc).
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDescription.Nature">
+            <summary>
+            The nature of the axis.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDescription.Bounded">
+            <summary>
+            Indicating if the axis' values are within a defined range. Depending on this value 
+            <see cref="F:Fusee.Engine.Common.AxisDescription.MinValueOrAxis"/> and <see cref="F:Fusee.Engine.Common.AxisDescription.MaxValueOrAxis"/> contain either constant range bounds 
+            or other axes' Ids delivering the (possibly changing) range values.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDescription.MinValueOrAxis">
+            <summary>
+            The minimum value returned by the axis. If <see cref="F:Fusee.Engine.Common.AxisDescription.Bounded"/> is <see cref="F:Fusee.Engine.Common.AxisBoundedType.Constant"/> this field contains constant value.
+            If <see cref="F:Fusee.Engine.Common.AxisDescription.Bounded"/> is <see cref="F:Fusee.Engine.Common.AxisBoundedType.OtherAxis"/> this field contains the Id of the axis keeping the (possibly changing) minimum value.
+            In this case cast this value to integer before passing it to InputDevice methods.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisDescription.MaxValueOrAxis">
+            <summary>
+            The maximum value returned by the axis. If <see cref="F:Fusee.Engine.Common.AxisDescription.Bounded"/> is <see cref="F:Fusee.Engine.Common.AxisBoundedType.Constant"/> this field contains constant value.
+            If <see cref="F:Fusee.Engine.Common.AxisDescription.Bounded"/> is <see cref="F:Fusee.Engine.Common.AxisBoundedType.OtherAxis"/> this field contains the Id of the axis keeping the (possibly changing) maximum value.
+            In this case cast this value to integer before passing it to InputDevice methods.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.AxisImpDescription">
+            <summary>
+            Implementation specific information about an axis exhibited by a device.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisImpDescription.AxisDesc">
+            <summary>
+            The axis description that can be passed to user code.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisImpDescription.PollAxis">
+            <summary>
+            true, if the axis needs to be polled. false if value changes on the axis are event-triggered.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.ButtonImpDescription">
+            <summary>
+            Implementation specific information about a button exhibited by a device.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ButtonImpDescription.ButtonDesc">
+            <summary>
+            The button description that can be passed to user code.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ButtonImpDescription.PollButton">
+            <summary>
+            true, if the button needs to be polled. false if state changes on the button are event-triggered.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.ButtonDescription">
+            <summary>
+            Information about a button exhibited by a device. Contains the Name of the button and the Id that
+            can be used to access the button state. 
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ButtonDescription.Name">
+            <summary>
+            The human readable name of the button.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ButtonDescription.Id">
+            <summary>
+            The identifier of the button. Use this identifier to query button state.
+            </summary>
+            <remards>
+            The id of a button might be different than the order of occurrence (index) of the button
+            when enumerated from the device.
+            </remards>
+        </member>
+        <member name="T:Fusee.Engine.Common.AxisValueChangedArgs">
+            <summary>
+            Event arguments sent with value changing events for input axes.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisValueChangedArgs.Value">
+            <summary>
+            The new value exhibited by the axis.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.AxisValueChangedArgs.Axis">
+            <summary>
+            The axis description which axis' value has changed.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.ButtonValueChangedArgs">
+            <summary>
+            Event arguments sent with state changing events for input buttons.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ButtonValueChangedArgs.Pressed">
+            <summary>
+            The new button state 
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ButtonValueChangedArgs.Button">
+            <summary>
+            The button description which button's state has changed.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IInputDeviceImp">
+            <summary>
+            Implementors represent a physical input device. 
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IInputDeviceImp.Id">
+            <summary>
+            Gets an identifier. Implementors take care that this
+            id is unique across all devices managed by a driver.
+            </summary>
+            <value>
+            The identifier.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IInputDeviceImp.Desc">
+            <summary>
+            Gets the human readable name of this device. This
+            parameter can be used in user dialogs to identify devices.
+            </summary>
+            <value>
+            The deivce description.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IInputDeviceImp.Category">
+            <summary>
+            Gets the category of this device. Device categories define a minimal common
+            set of buttons and axes which are identical across all devices sharing the same
+            category.
+            </summary>
+            <value>
+            The device category.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IInputDeviceImp.AxesCount">
+            <summary>
+            Gets number of axes supported by this device.
+            </summary>
+            <value>
+            The axes count.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IInputDeviceImp.AxisImpDesc">
+            <summary>
+            Gets a description of the axis. This value can be used in user setup-dialogs or 
+            to match axes of devices of different categories.
+            </summary>
+            <value>
+            The description of the axis.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImp.GetAxis(System.Int32)">
+            <summary>
+                Gets the value currently present at the given axis if its <see cref="P:Fusee.Engine.Common.IInputDeviceImp.AxisImpDesc"/> identifies it as a to-be-polled axis.
+            </summary>
+            <param name="iAxisId">The axis' Id.</param>
+            <returns>The value currently set on the axis.</returns>
+            <returns>The value currently set on the axis.</returns>
+            <remarks>
+                See <see cref="T:Fusee.Engine.Common.AxisDescription"/> to get information about how to interpret the
+                values returned by a given axis.
+             </remarks>
+        </member>
+        <member name="E:Fusee.Engine.Common.IInputDeviceImp.AxisValueChanged">
+            <summary>
+            Occurs on value changes of axes exhibited by this device. 
+            Only applies for axes where the <see cref="F:Fusee.Engine.Common.AxisImpDescription.PollAxis"/> is set to false.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IInputDeviceImp.ButtonCount">
+            <summary>
+                Gets the number of buttons supported by this device.
+            </summary>
+            <value>
+                The button count.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IInputDeviceImp.ButtonImpDesc">
+            <summary>
+                Gets information about of the specified button. This value can be used in user setup-dialogs or 
+                to match buttons of devices of different categories.
+            </summary>
+            <value>
+                Information about the button.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImp.GetButton(System.Int32)">
+            <summary>
+            Gets the state of the given button if its <see cref="P:Fusee.Engine.Common.IInputDeviceImp.ButtonImpDesc"/> identifies it as a to-be-polled button
+            </summary>
+            <param name="iButtonId">The Id of the button.</param>
+            <returns>true if the button is currently pressed. false, if the button is currently released.</returns>
+        </member>
+        <member name="E:Fusee.Engine.Common.IInputDeviceImp.ButtonValueChanged">
+            Occurs on state changes of buttons exhibited by this device. 
+            Only applies for buttons where the <see cref="F:Fusee.Engine.Common.ButtonImpDescription.PollButton"/> is set to false.
+        </member>
+        <member name="T:Fusee.Engine.Common.IInputDeviceImpOld">
+            <summary>
+            Abstracts the platform/device dependent implementation of an input device.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImpOld.GetXAxis">
+            <summary>
+            Implement this to get the X-Axis.
+            </summary>
+            <returns>The X-Axis value.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImpOld.GetYAxis">
+            <summary>
+            Implement this to get the Y-Axis.
+            </summary>
+            <returns>The Y-Axis value.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImpOld.GetZAxis">
+            <summary>
+            Implement this to get the Z-Axis.
+            </summary>
+            <returns>The Z-Axis value.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImpOld.GetName">
+            <summary>
+            Implement this to get the Device Name.
+            </summary>
+            <returns>The Device Name.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImpOld.GetPressedButton">
+            <summary>
+            Implement this to get the pressed button.
+            </summary>
+            <returns>The Index of the pressed button.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImpOld.IsButtonDown(System.Int32)">
+            <summary>
+            Implement this to check if button is down.
+            </summary>
+            <returns>True, if button is down</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImpOld.IsButtonPressed(System.Int32)">
+            <summary>
+            Implement this to check if button has been pressed.
+            </summary>
+            <returns>True, if button has been pressed.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImpOld.GetButtonCount">
+            <summary>
+            Implement this to get the amount of buttons.
+            </summary>
+            <returns>The amount of buttons.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IInputDeviceImpOld.GetCategory">
+            <summary>
+            Implement this to get the device category name.
+            </summary>
+            <returns>The name of the device categroy.</returns>
+        </member>
+        <member name="T:Fusee.Engine.Common.NewDeviceImpConnectedArgs">
+            <summary>
+            Parameters sent with a <see cref="E:Fusee.Engine.Common.IInputDriverImp.NewDeviceConnected"/> event.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NewDeviceImpConnectedArgs.InputDeviceImp">
+            <summary>
+            The input device implementation object representing the input device (such as a game pad) that was just connected.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.DeviceImpDisconnectedArgs">
+            <summary>
+            Parameters sent with a <see cref="E:Fusee.Engine.Common.IInputDriverImp.DeviceDisconnected"/> event.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.DeviceImpDisconnectedArgs.Id">
+            <summary>
+            The device identifier of the device just disconnected.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.DeviceImpDisconnectedArgs.Desc">
+            <summary>
+            The human-readable description string of the device just disconntected.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IInputDriverImp">
+            <summary>
+            Implementations of this interface represent a piece of software capabable of connecting to 
+            one or more input devices (<see cref="T:Fusee.Engine.Common.IInputDeviceImp"/>. Members of this interface allow access to the devices.
+            </summary>
+            <remarks>
+            An input "device" is considered a physical device such as keyboard, mouse, gamepad, kinect, etc.
+            </remarks>
+        </member>
+        <member name="P:Fusee.Engine.Common.IInputDriverImp.Devices">
+            <summary>
+            Retrieves a list of devices supported by this input driver.
+            </summary>
+            <value>
+            The list of devices.
+            </value>
+            <remarks>
+            The devices yielded represent the current status. At any time other devices can connect or disconnect.
+            Listen to the <see cref="E:Fusee.Engine.Common.IInputDriverImp.NewDeviceConnected"/> and <see cref="E:Fusee.Engine.Common.IInputDriverImp.DeviceDisconnected"/> events to get
+            informed about new or vanishing devices. Drivers may implement "static" access to devices such that
+            devices are connected at driver instantiation and never disconnected (in this case <see cref="E:Fusee.Engine.Common.IInputDriverImp.NewDeviceConnected"/>
+            and <see cref="E:Fusee.Engine.Common.IInputDriverImp.DeviceDisconnected"/> are never fired).
+            </remarks>
+        </member>
+        <member name="P:Fusee.Engine.Common.IInputDriverImp.DriverId">
+            <summary>
+            Gets the unique driver identifier.
+            </summary>
+            <value>
+            The driver identifier.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IInputDriverImp.DriverDesc">
+            <summary>
+            Gets the driver description string.
+            </summary>
+            <value>
+            A human-readable string describing the driver.
+            </value>
+        </member>
+        <member name="E:Fusee.Engine.Common.IInputDriverImp.NewDeviceConnected">
+            <summary>
+            Occurs when a new device is connected such as a gamepad is plugged into the system.
+            </summary>
+        </member>
+        <member name="E:Fusee.Engine.Common.IInputDriverImp.DeviceDisconnected">
+            <summary>
+            Occurs when a device is disconnected such as a gamepad is plugged off from the system.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.CharInfoStruct">
+            <summary>
+                A struct for saving character information needed for proccesing a font.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.CharInfoStruct.AdvanceX">
+            <summary>
+                The width of this char.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.CharInfoStruct.AdvanceY">
+            <summary>
+                The height of this char.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.CharInfoStruct.BitmapW">
+            <summary>
+                The width of this char on the texture atlas.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.CharInfoStruct.BitmapH">
+            <summary>
+                The height of this char on the texture atlas.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.CharInfoStruct.BitmapL">
+            <summary>
+                The left border of this char on the texture atlas.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.CharInfoStruct.BitmapT">
+            <summary>
+                The top border of this char on the texture atlas.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.CharInfoStruct.TexOffX">
+            <summary>
+                The x-offset of this char on the texture atlas.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.CharInfoStruct.TexOffY">
+            <summary>
+                The y-offset of this char on the texture atlas.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IFont">
+            <summary>
+                Interface for a font object to save informationen needed for proccesing a font.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IFont.TexAtlas">
+            <summary>
+                Gets the texture atlas.
+            </summary>
+            <value>
+                The texture atlas.
+            </value>
+            <remarks>
+                This texture contains all pre-rendered chars of a font in a specific font size.
+            </remarks>
+        </member>
+        <member name="P:Fusee.Engine.Common.IFont.Width">
+            <summary>
+                Gets the width of the texture atlas.
+            </summary>
+            <value>
+                The width of the texture atlas.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IFont.Height">
+            <summary>
+                Gets the height of the texture atlas.
+            </summary>
+            <value>
+                The height of the texture atlas.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IFont.FontSize">
+            <summary>
+                Gets the font size.
+            </summary>
+            <value>
+                The font size.
+            </value>
+            <remarks>
+                The font size cannot be changed after loading a font.
+            </remarks>
+        </member>
+        <member name="P:Fusee.Engine.Common.IFont.UseKerning">
+            <summary>
+                Gets or sets a value indicating whether the kerning definition of a font should be used.
+            </summary>
+            <value>
+                <c>true</c> if the kerning definition of a font should be used; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IFont.CharInfo">
+            <summary>
+                Gets the character information.
+            </summary>
+            <value>
+                The character information.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.IBoxShapeImp">
+            <summary>
+            Interface to abstract a box shape
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IBoxShapeImp.HalfExtents">
+            <summary>
+            Gets the half extents.
+            </summary>
+            <value>
+            The half extents (half the length of widht, heigt and depth).
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.ICapsuleShapeImp">
+            <summary>
+            IMplementation agnostic representation for a capsule-shaped collision object.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.ICapsuleShapeImp.HalfHeight">
+            <summary>
+            Retrieves the half height.
+            </summary>
+            <value>
+            Half of the height's value.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ICapsuleShapeImp.Radius">
+            <summary>
+            Retrieves the capsule's radius.
+            </summary>
+            <value>
+            The radius of the capsule.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ICapsuleShapeImp.UpAxis">
+            <summary>
+            Retrieves the index of the axis pointing towards the capsule's "north pole"
+            </summary>
+            <value>
+            The up axis.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.ICollisionShapeImp">
+            <summary>
+            Implementation agnostic representation of a collision shape.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.ICollisionShapeImp.Margin">
+            <summary>
+            Retrieves or sets the margin.
+            </summary>
+            <value>
+            The size of the collision shape's margin.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ICollisionShapeImp.LocalScaling">
+            <summary>
+            Retrieves or sets the local scaling.
+            </summary>
+            <value>
+            The local scaling.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ICollisionShapeImp.UserObject">
+            <summary>
+            Gets or sets a user object.
+            </summary>
+            <value>
+            The user object.
+            </value>
+            <remarks>
+            User objects can be used to store application specific references 
+            with the collisions shape. E.g. an object holding the the graphical 
+            representation of the collision shape.
+            </remarks>
+        </member>
+        <member name="T:Fusee.Engine.Common.ICompoundShapeImp">
+            <summary>
+            Implementation agnostic interface for a collision shape made up of one or more other shapes.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.ICompoundShapeImp.AddChildShape(Fusee.Math.Core.float4x4,Fusee.Engine.Common.IBoxShapeImp)">
+            <summary>
+            Adds a child shape.
+            </summary>
+            <param name="localTransform">The local transform.</param>
+            <param name="shape">The child shape.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.ICompoundShapeImp.AddChildShape(Fusee.Math.Core.float4x4,Fusee.Engine.Common.ISphereShapeImp)">
+            <summary>
+            Adds a child shape.
+            </summary>
+            <param name="localTransform">The local transform.</param>
+            <param name="shape">The child shape.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.ICompoundShapeImp.AddChildShape(Fusee.Math.Core.float4x4,Fusee.Engine.Common.ICapsuleShapeImp)">
+            <summary>
+            Adds a child shape.
+            </summary>
+            <param name="localTransform">The local transform.</param>
+            <param name="shape">The child shape.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.ICompoundShapeImp.AddChildShape(Fusee.Math.Core.float4x4,Fusee.Engine.Common.IConeShapeImp)">
+            <summary>
+            Adds a child shape.
+            </summary>
+            <param name="localTransform">The local transform.</param>
+            <param name="shape">The child shape.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.ICompoundShapeImp.AddChildShape(Fusee.Math.Core.float4x4,Fusee.Engine.Common.ICylinderShapeImp)">
+            <summary>
+            Adds a child shape.
+            </summary>
+            <param name="localTransform">The local transform.</param>
+            <param name="shape">The child shape.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.ICompoundShapeImp.AddChildShape(Fusee.Math.Core.float4x4,Fusee.Engine.Common.IMultiSphereShapeImp)">
+            <summary>
+            Adds a child shape.
+            </summary>
+            <param name="localTransform">The local transform.</param>
+            <param name="shape">The child shape.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.ICompoundShapeImp.AddChildShape(Fusee.Math.Core.float4x4,Fusee.Engine.Common.IEmptyShapeImp)">
+            <summary>
+            Adds a child shape.
+            </summary>
+            <param name="localTransform">The local transform.</param>
+            <param name="shape">The child shape.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.ICompoundShapeImp.CalculatePrincipalAxisTransform(System.Single[],Fusee.Math.Core.float4x4,Fusee.Math.Core.float3)">
+            <summary>
+            Calculates the principal axis transform.
+            </summary>
+            <param name="masses">The masses.</param>
+            <param name="principal">The principal.</param>
+            <param name="inertia">The inertia.</param>
+        </member>
+        <member name="T:Fusee.Engine.Common.IConeShapeImp">
+            <summary>
+            Implementation agnostic representation of a cone-shaped collision shape
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeShapeImp.ConeUpIndex">
+            <summary>
+            Gets or sets the index of the cone up.
+            </summary>
+            <value>
+            The index of the cone up.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeShapeImp.Height">
+            <summary>
+            Retrieves the cone' height.
+            </summary>
+            <value>
+            The height of the cone.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeShapeImp.Radius">
+            <summary>
+            Gets the cone's radius.
+            </summary>
+            <value>
+            The radius of the cone.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.IConeTwistConstraintImp">
+            <summary>
+            Implementation agnostic representation of a cone twist constraint (a shoulder joint with arbitrary arm roll).
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.AFrame">
+            <summary>
+            Gets the A frame.
+            </summary>
+            <value>
+            The A frame.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.BFrame">
+            <summary>
+            Gets the B frame.
+            </summary>
+            <value>
+            The B frame.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.CalcAngleInfo">
+            <summary>
+            Calculates the angle information.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.CalcAngleInfo2(Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4)">
+            <summary>
+            Alternative angle info calculation.
+            </summary>
+            <param name="transA">The trans a.</param>
+            <param name="transB">The trans b.</param>
+            <param name="invInertiaWorldA">The inv inertia world a.</param>
+            <param name="invInertiaWorldB">The inv inertia world b.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.EnableMotor(System.Boolean)">
+            <summary>
+            Enables the motor.
+            </summary>
+            <param name="b">if set to <c>true</c> [b].</param>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.FixThresh">
+            <summary>
+            Gets or sets the fix threshold.
+            </summary>
+            <value>
+            The fix threshold.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.FrameOffsetA">
+            <summary>
+            Gets the frame offset a.
+            </summary>
+            <value>
+            The frame offset a.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.FrameOffsetB">
+            <summary>
+            Gets the frame offset b.
+            </summary>
+            <value>
+            The frame offset b.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.GetPointForAngle(System.Single,System.Single)">
+            <summary>
+            Gets the point for angle.
+            </summary>
+            <param name="fAngleInRadius">The f angle in radius.</param>
+            <param name="fLength">Length of the f.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.IsPastSwingLimit">
+            <summary>
+            Gets a value indicating whether this constraint/joint is past the swing limit.
+            </summary>
+            <value>
+            <c>true</c> if this constraint is past swing limit; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.SetAngularOnly(System.Boolean)">
+            <summary>
+            Set the angular only mode.
+            </summary>
+            <param name="angularOnly">if set to <c>true</c> only angular constraint is effective.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.SetDamping(System.Single)">
+            <summary>
+            Sets the damping.
+            </summary>
+            <param name="damping">The damping.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.SetLimit(System.Int32,System.Single)">
+            <summary>
+            Sets the limit.
+            </summary>
+            <param name="limitIndex">Index of the limit.</param>
+            <param name="limitValue">The limit value.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.SetLimit(System.Single,System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets the limit.
+            </summary>
+            <param name="swingSpan1">The swing span1.</param>
+            <param name="swingSpan2">The swing span2.</param>
+            <param name="twistSpan">The twist span.</param>
+            <param name="softness">The softness.</param>
+            <param name="biasFactor">The bias factor.</param>
+            <param name="relaxationFactor">The relaxation factor.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.SetMaxMotorImpulse(System.Single)">
+            <summary>
+            Sets the maximum motor impulse.
+            </summary>
+            <param name="maxMotorImpulse">The maximum motor impulse.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.SetMaxMotorImpulseNormalized(System.Single)">
+            <summary>
+            Sets the normalized maximum motor impulse.
+            </summary>
+            <param name="maxMotorImpulse">The maximum motor impulse.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.SetMotorTarget(Fusee.Math.Core.Quaternion)">
+            <summary>
+            Sets the motor target.
+            </summary>
+            <param name="q">Quaternion (orientation) of the target.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.SetMotorTargetInConstraintSpace(Fusee.Math.Core.Quaternion)">
+            <summary>
+            Sets the motor target in constraint space.
+            </summary>
+            <param name="q">Quaternion (orientation) of the target in constraint space.</param>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.SolveSwingLimit">
+            <summary>
+            Gets the solve swing limit.
+            </summary>
+            <value>
+            The solve swing limit.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.SolveTwistLimit">
+            <summary>
+            Gets the solve twist limit.
+            </summary>
+            <value>
+            The solve twist limit.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.SwingSpan1">
+            <summary>
+            Gets the swing span1.
+            </summary>
+            <value>
+            The swing span1.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.SwingSpan2">
+            <summary>
+            Gets the swing span2.
+            </summary>
+            <value>
+            The swing span2.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.TwistAngle">
+            <summary>
+            Gets the twist angle.
+            </summary>
+            <value>
+            The twist angle.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.TwistLimitSign">
+            <summary>
+            Gets the twist limit sign.
+            </summary>
+            <value>
+            The twist limit sign.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConeTwistConstraintImp.TwistSpan">
+            <summary>
+            Gets the twist span.
+            </summary>
+            <value>
+            The twist span.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConeTwistConstraintImp.UpdateRhs(System.Single)">
+            <summary>
+            Updates the RHS.
+            </summary>
+            <param name="timeStep">The time step.</param>
+        </member>
+        <member name="T:Fusee.Engine.Common.IConstraintImp">
+            <summary>
+            Implementation agnostic Base representation of a constraint.
+            A constraint defines how motion and rotation is constrained, typically 
+            by a connection between two bodies A and B.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConstraintImp.RigidBodyA">
+            <summary>
+            Gets the rigid body A.
+            </summary>
+            <value>
+            The rigid body A.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConstraintImp.RigidBodyB">
+            <summary>
+            Gets the rigid body B.
+            </summary>
+            <value>
+            The rigid body B.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConstraintImp.GetUid">
+            <summary>
+            Gets the uid.
+            </summary>
+            <returns>The uid.</returns>
+        </member>
+        <member name="P:Fusee.Engine.Common.IConstraintImp.UserObject">
+            <summary>
+            Gets or sets a user object.
+            </summary>
+            <value>
+            The user object.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.IConvexHullShapeImp">
+            <summary>
+            Implementation agnostic representation of a convex hull shape.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConvexHullShapeImp.AddPoint(Fusee.Math.Core.float3)">
+            <summary>
+            Adds the point.
+            </summary>
+            <param name="point">The point.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConvexHullShapeImp.GetScaledPoint(System.Int32)">
+            <summary>
+            Gets the scaled point.
+            </summary>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConvexHullShapeImp.GetUnscaledPoints">
+            <summary>
+            Gets the unscaled points.
+            </summary>
+            <returns>An array of unscaled vertices.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IConvexHullShapeImp.GetNumPoints">
+            <summary>
+            Gets the number of points.
+            </summary>
+            <returns>The number of points.</returns>
+        </member>
+        <member name="T:Fusee.Engine.Common.ICylinderShapeImp">
+            <summary>
+            Implementation agnostic representation of a cylinder shape.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.ICylinderShapeImp.HalfExtents">
+            <summary>
+            Gets the half extents.
+            </summary>
+            <value>
+            The half extents.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ICylinderShapeImp.Radius">
+            <summary>
+            Gets the radius.
+            </summary>
+            <value>
+            The radius.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ICylinderShapeImp.UpAxis">
+            <summary>
+            Gets up axis.
+            </summary>
+            <value>
+            Up axis.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.IDynamicWorldImp">
+            <summary>
+            Implementation agnostic representation of a dynamic worl. The dynamic world is the root object of 
+            any physics simulation. It keeps track of all objects moving and rotating within the world.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IDynamicWorldImp.Gravity">
+            <summary>
+            Gets or sets the gravity.
+            </summary>
+            <value>
+            The gravity.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddRigidBody(System.Single,Fusee.Math.Core.float3,Fusee.Math.Core.float3,Fusee.Engine.Common.ICollisionShapeImp)">
+            <summary>
+            Adds the rigid body.
+            </summary>
+            <param name="mass">The mass.</param>
+            <param name="position">The position.</param>
+            <param name="orientation">The orientation.</param>
+            <param name="colShape">The col shape.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.GetRigidBody(System.Int32)">
+            <summary>
+            Gets the rigid body.
+            </summary>
+            <param name="i">The i.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.StepSimulation(System.Single,System.Int32,System.Single)">
+            <summary>
+            Steps the simulation.
+            </summary>
+            <param name="timeSteps">The time steps.</param>
+            <param name="maxSubSteps">The maximum sub steps.</param>
+            <param name="fixedTimeSteps">The fixed time steps.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.NumberRigidBodies">
+            <summary>
+            Numbers the rigid bodies.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddPoint2PointConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float3)">
+            <summary>
+            Adds the point2 point constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="pivotInA">The pivot in a.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddPoint2PointConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float3,Fusee.Math.Core.float3)">
+            <summary>
+            Adds the point2 point constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="rigidBodyB">The rigid body b.</param>
+            <param name="pivotInA">The pivot in a.</param>
+            <param name="pivotInB">The pivot in b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddHingeConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float4x4,System.Boolean)">
+            <summary>
+            Adds the hinge constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="frameInA">The frame in a.</param>
+            <param name="useReferenceFrameA">if set to <c>true</c> [use reference frame a].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddHingeConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float3,Fusee.Math.Core.float3,System.Boolean)">
+            <summary>
+            Adds the hinge constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="pivotInA">The pivot in a.</param>
+            <param name="axisInA">The axis in a.</param>
+            <param name="useReferenceFrameA">if set to <c>true</c> [use reference frame a].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddHingeConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float3,Fusee.Math.Core.float3,Fusee.Math.Core.float3,Fusee.Math.Core.float3,System.Boolean)">
+            <summary>
+            Adds the hinge constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="rigidBodyB">The rigid body b.</param>
+            <param name="pivotInA">The pivot in a.</param>
+            <param name="pivotInB">The pivot in b.</param>
+            <param name="axisInA">The axis in a.</param>
+            <param name="axisInB">The axis in b.</param>
+            <param name="useReferenceFrameA">if set to <c>true</c> [use reference frame a].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddHingeConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4,System.Boolean)">
+            <summary>
+            Adds the hinge constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="rigidBodyB">The rigid body b.</param>
+            <param name="brAFrame">The br a frame.</param>
+            <param name="brBFrame">The br b frame.</param>
+            <param name="useReferenceFrameA">if set to <c>true</c> [use reference frame a].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddSliderConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4,System.Boolean)">
+            <summary>
+            Adds the slider constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="rigidBodyB">The rigid body b.</param>
+            <param name="frameInA">The frame in a.</param>
+            <param name="frameInB">The frame in b.</param>
+            <param name="useLinearReferenceFrameA">if set to <c>true</c> [use linear reference frame a].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddSliderConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float4x4,System.Boolean)">
+            <summary>
+            Adds the slider constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="frameInA">The frame in a.</param>
+            <param name="useLinearReferenceFrameA">if set to <c>true</c> [use linear reference frame a].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddGearConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float3,Fusee.Math.Core.float3,System.Single)">
+            <summary>
+            Adds the gear constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="rigidBodyB">The rigid body b.</param>
+            <param name="axisInA">The axis in a.</param>
+            <param name="axisInB">The axis in b.</param>
+            <param name="ratio">The ratio.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddConeTwistConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float4x4)">
+            <summary>
+            Adds the cone twist constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="rbAFrame">The rb a frame.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddConeTwistConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4)">
+            <summary>
+            Adds the cone twist constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="rigidBodyB">The rigid body b.</param>
+            <param name="rbAFrame">The rb a frame.</param>
+            <param name="rbBFrame">The rb b frame.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddGeneric6DofConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float4x4,System.Boolean)">
+            <summary>
+            Adds the generic6 dof constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="frameInA">The frame in a.</param>
+            <param name="useReferenceFrameA">if set to <c>true</c> [use reference frame a].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddGeneric6DofConstraint(Fusee.Engine.Common.IRigidBodyImp,Fusee.Engine.Common.IRigidBodyImp,Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4,System.Boolean)">
+            <summary>
+            Adds the generic6 dof constraint.
+            </summary>
+            <param name="rigidBodyA">The rigid body a.</param>
+            <param name="rigidBodyB">The rigid body b.</param>
+            <param name="frameInA">The frame in a.</param>
+            <param name="frameInB">The frame in b.</param>
+            <param name="useReferenceFrameA">if set to <c>true</c> [use reference frame a].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddBoxShape(System.Single)">
+            <summary>
+            Adds the box shape.
+            </summary>
+            <param name="boxHalfExtents">The box half extents.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddBoxShape(Fusee.Math.Core.float3)">
+            <summary>
+            Adds the box shape.
+            </summary>
+            <param name="boxHalfExtents">The box half extents.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddBoxShape(System.Single,System.Single,System.Single)">
+            <summary>
+            Adds the box shape.
+            </summary>
+            <param name="boxHalfExtentsX">The box half extents x.</param>
+            <param name="boxHalfExtentsY">The box half extents y.</param>
+            <param name="boxHalfExtentsZ">The box half extents z.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddSphereShape(System.Single)">
+            <summary>
+            Adds the sphere shape.
+            </summary>
+            <param name="radius">The radius.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddCapsuleShape(System.Single,System.Single)">
+            <summary>
+            Adds the capsule shape.
+            </summary>
+            <param name="radius">The radius.</param>
+            <param name="height">The height.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddCylinderShape(System.Single)">
+            <summary>
+            Adds the cylinder shape.
+            </summary>
+            <param name="halfExtents">The half extents.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddCylinderShape(Fusee.Math.Core.float3)">
+            <summary>
+            Adds the cylinder shape.
+            </summary>
+            <param name="halfExtents">The half extents.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddCylinderShape(System.Single,System.Single,System.Single)">
+            <summary>
+            Adds the cylinder shape.
+            </summary>
+            <param name="halfExtentsX">The half extents x.</param>
+            <param name="halfExtentsY">The half extents y.</param>
+            <param name="halfExtentsZ">The half extents z.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddConeShape(System.Single,System.Single)">
+            <summary>
+            Adds the cone shape.
+            </summary>
+            <param name="radius">The radius.</param>
+            <param name="height">The height.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddMultiSphereShape(Fusee.Math.Core.float3[],System.Single[])">
+            <summary>
+            Adds the multi sphere shape.
+            </summary>
+            <param name="positions">The positions.</param>
+            <param name="radi">The radi.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddCompoundShape(System.Boolean)">
+            <summary>
+            Adds the compound shape.
+            </summary>
+            <param name="enableDynamicAabbTree">if set to <c>true</c> [enable dynamic aabb tree].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddEmptyShape">
+            <summary>
+            Adds the empty shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddConvexHullShape">
+            <summary>
+            Adds the convex hull shape.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddConvexHullShape(Fusee.Math.Core.float3[],System.Boolean)">
+            <summary>
+            Adds the convex hull shape.
+            </summary>
+            <param name="points">The points.</param>
+            <param name="optimized">if set to <c>true</c> [optimized].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddStaticPlaneShape(Fusee.Math.Core.float3,System.Single)">
+            <summary>
+            Adds the static plane shape.
+            </summary>
+            <param name="planeNormal">The plane normal.</param>
+            <param name="planeConstant">The plane constant.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.AddGImpactMeshShape(System.Int32[],Fusee.Math.Core.float3[])">
+            <summary>
+            Adds the g impact mesh shape.
+            </summary>
+            <param name="meshTriangles">The mesh triangles.</param>
+            <param name="meshVertecies">The mesh vertecies.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.NumberConstraints">
+            <summary>
+            Numbers the constraints.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IDynamicWorldImp.Dispose">
+            <summary>
+            Releases unmanaged and - optionally - managed resources.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IEmptyShapeImp">
+            <summary>
+            Implementation agnostic representation of an empty shape.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IGearConstraintImp">
+            <summary>
+            Implementation agnostic representation of a gear constraint.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IGeneric6DofConstraintImp">
+            <summary>
+            Implementation agnostic representation of a six degrees of freedom constraint.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IGeneric6DofConstraintImp.AngularLowerLimit">
+            <summary>
+            Gets or sets the angular lower limit.
+            </summary>
+            <value>
+            The angular lower limit.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IGeneric6DofConstraintImp.AngularUpperLimit">
+            <summary>
+            Gets or sets the angular upper limit.
+            </summary>
+            <value>
+            The angular upper limit.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.CalcAnchorPos">
+            <summary>
+            Calculates the anchor position.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.CalculateTransforms">
+            <summary>
+            Calculates the transforms.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.CalculateTransforms(Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4)">
+            <summary>
+            Calculates the transforms.
+            </summary>
+            <param name="transA">The trans a.</param>
+            <param name="transB">The trans b.</param>
+        </member>
+        <member name="P:Fusee.Engine.Common.IGeneric6DofConstraintImp.CalculatedTransformA">
+            <summary>
+            Gets the calculated transform a.
+            </summary>
+            <value>
+            The calculated transform a.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IGeneric6DofConstraintImp.CalculatedTransformB">
+            <summary>
+            Gets the calculated transform b.
+            </summary>
+            <value>
+            The calculated transform b.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IGeneric6DofConstraintImp.FrameOffsetA">
+            <summary>
+            Gets or sets the frame offset a.
+            </summary>
+            <value>
+            The frame offset a.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IGeneric6DofConstraintImp.FrameOffsetB">
+            <summary>
+            Gets or sets the frame offset b.
+            </summary>
+            <value>
+            The frame offset b.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.GetAngle(System.Int32)">
+            <summary>
+            Gets the angle.
+            </summary>
+            <param name="axisIndex">Index of the axis.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.GetAxis(System.Int32)">
+            <summary>
+            Gets the axis.
+            </summary>
+            <param name="axisIndex">Index of the axis.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.GetRelativePivotPosition(System.Int32)">
+            <summary>
+            Gets the relative pivot position.
+            </summary>
+            <param name="axisIndex">Index of the axis.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.IsLimited(System.Int32)">
+            <summary>
+            Determines whether the specified limit index is limited.
+            </summary>
+            <param name="limitIndex">Index of the limit.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Fusee.Engine.Common.IGeneric6DofConstraintImp.LinearLowerLimit">
+            <summary>
+            Gets or sets the linear lower limit.
+            </summary>
+            <value>
+            The linear lower limit.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IGeneric6DofConstraintImp.LinearUpperLimit">
+            <summary>
+            Gets or sets the linear upper limit.
+            </summary>
+            <value>
+            The linear upper limit.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.SetAxis(Fusee.Math.Core.float3,Fusee.Math.Core.float3)">
+            <summary>
+            Sets the axis.
+            </summary>
+            <param name="axis1">The axis1.</param>
+            <param name="axis2">The axis2.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.SetFrames(Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4)">
+            <summary>
+            Sets the frames.
+            </summary>
+            <param name="frameA">The frame a.</param>
+            <param name="frameB">The frame b.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.SetLimit(System.Int32,System.Single,System.Single)">
+            <summary>
+            Sets the limit.
+            </summary>
+            <param name="axis">The axis.</param>
+            <param name="lo">The lo.</param>
+            <param name="hi">The hi.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.TestAngularLimitMotor(System.Int32)">
+            <summary>
+            Tests the angular limit motor.
+            </summary>
+            <param name="axisIndex">Index of the axis.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Fusee.Engine.Common.IGeneric6DofConstraintImp.UseFrameOffset">
+            <summary>
+            Gets or sets a value indicating whether [use frame offset].
+            </summary>
+            <value>
+              <c>true</c> if [use frame offset]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IGeneric6DofConstraintImp.UpdateRhs(System.Single)">
+            <summary>
+            Updates the RHS.
+            </summary>
+            <param name="timeStep">The time step.</param>
+        </member>
+        <member name="T:Fusee.Engine.Common.IGImpactMeshShapeImp">
+            <summary>
+            Implementation agnostic representation of a G impact mesh shape.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.HingeFlags">
+            <summary>
+            Flags describing hinge detail.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IHingeConstraintImp">
+            <summary>
+            Implementation agnostic representation of a hinge constraint.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.AngularOnly">
+            <summary>
+            Gets or sets a value indicating whether [angular only].
+            </summary>
+            <value>
+              <c>true</c> if [angular only]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.EnableMotor">
+            <summary>
+            Gets or sets a value indicating whether [enable motor].
+            </summary>
+            <value>
+              <c>true</c> if [enable motor]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IHingeConstraintImp.EnableAngularMotor(System.Boolean,System.Single,System.Single)">
+            <summary>
+            Enables the angular motor.
+            </summary>
+            <param name="enableMotor">if set to <c>true</c> [enable motor].</param>
+            <param name="targetVelocity">The target velocity.</param>
+            <param name="maxMotorImpulse">The maximum motor impulse.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IHingeConstraintImp.SetMotorTarget(Fusee.Math.Core.Quaternion,System.Single)">
+            <summary>
+            Sets the motor target.
+            </summary>
+            <param name="qAinB">The q ain b.</param>
+            <param name="dt">The dt.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IHingeConstraintImp.SetMotorTarget(System.Single,System.Single)">
+            <summary>
+            Sets the motor target.
+            </summary>
+            <param name="targetAngle">The target angle.</param>
+            <param name="dt">The dt.</param>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.MaxMotorImpulse">
+            <summary>
+            Gets or sets the maximum motor impulse.
+            </summary>
+            <value>
+            The maximum motor impulse.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.MotorTargetVelocity">
+            <summary>
+            Gets the motor target velocity.
+            </summary>
+            <value>
+            The motor target velocity.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.FrameA">
+            <summary>
+            Gets the frame of object A.
+            </summary>
+            <value>
+            The frame for object A.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.FrameB">
+            <summary>
+            Gets the frame of object B.
+            </summary>
+            <value>
+            The frame of B.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.FrameOffsetA">
+            <summary>
+            Gets the frame offset of object A.
+            </summary>
+            <value>
+            The frame offset for A.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.FrameOffsetB">
+            <summary>
+            Gets the frame offset of object B.
+            </summary>
+            <value>
+            The frame offset for B.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IHingeConstraintImp.SetAxis(Fusee.Math.Core.float3)">
+            <summary>
+            Sets the axis.
+            </summary>
+            <param name="axisInA">The axis in a.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IHingeConstraintImp.GetHingeAngle">
+            <summary>
+            Gets the hinge angle.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IHingeConstraintImp.GetHingeAngle(Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4)">
+            <summary>
+            Gets the hinge angle.
+            </summary>
+            <param name="transA">The trans a.</param>
+            <param name="transB">The trans b.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IHingeConstraintImp.SetLimit(System.Single,System.Single,System.Single,System.Single,System.Single)">
+            <summary>
+            Sets the limit.
+            </summary>
+            <param name="low">The low.</param>
+            <param name="high">The high.</param>
+            <param name="softness">The softness.</param>
+            <param name="biasFactor">The bias factor.</param>
+            <param name="relaxationFactor">The relaxation factor.</param>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.SolverLimit">
+            <summary>
+            Gets the solver limit.
+            </summary>
+            <value>
+            The solver limit.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.LowerLimit">
+            <summary>
+            Gets the lower limit.
+            </summary>
+            <value>
+            The lower limit.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IHingeConstraintImp.UpperLimit">
+            <summary>
+            Gets the upper limit.
+            </summary>
+            <value>
+            The upper limit.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.IMeshImp">
+            <summary>
+            Interface for Mesh implementations. The implementation should handle typical mesh informations like: vertices, triangles, normals, colors, UV's.
+            It is also required to implement a connection to the current Rendercontext in order to apply the Mesh for rendering.
+            The Mesh should preferable use handles for its informations in order to communicate with a rendercontext. The handles are refering to so called BufferObjects.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IMeshImp.InvalidateVertices">
+            <summary>
+            Implementation Task: Invalidates the vertices of the mesh, e.g. reset the VertexBufferObject of this instance by setting it to 0.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IMeshImp.VerticesSet">
+            <summary>
+            Implementation Tasks: Get a value indicating whether [vertices set].
+            </summary>
+            <value>
+              <c>true</c> if VertexBufferObject is not 0; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IMeshImp.InvalidateNormals">
+            <summary>
+            Implementation Tasks: Invalidates the normals of the mesh, e.g. reset the NormalBufferObject of this instance by setting it to 0.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IMeshImp.NormalsSet">
+            <summary>
+            Implementation Tasks: Gets a value indicating whether [normals set].
+            </summary>
+            <value>
+              <c>true</c> if NormalBufferObject is not 0; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IMeshImp.InvalidateColors">
+            <summary>
+            Implementation Tasks: Invalidates the colors, e.g. reset the ColorBufferObject of this instance by setting it to 0.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IMeshImp.ColorsSet">
+            <summary>
+            Implementation Tasks: Gets a value indicating whether [colors set].
+            </summary>
+            <value>
+              <c>true</c> if ColorBufferObject is not 0; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IMeshImp.InvalidateTriangles">
+            <summary>
+            Implementation Tasks: Invalidates the triangles, e.g. reset the ElementBufferObject of this instance by setting it to 0.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IMeshImp.TrianglesSet">
+            <summary>
+            Implementation Tasks: Gets a value indicating whether [triangles set].
+            </summary>
+            <value>
+              <c>true</c> if ElementBufferObject is not 0; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IMeshImp.UVsSet">
+            <summary>
+            Implementation Tasks: Gets a value indicating whether [UVs set].
+            </summary>
+            <value>
+              <c>true</c> if UVBufferObject is not 0; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IMeshImp.InvalidateUVs">
+            <summary>
+            Implementation Tasks: Invalidates the UV's, e.g. reset the UVBufferObject of this instance by setting it to 0.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IMeshImp.InvalidateBoneWeights">
+            <summary>
+            Implementation Tasks: Invalidates the boneweights of the mesh, e.g. reset the BoneWeightsBufferObject of this instance by setting it to 0.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IMeshImp.BoneWeightsSet">
+            <summary>
+            Implementation Tasks: Gets a value indicating whether [boneweights set].
+            </summary>
+            <value>
+              <c>true</c> if BoneWeightsBufferObject is not 0; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IMeshImp.InvalidateBoneIndices">
+            <summary>
+            Implementation Tasks: Invalidates the boneindices of the mesh, e.g. reset the BoneIndicesBufferObject of this instance by setting it to 0.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IMeshImp.BoneIndicesSet">
+            <summary>
+            Implementation Tasks: Gets a value indicating whether [boneindices set].
+            </summary>
+            <value>
+              <c>true</c> if BoneIndicesBufferObject is not 0; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.IMultiSphereShapeImp">
+            <summary>
+            Implementation agnostic representation of a collision shape 
+            consisting of multiple spheres.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IMultiSphereShapeImp.GetSpherePosition(System.Int32)">
+            <summary>
+            Gets the sphere position.
+            </summary>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IMultiSphereShapeImp.GetSphereRadius(System.Int32)">
+            <summary>
+            Gets the sphere radius.
+            </summary>
+            <param name="index">The index.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Fusee.Engine.Common.IMultiSphereShapeImp.SphereCount">
+            <summary>
+            Gets the sphere count.
+            </summary>
+            <value>
+            The sphere count.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.IPEndpointData">
+            <summary>
+            Struct holding all data necessary to describe an IP connection.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.IPEndpointData.Address">
+            <summary>
+            The IP address as a long value.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.IPEndpointData.Port">
+            <summary>
+            The port of the IP connection.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.INetworkConnection">
+            <summary>
+            Interface for a network connection object.
+            </summary>
+            <remarks>
+            Implementation tasks: A network connection has to implement functionality to send messages via a network and to disconnect.
+            </remarks>
+        </member>
+        <member name="P:Fusee.Engine.Common.INetworkConnection.RemoteEndPoint">
+            <summary>
+            Gets the remote end point. 
+            </summary>
+            <value>
+            The remote end point.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.INetworkConnection.RoundtripTime">
+            <summary>
+            Gets the roundtrip time of a packet. This is the time in milliseconds that a packet requires to be send to the remote end point and back.
+            </summary>
+            <value>
+            The roundtrip time.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkConnection.Disconnect">
+            <summary>
+            Disconnects this instance from the remote end point.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkConnection.Disconnect(System.String)">
+            <summary>
+            Disconnects this instance with specified bye message for the remote end point.
+            </summary>
+            <param name="byeMessage">The bye message.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkConnection.SendMessage(System.Byte[])">
+            <summary>
+            Sends the message as <see cref="T:Fusee.Engine.Common.MessageType"/>.RealiableOrdered on channel 0.
+            </summary>
+            <param name="packet">The packet in byte[].</param>
+            <returns>True if the message arrived.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkConnection.SendMessage(System.Byte[],Fusee.Engine.Common.MessageDelivery,System.Int32)">
+            <summary>
+            Sends the message with options.
+            </summary>
+            <param name="packet">The packet in byte[].</param>
+            <param name="msgDelivery">The <see cref="T:Fusee.Engine.Common.MessageDelivery"/>.</param>
+            <param name="msgChannel">The message channel.</param>
+            <returns>True if the message arrived.</returns>
+        </member>
+        <member name="T:Fusee.Engine.Common.NetConfigValues">
+            <summary>
+            Network configuration object.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetConfigValues.SysType">
+            <summary>
+            The system type. (Client, Server, Peer) 
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetConfigValues.DefaultPort">
+            <summary>
+            The default port (default: 14242)
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetConfigValues.Discovery">
+            <summary>
+            The automatic discovery in net (default: false)
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetConfigValues.ConnectOnDiscovery">
+            <summary>
+            The automatic connect on discovery. (default: false)
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetConfigValues.DiscoveryTimeout">
+            <summary>
+            The discovery timeout. (default: 5000 ms)
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetConfigValues.RedirectPackets">
+            <summary>
+            The redirect packets. Currently this is not used. (default: false)
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.NetStatusValues">
+            <summary>
+            Connection status object.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.NetStatusValues.Connected">
+            <summary>
+            Gets or sets a value indicating whether [connected].
+            </summary>
+            <value>
+              <c>true</c> if [connected]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.NetStatusValues.Connecting">
+            <summary>
+            Gets or sets a value indicating whether [connecting].
+            </summary>
+            <value>
+              <c>true</c> if [connecting]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetStatusValues.LastStatus">
+            <summary>
+            Feedback about the last status.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.SysType">
+            <summary>
+            Type of the system enums.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.SysType.None">
+            <summary>
+            None = 0.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.SysType.Peer">
+            <summary>
+            Peer = 1.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.SysType.Client">
+            <summary>
+            Client = 2.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.SysType.Server">
+            <summary>
+            Server = 3.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.ConnectionUpdateEvent">
+            <summary>
+            Event that gets triggered on connection change, establishing or disconnection.
+            </summary>
+            <param name="eStatus">The <see cref="T:Fusee.Engine.Common.ConnectionStatus"/>.</param>
+            <param name="connection">The <see cref="T:Fusee.Engine.Common.INetworkConnection"/>.</param>
+        </member>
+        <member name="T:Fusee.Engine.Common.INetworkImp">
+            <summary>
+            The core network connection and sending object interface.
+            </summary>
+            <remarks>
+            Implementation Tasks: This object has to handle everything that is required for network communication. 
+            Possible topics are Configuration, Status of connection and system as well as connection and message handling.
+            </remarks>
+        </member>
+        <member name="P:Fusee.Engine.Common.INetworkImp.Config">
+            <summary>
+            Gets or sets the configuration of the network. <see cref="T:Fusee.Engine.Common.NetConfigValues"/>
+            </summary>
+            <value>
+            The configuration.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.INetworkImp.Status">
+            <summary>
+            Gets or sets the status.
+            </summary>
+            <value>
+            The status.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.INetworkImp.Connections">
+            <summary>
+            Gets all the connections that this instance is handling.
+            </summary>
+            <value>
+            The connections of type <see cref="T:Fusee.Engine.Common.INetworkConnection"/>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkImp.GetLocalIp">
+            <summary>
+            Gets the local ip. Do not use this often due to performance reasons.
+            </summary>
+            <returns>The local ip as a string.</returns>
+        </member>
+        <member name="P:Fusee.Engine.Common.INetworkImp.IncomingMsg">
+            <summary>
+            Gets all the incoming Messages that are not yet viewed.
+            </summary>
+            <value>
+            The incoming Messages of type <see cref="T:Fusee.Engine.Common.INetworkMsg"/>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkImp.StartPeer(System.Int32)">
+            <summary>
+            Initialize system on port.
+            </summary>
+            <param name="port">The port.</param>
+        </member>
+        <member name="E:Fusee.Engine.Common.INetworkImp.ConnectionUpdate">
+            <summary>
+            Occurs when [connection update] is triggered. <see cref="T:Fusee.Engine.Common.ConnectionUpdateEvent"/>
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkImp.OpenConnection(Fusee.Engine.Common.SysType,System.String,System.Int32)">
+            <summary>
+            Establish connection to port and host.
+            </summary>
+            <param name="type">The type of the system (only peer or client are supported).</param>
+            <param name="host">The host. Example: 129.12.12.12</param>
+            <param name="port">The port.</param>
+            <returns>True if could open connection succesfully.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkImp.CloseConnection">
+            <summary>
+            Closes the connection.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkImp.SendMessage(System.Byte[],Fusee.Engine.Common.MessageDelivery,System.Int32)">
+            <summary>
+            Sends a message through a channel with defined message delivery type.
+            </summary>
+            <param name="msg">The Message in byte[].</param>
+            <param name="msgDelivery">The <see cref="T:Fusee.Engine.Common.MessageDelivery"/>.</param>
+            <param name="msgChannel">The message channel.</param>
+            <returns>True if the message arrived.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkImp.SendDiscoveryMessage(System.Int32)">
+            <summary>
+            Sends the discovery message on defined port.
+            </summary>
+            <param name="port">The port.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkImp.OnUpdateFrame">
+            <summary>
+            Called when [update frame] occurs.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.INetworkImp.CloseDevices">
+            <summary>
+            Closes all network connections.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.ConnectionStatus">
+            <summary>
+            Connection status enums.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ConnectionStatus.None">
+            <summary>
+            No connection = 0
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ConnectionStatus.InitiatedConnect">
+            <summary>
+            Connection initialization = 1
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ConnectionStatus.ReceivedInitiation">
+            <summary>
+            Initiation Received = 2
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ConnectionStatus.RespondedAwaitingApproval">
+            <summary>
+            Responded awaiting approval = 3
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ConnectionStatus.RespondedConnect">
+            <summary>
+            The responded connect(agree to accept connection) = 4
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ConnectionStatus.Connected">
+            <summary>
+            Connection established = 5
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ConnectionStatus.Disconnecting">
+            <summary>
+            Initialization of Disconnection = 6
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ConnectionStatus.Disconnected">
+            <summary>
+            Disconnected = 7
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.MessageType">
+            <summary>
+            Network transfer message type enums.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.Error">
+            <summary>
+             error = 0
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.StatusChanged">
+            <summary>
+             status changed = 1
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.UnconnectedData">
+            <summary>
+             unconnected data = 2
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.ConnectionApproval">
+            <summary>
+             connection approval = 4
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.Data">
+            <summary>
+             data = 8
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.Receipt">
+            <summary>
+             receipt = 16
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.DiscoveryRequest">
+            <summary>
+             discovery request = 32
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.DiscoveryResponse">
+            <summary>
+             discovery response = 64
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.VerboseDebugMessage">
+            <summary>
+             verbose debug message = 18
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.DebugMessage">
+            <summary>
+             debug message = 256
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.WarningMessage">
+            <summary>
+             warning message = 512
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.ErrorMessage">
+            <summary>
+             error message = 1024
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.NatIntroductionSuccess">
+            <summary>
+             nat introduction success = 2048
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageType.ConnectionLatencyUpdated">
+            <summary>
+             connection latency updated = 4096
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.MessageDelivery">
+            <summary>
+            Message delivery type enums.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageDelivery.Unknown">
+            <summary>
+            Unknown type = 0
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageDelivery.Unreliable">
+            <summary>
+            Unreliable = 1, Packets can get lost and the order doesn't have to be correct.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageDelivery.UnreliableSequenced">
+            <summary>
+            Unrealiable Sequenced = 2, Packets can get lost, if an older(order) packet is received after a new one it(the older) is deleted.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageDelivery.ReliableUnordered">
+            <summary>
+            Reliable Unordered = 3, Packets don't get lost andthe order doesnt have to be correct.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageDelivery.ReliableSequenced">
+            <summary>
+            Reliable Sequenced = 4, Packets don't get lost, if an older(order) packet is received after a new one it(the older) is deleted. 
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MessageDelivery.ReliableOrdered">
+            <summary>
+            Realiable Ordered = 5, Packets don't get lost and are always transmitted in correct order.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.MsgDataTypes">
+            <summary>
+            Data type of the message data. 
+            Data is always received as Byte[] and will be casted to appropriate enum type.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MsgDataTypes.Object">
+            <summary>
+             object = 0. Can be any object.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MsgDataTypes.Bytes">
+            <summary>
+             bytes = 1. This is an array.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MsgDataTypes.Int">
+            <summary>
+             int = 2. This is a single value.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MsgDataTypes.Float">
+            <summary>
+             float = 3. This is a single value.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.MsgDataTypes.String">
+            <summary>
+             string = 4.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.NetworkMsgType">
+            <summary>
+            Message type container struct. (= Packet container) 
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetworkMsgType.MsgType">
+            <summary>
+            The Message's data type (object, int, bytes, float, string).
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetworkMsgType.MsgDelivery">
+            <summary>
+            The Message's transmission type.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetworkMsgType.MsgChannel">
+            <summary>
+            The Message's channel.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetworkMsgType.ReadBytes">
+            <summary>
+            The read bytes.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetworkMsgType.ReadInt">
+            <summary>
+            The read int.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetworkMsgType.ReadFloat">
+            <summary>
+            The read float.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.NetworkMsgType.ReadString">
+            <summary>
+            The read string.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.INetworkMsg">
+            <summary>
+            The Network message interface. 
+            </summary>
+            <remarks>
+            Implementation Tasks: In order to use this with own implementations own enums for MessageType, Connectionstatus and Network message type are required.
+            An implementation of <see cref="T:Fusee.Engine.Common.INetworkConnection"/> is required to identify the sender of the message.
+            </remarks>
+        </member>
+        <member name="P:Fusee.Engine.Common.INetworkMsg.Type">
+            <summary>
+            Gets the type of the message.
+            </summary>
+            <value>
+            The type.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.INetworkMsg.Status">
+            <summary>
+            Gets the status of the connection.
+            </summary>
+            <value>
+            The status.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.INetworkMsg.Sender">
+            <summary>
+            Gets the sender of the message.
+            </summary>
+            <value>
+            The sender.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.INetworkMsg.Message">
+            <summary>
+            Gets the message's data dontent.
+            </summary>
+            <value>
+            The message.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.InitEventArgs">
+            <summary>
+            The Init event argument container. This is mainly used in <see cref="T:Fusee.Engine.Common.IRenderCanvasImp"/>.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.PointToPointFlags">
+            <summary>
+            Flags specifing point-to-point constraint details.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IPoint2PointConstraintImp">
+            <summary>
+            Implmentation agnostic representation of a point-to-point constraint.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IPoint2PointConstraintImp.PivotInA">
+            <summary>
+            Gets or sets the pivot in a.
+            </summary>
+            <value>
+            The pivot in a.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IPoint2PointConstraintImp.PivotInB">
+            <summary>
+            Gets or sets the pivot in b.
+            </summary>
+            <value>
+            The pivot in b.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IPoint2PointConstraintImp.UpdateRhs(System.Single)">
+            <summary>
+            Updates the RHS.
+            </summary>
+            <param name="timeStep">The time step.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IPoint2PointConstraintImp.SetParam(Fusee.Engine.Common.PointToPointFlags,System.Single,System.Int32)">
+            <summary>
+            Sets the parameter.
+            </summary>
+            <param name="constraintParameter">The constraint parameter.</param>
+            <param name="value">The value.</param>
+            <param name="axis">The axis.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IPoint2PointConstraintImp.GetParam(Fusee.Engine.Common.PointToPointFlags,System.Int32)">
+            <summary>
+            Gets the parameter.
+            </summary>
+            <param name="param">The parameter.</param>
+            <param name="axis">The axis.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fusee.Engine.Common.IRenderCanvasImp">
+            <summary>
+            Implementation agnostic representation of a render canvas.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRenderCanvasImp.Width">
+            <summary>
+            Implementation Tasks: Gets or sets the width(pixel units) of the Canvas.
+            </summary>
+            <value>
+            The width.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRenderCanvasImp.Height">
+            <summary>
+            Implementation Tasks: Gets or sets the height(pixel units) of the Canvas.
+            </summary>
+            <value>
+            The height.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRenderCanvasImp.Caption">
+            <summary>
+            Implementation Tasks: Gets or sets the caption of the Application(Window Title).
+            </summary>
+            <value>
+            The caption.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRenderCanvasImp.DeltaTime">
+            <summary>
+            Implementation Tasks: Gets the delta time. The delta time is the time it took the last frame to render in milliseconds.
+            </summary>
+            <value>
+            The delta time.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRenderCanvasImp.VerticalSync">
+            <summary>
+            Implementation Tasks: Gets or sets a value indicating whether vertical synchronization is enabled.
+            This option is used to reduce "Glitches" during rendering.
+            </summary>
+            <value>
+              <c>true</c> if [vertical sync]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRenderCanvasImp.Fullscreen">
+            <summary>
+            Implementation Tasks: Gets or sets a value indicating whether this <see cref="T:Fusee.Engine.Common.IRenderCanvasImp"/> is in fullscreen mode.
+            This option can not be applied to all plattforms. 
+            </summary>
+            <value>
+              <c>true</c> if fullscreen; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderCanvasImp.Present">
+            <summary>
+            Implementation Tasks: Presents the final rendered image. The FrameBuffer needs to be cleared afterwards.
+            The delta time needs to be recalculated when this function is called.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderCanvasImp.Run">
+            <summary>
+            Runs this instance. This function should not be called more than once as its only for initilization purposes.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderCanvasImp.SetCursor(Fusee.Engine.Common.CursorType)">
+            <summary>
+            Set the cursor (the mouse pointer image) to one of the pre-defined types
+            </summary>
+            <param name="cursorType">The type of the cursor to set.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderCanvasImp.OpenLink(System.String)">
+            <summary>
+            Opens the given URL in the user's standard web browser. The link MUST start with "http://".
+            </summary>
+            <param name="link">The URL to open</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderCanvasImp.SetWindowSize(System.Int32,System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Sets the size of the output window for desktop development.
+            </summary>
+            <param name="width">The width of the window.</param>
+            <param name="height">The height of the window.</param>
+            <param name="posx">The x position of the window.</param>
+            <param name="posy">The y position of the window.</param>
+            <param name="borderHidden">Show the window border or not.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderCanvasImp.CloseGameWindow">
+            <summary>
+            Closes the GameWindow with a call to opentk.
+            </summary>
+        </member>
+        <member name="E:Fusee.Engine.Common.IRenderCanvasImp.Init">
+            <summary>
+            Occurs when [init] is called.
+            Implementation Tasks: Handle the Initialization process
+            </summary>
+        </member>
+        <member name="E:Fusee.Engine.Common.IRenderCanvasImp.UnLoad">
+            <summary>
+            Occurs when [UnLoad] is called.
+            </summary>
+        </member>
+        <member name="E:Fusee.Engine.Common.IRenderCanvasImp.Render">
+            <summary>
+            Occurs when [Render] is called.
+            </summary>
+        </member>
+        <member name="E:Fusee.Engine.Common.IRenderCanvasImp.Resize">
+            <summary>
+            Occurs when [Resize] is called.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IRenderContextImp">
+            <summary>
+            The render context interface contains all functions necessary to manipulate the underlying rendering hardware. Use this class' elements
+            to render geometry to the RenderCanvas associated with this context. If you are worked with OpenGL or DirectX before you will find
+            many similarities in this class' methods and properties.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRenderContextImp.ClearColor">
+            <summary>
+            The color to use when clearing the color buffer.
+            </summary>
+            <value>
+            The color value is interpreted as a (Red, Green, Blue, Alpha) quadruple with
+            component values ranging from 0.0f to 1.0f.
+            </value>
+            <remarks>
+            This is the color that will be copied to all pixels in the output color buffer when Clear is called on the render context.
+            </remarks>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.Clear(Fusee.Engine.Common.ClearFlags)"/>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRenderContextImp.ClearDepth">
+            <summary>
+            The depth value to use when clearing the color buffer.
+            </summary>
+            <value>
+            Typically set to the highest possible depth value. Typically ranges between 0 and 1.
+            </value>
+            <remarks>
+            This is the depth (z-) value that will be copied to all pixels in the depth (z-) buffer when Clear is called on the render context.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.CreateShader(System.String,System.String)">
+            <summary>
+            Creates a shader object from vertex shader source code and pixel shader source code.
+            </summary>
+            <param name="vs">A string containing the vertex shader source.</param>
+            <param name="ps">A string containing the pixel (fragment) shader source code.</param>
+            <returns>A shader program object identifying the combination of the given vertex and pixel shader.</returns>
+            <remarks>
+            Currently only shaders in GLSL (or rather GLSL/ES) source language(s) are supported.
+            The result is already compiled to code executable on the GPU. <see cref="M:Fusee.Engine.Common.IRenderContextImp.SetShader(Fusee.Engine.Common.IShaderProgramImp)"/>
+            to activate the result as the current shader used for rendering geometry passed to the RenderContext.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParamList(Fusee.Engine.Common.IShaderProgramImp)">
+            <summary>
+            Get a list of (uniform) shader parameters accessed by the given shader.
+            </summary>
+            <param name="shaderProgram">The shader program to query for parameters.</param>
+            <returns>
+            A list of shader parameters accessed by the shader code of the given shader program. The parameters listed here
+            are the so-called uniform parameters of the shader (in contrast to the varying parameters). The list contains all
+            uniform parameters that are accessed by either the vertex shader, the pixel shader, or both shaders compiled into
+            the given shader.
+            </returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParam(Fusee.Engine.Common.IShaderProgramImp,System.String)">
+            <summary>
+            Returns an identifiyer for the named (uniform) parameter used in the specified shader program.
+            </summary>
+            <param name="shaderProgram">The shader program using the parameter.</param>
+            <param name="paramName">Name of the shader parameter.</param>
+            <returns>A handle object to identify the given parameter in subsequent calls to SetShaderParam.</returns>
+            <remarks>
+            The returned handle can be used to assign values to a (uniform) shader paramter.
+            </remarks>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.SetShaderParam(Fusee.Engine.Common.IShaderParam,System.Single)"/>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.GetParamValue(Fusee.Engine.Common.IShaderProgramImp,Fusee.Engine.Common.IShaderParam)">
+            <summary>
+            Gets the value of a shader parameter.
+            </summary>
+            <param name="shaderProgram">The program.</param>
+            <param name="param">The handle.</param>
+            <returns>The float value.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetShaderParam(Fusee.Engine.Common.IShaderParam,System.Single)">
+            <summary>
+            Sets the specified shader parameter to a float value.
+            </summary>
+            <param name="param">The shader parameter identifier.</param>
+            <param name="val">The float value that should be assigned to the shader parameter.</param>
+            <remarks>
+            <see cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParam(Fusee.Engine.Common.IShaderProgramImp,System.String)"/> to see how to retrieve an identifier for
+            a given uniform parameter name used in a shader program.
+            </remarks>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParamList(Fusee.Engine.Common.IShaderProgramImp)"/>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetShaderParam(Fusee.Engine.Common.IShaderParam,Fusee.Math.Core.float2)">
+            <summary>
+            Sets the shader parameter to a float2 value.
+            </summary>
+            <param name="param">The shader parameter identifier.</param>
+            <param name="val">The float2 value that should be assigned to the shader parameter.</param>
+            <remarks>
+            <see cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParam(Fusee.Engine.Common.IShaderProgramImp,System.String)"/> to see how to retrieve an identifier for
+            a given uniform parameter name used in a shader program.
+            </remarks>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParamList(Fusee.Engine.Common.IShaderProgramImp)"/>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetShaderParam(Fusee.Engine.Common.IShaderParam,Fusee.Math.Core.float3)">
+            <summary>
+            Sets the shader parameter to a float3 value.
+            </summary>
+            <param name="param">The shader parameter identifier.</param>
+            <param name="val">The float3 value that should be assigned to the shader parameter.</param>
+            <remarks>
+            <see cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParam(Fusee.Engine.Common.IShaderProgramImp,System.String)"/> to see how to retrieve an identifier for
+            a given uniform parameter name used in a shader program.
+            </remarks>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParamList(Fusee.Engine.Common.IShaderProgramImp)"/>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetShaderParam(Fusee.Engine.Common.IShaderParam,Fusee.Math.Core.float4)">
+            <summary>
+            Sets the shader parameter to a float4 value.
+            </summary>
+            <param name="param">The shader parameter identifier.</param>
+            <param name="val">The float4 value that should be assigned to the shader parameter.</param>
+            <remarks>
+            <see cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParam(Fusee.Engine.Common.IShaderProgramImp,System.String)"/> to see how to retrieve an identifier for
+            a given uniform parameter name used in a shader program.
+            </remarks>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParamList(Fusee.Engine.Common.IShaderProgramImp)"/>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetShaderParam(Fusee.Engine.Common.IShaderParam,Fusee.Math.Core.float4[])">
+            <summary>
+            Sets the shader parameter to a float4 array.
+            </summary>
+            <param name="param">The <see cref="T:Fusee.Engine.Common.IShaderParam"/> identifier.</param>
+            <param name="val">The float4 array that should be assigned to the shader array parameter.</param>
+            <remarks>
+            <see cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParam(Fusee.Engine.Common.IShaderProgramImp,System.String)"/> to see how to retrieve an identifier for
+            a given uniform parameter name used in a shader program.
+            </remarks>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParamList(Fusee.Engine.Common.IShaderProgramImp)"/>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetShaderParam(Fusee.Engine.Common.IShaderParam,Fusee.Math.Core.float4x4)">
+            <summary>
+            Sets the shader parameter to a float4x4 matrix value.
+            </summary>
+            <param name="param">The shader parameter identifier.</param>
+            <param name="val">The float4x4 matrix that should be assigned to the shader parameter.</param>
+            <remarks>
+            <see cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParam(Fusee.Engine.Common.IShaderProgramImp,System.String)"/> to see how to retrieve an identifier for
+            a given uniform parameter name used in a shader program.
+            </remarks>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParamList(Fusee.Engine.Common.IShaderProgramImp)"/>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetShaderParam(Fusee.Engine.Common.IShaderParam,Fusee.Math.Core.float4x4[])">
+            <summary>
+            Sets the shader parameter to a float4x4 matrix array.
+            </summary>
+            <param name="param">The shader parameter identifier.</param>
+            <param name="val">The float4x4 matrix array that should be assigned to the shader array parameter.</param>
+            <remarks>
+            <see cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParam(Fusee.Engine.Common.IShaderProgramImp,System.String)"/> to see how to retrieve an identifier for
+            a given uniform parameter name used in a shader program.
+            </remarks>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParamList(Fusee.Engine.Common.IShaderProgramImp)"/>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetShaderParam(Fusee.Engine.Common.IShaderParam,System.Int32)">
+            <summary>
+            Sets the shader parameter to a integer value.
+            </summary>
+            <param name="param">The shader parameter identifier.</param>
+            <param name="val">The integer value that should be assigned to the shader parameter.</param>
+            <remarks>
+            <see cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParam(Fusee.Engine.Common.IShaderProgramImp,System.String)"/> to see how to retrieve an identifier for
+            a given uniform parameter name used in a shader program.
+            </remarks>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.GetShaderParamList(Fusee.Engine.Common.IShaderProgramImp)"/>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetShaderParamTexture(Fusee.Engine.Common.IShaderParam,Fusee.Engine.Common.ITexture)">
+            <summary>
+            Sets a Shader Parameter to a created texture.
+            </summary>
+            <param name="param">Shader Parameter used for texture binding.</param>
+            <param name="texId">An ITexture probably returned from CreateTexture() method.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.UpdateTextureFromVideoStream(Fusee.Engine.Common.IVideoStreamImp,Fusee.Engine.Common.ITexture)">
+            <summary>
+            Updates the texture from video the given video stream.
+            </summary>
+            <param name="stream">The video stream to retrieve an individual image.</param>
+            <param name="tex">The texture to fill with the image from the video.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.UpdateTextureRegion(Fusee.Engine.Common.ITexture,Fusee.Base.Common.ImageData,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Updates the given region of a texture with te passed image data.
+            </summary>
+            <param name="tex">The tex.</param>
+            <param name="img">The img.</param>
+            <param name="startX">The start x.</param>
+            <param name="startY">The start y.</param>
+            <param name="width">The width.</param>
+            <param name="height">The height.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.CreateTexture(Fusee.Base.Common.ImageData,System.Boolean)">
+            <summary>
+            Creates a new texture and binds it to the shader.
+            </summary>
+            <remarks>
+            Method should be called after LoadImage method to process
+            the BitmapData an make them available for the shader.
+            </remarks>
+            <param name="imageData">An ImageData struct, containing necessary information for the upload to the graphics card.</param>
+            <param name="repeat">Indicating if the texture should be clamped or repeated.</param>
+            <returns>
+            An ITexture that can be used for texturing in the shader.
+            </returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.Clear(Fusee.Engine.Common.ClearFlags)">
+            <summary>
+            Erases the contents of the speciefied rendering buffers.
+            </summary>
+            <param name="flags">A combination of flags specifying the rendering buffers to clear.</param>
+            <remarks>
+            Calling this method erases all contents of the rendering buffers. A typical use case for this method
+            is to erase the contents of the color buffer and the depth buffer (z-buffer) before rendering starts
+            at the beginning of a rendering loop. Thus, rendering the current frame starts with an empty color and
+            z-buffer. <see cref="T:Fusee.Engine.Common.ClearFlags"/> for a list of possible buffers to clear. Make sure to use the bitwisee
+            or-operator (|) to combine several buffers to clear.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetVertices(Fusee.Engine.Common.IMeshImp,Fusee.Math.Core.float3[])">
+            <summary>
+            Binds the vertices onto the GL Rendercontext and assigns an VertexBuffer index to the passed <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.
+            </summary>
+            <param name="mesh">The <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.</param>
+            <param name="vertices">The vertices.</param>
+            <exception cref="T:System.ArgumentException">Vertices must not be null or empty</exception>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetNormals(Fusee.Engine.Common.IMeshImp,Fusee.Math.Core.float3[])">
+            <summary>
+            Binds the normals onto the GL Rendercontext and assigns an NormalBuffer index to the passed <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.
+            </summary>
+            <param name="mr">The <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.</param>
+            <param name="normals">The normals.</param>
+            <exception cref="T:System.ArgumentException">Normals must not be null or empty</exception>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetUVs(Fusee.Engine.Common.IMeshImp,Fusee.Math.Core.float2[])">
+            <summary>
+            Binds the UV coordinates onto the GL Rendercontext and assigns an UVBuffer index to the passed <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.
+            </summary>
+            <param name="mr">The <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.</param>
+            <param name="uvs">The UV's.</param>
+            <exception cref="T:System.ArgumentException">UVs must not be null or empty</exception>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetColors(Fusee.Engine.Common.IMeshImp,System.UInt32[])">
+            <summary>
+            Binds the colors onto the GL Rendercontext and assigns an ColorBuffer index to the passed <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.
+            </summary>
+            <param name="mr">The <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.</param>
+            <param name="colors">The colors.</param>
+            <exception cref="T:System.ArgumentException">colors must not be null or empty</exception>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetTriangles(Fusee.Engine.Common.IMeshImp,System.UInt16[])">
+            <summary>
+            Binds the triangles onto the GL Rendercontext and assigns an ElementBuffer index to the passed <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.
+            </summary>
+            <param name="mr">The <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.</param>
+            <param name="triangleIndices">The triangle indices.</param>
+            <exception cref="T:System.ArgumentException">triangleIndices must not be null or empty</exception>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetBoneIndices(Fusee.Engine.Common.IMeshImp,Fusee.Math.Core.float4[])">
+            <summary>
+            Binds the boneindices onto the GL Rendercontext and assigns an ElementBuffer index to the passed <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.
+            </summary>
+            <param name="mr">The <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.</param>
+            <param name="boneIndices">The boneindices.</param>
+            <exception cref="T:System.ArgumentException">boneIndices must not be null or empty</exception>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetBoneWeights(Fusee.Engine.Common.IMeshImp,Fusee.Math.Core.float4[])">
+            <summary>
+            Binds the boneweights onto the GL Rendercontext and assigns an ElementBuffer index to the passed <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.
+            </summary>
+            <param name="mr">The <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.</param>
+            <param name="boneWeights">The boneweights.</param>
+            <exception cref="T:System.ArgumentException">boneWeights must not be null or empty</exception>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetShader(Fusee.Engine.Common.IShaderProgramImp)">
+            <summary>
+            Activates the passed shader program as the current shader for geometry rendering.
+            </summary>
+            <param name="shaderProgramImp">The shader to apply to mesh geometry subsequently passed to the RenderContext</param>
+            <seealso cref="M:Fusee.Engine.Common.IRenderContextImp.CreateShader(System.String,System.String)"/>
+            <see cref="M:Fusee.Engine.Common.IRenderContextImp.Render(Fusee.Engine.Common.IMeshImp)"/>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.Viewport(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets the rectangular output region within the output buffer(s).
+            </summary>
+            <param name="x">leftmost pixel of the rectangular output region within the output buffer.</param>
+            <param name="y">topmost pixel of the rectangular output region within the output buffer.</param>
+            <param name="width">horizontal size (in pixels) of the output region.</param>
+            <param name="height">vertical size (in pixels) of the ouput region.</param>
+            <remarks>
+            Setting the Viewport limits the rendering ouptut to the specified rectangular region.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.ColorMask(System.Boolean,System.Boolean,System.Boolean,System.Boolean)">
+            <summary>
+            Enable or disable Color channels to be written to the frame buffer (final image).
+            Use this function as a color channel filter for the final image.
+            </summary>
+            <param name="red">if set to <c>true</c> [red].</param>
+            <param name="green">if set to <c>true</c> [green].</param>
+            <param name="blue">if set to <c>true</c> [blue].</param>
+            <param name="alpha">if set to <c>true</c> [alpha].</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.Render(Fusee.Engine.Common.IMeshImp)">
+            <summary>
+            Renders the specified mesh.
+            </summary>
+            <param name="mr">The mesh that should be rendered.</param>
+            <remarks>
+            Passes geometry to be pushed through the rendering pipeline. <see cref="T:Fusee.Engine.Common.IMeshImp"/> for a description how geometry is made up.
+            The geometry is transformed and rendered by the currently active shader program.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.DebugLine(Fusee.Math.Core.float3,Fusee.Math.Core.float3,Fusee.Math.Core.float4)">
+            <summary>
+            Draws a Debug Line in 3D Space by using a start and end point (float3).
+            </summary>
+            <param name="start">The startpoint of the DebugLine.</param>
+            <param name="end">The endpoint of the DebugLine.</param>
+            <param name="color">The color of the DebugLine.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.GetBufferContent(Fusee.Engine.Common.Rectangle,Fusee.Engine.Common.ITexture)">
+            <summary>
+            Gets the content of the buffer.
+            </summary>
+            <param name="quad">The quad.</param>
+            <param name="texId">The tex identifier.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.CreateMeshImp">
+            <summary>
+            Creates the mesh implementation.
+            </summary>
+            <returns>The <see cref="T:Fusee.Engine.Common.IMeshImp" /> instance.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.SetRenderState(Fusee.Engine.Common.RenderState,System.UInt32)">
+            <summary>
+            Sets the specified render state to the given setting.
+            </summary>
+            <param name="renderState">The render state to set.</param>
+            <param name="value">The new value of the render state.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.GetRenderState(Fusee.Engine.Common.RenderState)">
+            <summary>
+            Retrieves the value of the giben render state.
+            </summary>
+            <param name="renderState">The render state to retrieve.</param>
+            <returns>the current value of the render state.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.GetPixelColor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Retrieves a sub-image of the giben region.
+            </summary>
+            <param name="x">The x value of the start of the region.</param>
+            <param name="y">The y value of the start of the region.</param>
+            <param name="w">The width to copy.</param>
+            <param name="h">The height to copy.</param>
+            <returns>The specified sub-image</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRenderContextImp.GetPixelDepth(System.Int32,System.Int32)">
+            <summary>
+            Retrieves the Z-value at the given pixel position.
+            </summary>
+            <param name="x">The x value.</param>
+            <param name="y">The y value.</param>
+            <returns>The Z value at (x, y).</returns>
+        </member>
+        <member name="T:Fusee.Engine.Common.IRigidBodyImp">
+            <summary>
+            Implementation agnostic representation of the base class of all rigid body implementations.
+            Contains members common to all rigid bodies.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.Gravity">
+            <summary>
+            Gets or sets the gravity.
+            </summary>
+            <value>
+            The gravity.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.Mass">
+            <summary>
+            Gets or sets the mass.
+            </summary>
+            <value>
+            The mass.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.Inertia">
+            <summary>
+            Gets or sets the inertia.
+            </summary>
+            <value>
+            The inertia.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.WorldTransform">
+            <summary>
+            Gets or sets the world transform.
+            </summary>
+            <value>
+            The world transform.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+            <value>
+            The position.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.Rotation">
+            <summary>
+            Gets the rotation.
+            </summary>
+            <value>
+            The rotation.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRigidBodyImp.ApplyForce(Fusee.Math.Core.float3,Fusee.Math.Core.float3)">
+            <summary>
+            Applies the force.
+            </summary>
+            <param name="force">The force.</param>
+            <param name="relPos">The relative position.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRigidBodyImp.ApplyImpulse(Fusee.Math.Core.float3,Fusee.Math.Core.float3)">
+            <summary>
+            Applies the impulse.
+            </summary>
+            <param name="impulse">The impulse.</param>
+            <param name="relPos">The relative position.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRigidBodyImp.ApplyTorque(Fusee.Math.Core.float3)">
+            <summary>
+            Applies the specified torque on this rigigd body instance.
+            </summary>
+            <param name="torque">The torque.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRigidBodyImp.ApplyTorqueImpulse(Fusee.Math.Core.float3)">
+            <summary>
+            Applies the specified torque impulse on this rigid body instance.
+            </summary>
+            <param name="torqueImpulse">The torque impulse.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRigidBodyImp.ApplyCentralForce(Fusee.Math.Core.float3)">
+            <summary>
+            Applies the central force apply central force.
+            </summary>
+            <param name="centralForce">The central force.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRigidBodyImp.ApplyCentralImpulse(Fusee.Math.Core.float3)">
+            <summary>
+            Applies the given impulse on the center of this rigid body instance.
+            </summary>
+            <param name="centralImpulse">The central impulse.</param>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.LinearVelocity">
+            <summary>
+            Gets or sets the linear velocity.
+            </summary>
+            <value>
+            The linear velocity.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.AngularVelocity">
+            <summary>
+            Gets or sets the angular velocity.
+            </summary>
+            <value>
+            The angular velocity.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.LinearFactor">
+            <summary>
+            Gets or sets the linear factor.
+            </summary>
+            <value>
+            The linear factor.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.AngularFactor">
+            <summary>
+            Gets or sets the angular factor.
+            </summary>
+            <value>
+            The angular factor.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.Restitution">
+            <summary>
+            Gets or sets the restitution.
+            </summary>
+            <value>
+            The restitution.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.Friction">
+            <summary>
+            Gets or sets the friction.
+            </summary>
+            <value>
+            The friction.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRigidBodyImp.SetDrag(System.Single,System.Single)">
+            <summary>
+            Sets the drag.
+            </summary>
+            <param name="linearDrag">The linear drag.</param>
+            <param name="anglularDrag">The anglular drag.</param>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.LinearDrag">
+            <summary>
+            Gets the linear drag.
+            </summary>
+            <value>
+            The linear drag.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.AngularDrag">
+            <summary>
+            Gets the angular drag.
+            </summary>
+            <value>
+            The angular drag.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.CollisionShape">
+            <summary>
+            Gets or sets the collision shape.
+            </summary>
+            <value>
+            The collision shape.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IRigidBodyImp.UserObject">
+            <summary>
+            Gets or sets a user object.
+            </summary>
+            <value>
+            The user object.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.IRigidBodyImp.OnCollision(Fusee.Engine.Common.IRigidBodyImp)">
+            <summary>
+            Called when a collision arises.
+            </summary>
+            <param name="other">The other object we're colliding with.</param>
+        </member>
+        <member name="T:Fusee.Engine.Common.IShaderParam">
+            <summary>
+             This is a markup-only for different types of handling shader parameters.
+             The implementation is render-platform specific and differs among platforms 
+             like OpenGL, DirectX, or WebGL
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IShaderProgramImp">
+            <summary>
+            The Shaderprogram interface. It is currently in prototype state.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IAudioImp">
+            <summary>
+            Interface for the Audio implementation. The implementation of this interface is responsible for management of all <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> instances.
+            This is used as a container for all the <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> and handles Sound functions globally.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioImp.OpenDevice">
+            <summary>
+            Implementation Tasks: Opens the device. All <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> derivate instances have to be wiped and the globalvolume of a Listener(if 3D Sound is intended) can be set to maximum.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioImp.CloseDevice">
+            <summary>
+            Implementation Tasks: Closes the device. All instances of <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> derivate have to be disposed in order to free up memory.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioImp.LoadFile(System.String,System.Boolean)">
+            <summary>
+            Implementation Tasks: Loads the specified file from an external source (examples: hard drive, network, etc) into memory for usage inside of the application.
+            </summary>
+            <param name="fileName">Name of the file that should include the file type ending and a absolute or relative path, e.g. C:\sound.ogg .</param>
+            <param name="streaming">if set to <c>true</c> [streaming].</param>
+            <returns>A derivate of <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> should be returned upon succesful filepath resolution.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioImp.Stop">
+            <summary>
+            Implementation Tasks: Stops all <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> derivates playbacks that this instance is responsible for.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioImp.SetVolume(System.Single)">
+            <summary>
+            Implemenation Tasks: Sets the global volume of the application. In 3D Sound usually a Listener is used to accomplish this task. 
+            In 2D Sound a simple iteration through all <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> derivates that this instance is responsible for is sufficient.
+            </summary>
+            <param name="val">The val.</param>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioImp.GetVolume">
+            <summary>
+            Implementation Tasks: Gets the global volume of the application. In 3D Sound a Listener is usually used to accomplish this task.
+            In 2D Sound an internal master volume property can be implemented that handles all <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> derivates volumes that this instance is responsible for.
+            </summary>
+            <returns>A number in float precision.</returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IAudioImp.SetPanning(System.Single)">
+            <summary>
+            Implemenation Tasks: Sets the panning for all <see cref="T:Fusee.Engine.Common.IAudioStreamImp" /> derivates that this instance is responsible for.
+            </summary>
+            <param name="val">The panning value.</param>
+        </member>
+        <member name="T:Fusee.Engine.Common.ISliderConstraintImp">
+            <summary>
+            Implementation agnostic representation of a slider constraint (linear joint).
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.AnchorInA">
+            <summary>
+            Gets the anchor in a.
+            </summary>
+            <value>
+            The anchor in a.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.AnchorInB">
+            <summary>
+            Gets the anchor in b.
+            </summary>
+            <value>
+            The anchor in b.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.AngularDepth">
+            <summary>
+            Gets the angular depth.
+            </summary>
+            <value>
+            The angular depth.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.AngularPos">
+            <summary>
+            Gets the angular position.
+            </summary>
+            <value>
+            The angular position.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.ISliderConstraintImp.CalculateTransforms(Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4)">
+            <summary>
+            Calculates the transforms.
+            </summary>
+            <param name="transA">The trans a.</param>
+            <param name="transB">The trans b.</param>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.CalculatedTransformA">
+            <summary>
+            Gets the calculated transform a.
+            </summary>
+            <value>
+            The calculated transform a.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.CalculatedTransformB">
+            <summary>
+            Gets the calculated transform b.
+            </summary>
+            <value>
+            The calculated transform b.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.DampingDirAngular">
+            <summary>
+            Gets or sets the damping dir angular.
+            </summary>
+            <value>
+            The damping dir angular.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.DampingDirLin">
+            <summary>
+            Gets or sets the damping dir lin.
+            </summary>
+            <value>
+            The damping dir lin.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.DampingLimAngular">
+            <summary>
+            Gets or sets the damping lim angular.
+            </summary>
+            <value>
+            The damping lim angular.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.DampingLimLin">
+            <summary>
+            Gets or sets the damping lim lin.
+            </summary>
+            <value>
+            The damping lim lin.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.DampingOrthoAngular">
+            <summary>
+            Gets or sets the damping ortho angular.
+            </summary>
+            <value>
+            The damping ortho angular.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.DampingOrthoLin">
+            <summary>
+            Gets or sets the damping ortho lin.
+            </summary>
+            <value>
+            The damping ortho lin.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.FrameOffsetA">
+            <summary>
+            Gets the frame offset a.
+            </summary>
+            <value>
+            The frame offset a.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.FrameOffsetB">
+            <summary>
+            Gets the frame offset b.
+            </summary>
+            <value>
+            The frame offset b.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.LinDepth">
+            <summary>
+            Gets the lin depth.
+            </summary>
+            <value>
+            The lin depth.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.LinPos">
+            <summary>
+            Gets the lin position.
+            </summary>
+            <value>
+            The lin position.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.LowerAngularLimit">
+            <summary>
+            Gets or sets the lower angular limit.
+            </summary>
+            <value>
+            The lower angular limit.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.LowerLinLimit">
+            <summary>
+            Gets or sets the lower lin limit.
+            </summary>
+            <value>
+            The lower lin limit.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.MaxAngularMotorForce">
+            <summary>
+            Gets or sets the maximum angular motor force.
+            </summary>
+            <value>
+            The maximum angular motor force.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.MaxLinMotorForce">
+            <summary>
+            Gets or sets the maximum lin motor force.
+            </summary>
+            <value>
+            The maximum lin motor force.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.PoweredAngularMotor">
+            <summary>
+            Gets or sets a value indicating whether [powered angular motor].
+            </summary>
+            <value>
+              <c>true</c> if [powered angular motor]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.PoweredLinMotor">
+            <summary>
+            Gets or sets a value indicating whether [powered lin motor].
+            </summary>
+            <value>
+              <c>true</c> if [powered lin motor]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.RestitutionDirAngular">
+            <summary>
+            Gets or sets the restitution dir angular.
+            </summary>
+            <value>
+            The restitution dir angular.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.RestitutionDirLin">
+            <summary>
+            Gets or sets the restitution dir lin.
+            </summary>
+            <value>
+            The restitution dir lin.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.RestitutionLimAngular">
+            <summary>
+            Gets or sets the restitution lim angular.
+            </summary>
+            <value>
+            The restitution lim angular.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.RestitutionLimLin">
+            <summary>
+            Gets or sets the restitution lim lin.
+            </summary>
+            <value>
+            The restitution lim lin.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.RestitutionOrthoAngular">
+            <summary>
+            Gets or sets the restitution ortho angular.
+            </summary>
+            <value>
+            The restitution ortho angular.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.RestitutionOrthoLin">
+            <summary>
+            Gets or sets the restitution ortho lin.
+            </summary>
+            <value>
+            The restitution ortho lin.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.ISliderConstraintImp.SetFrames(Fusee.Math.Core.float4x4,Fusee.Math.Core.float4x4)">
+            <summary>
+            Sets the frames.
+            </summary>
+            <param name="frameA">The frame a.</param>
+            <param name="frameB">The frame b.</param>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.SoftnessDirAngular">
+            <summary>
+            Gets or sets the softness dir angular.
+            </summary>
+            <value>
+            The softness dir angular.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.SoftnessDirLin">
+            <summary>
+            Gets or sets the softness dir lin.
+            </summary>
+            <value>
+            The softness dir lin.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.SoftnessLimAngular">
+            <summary>
+            Gets or sets the softness lim angular.
+            </summary>
+            <value>
+            The softness lim angular.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.SoftnessLimLin">
+            <summary>
+            Gets or sets the softness lim lin.
+            </summary>
+            <value>
+            The softness lim lin.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.SoftnessOrthoAngular">
+            <summary>
+            Gets or sets the softness ortho angular.
+            </summary>
+            <value>
+            The softness ortho angular.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.SoftnessOrthoLin">
+            <summary>
+            Gets or sets the softness ortho lin.
+            </summary>
+            <value>
+            The softness ortho lin.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.SolveAngularLimit">
+            <summary>
+            Gets a value indicating whether [solve angular limit].
+            </summary>
+            <value>
+              <c>true</c> if [solve angular limit]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.SolveLinLimit">
+            <summary>
+            Gets a value indicating whether [solve lin limit].
+            </summary>
+            <value>
+              <c>true</c> if [solve lin limit]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.TargetAngularMotorVelocity">
+            <summary>
+            Gets or sets the target angular motor velocity.
+            </summary>
+            <value>
+            The target angular motor velocity.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.TargetLinMotorVelocity">
+            <summary>
+            Gets or sets the target lin motor velocity.
+            </summary>
+            <value>
+            The target lin motor velocity.
+            </value>
+        </member>
+        <member name="M:Fusee.Engine.Common.ISliderConstraintImp.TestAngularLimits">
+            <summary>
+            Tests the angular limits.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.ISliderConstraintImp.TestLinLimits">
+            <summary>
+            Tests the lin limits.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.UpperAngularLimit">
+            <summary>
+            Gets or sets the upper angular limit.
+            </summary>
+            <value>
+            The upper angular limit.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.UpperLinLimit">
+            <summary>
+            Gets or sets the upper lin limit.
+            </summary>
+            <value>
+            The upper lin limit.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.UseFrameOffset">
+            <summary>
+            Gets or sets a value indicating whether [use frame offset].
+            </summary>
+            <value>
+              <c>true</c> if [use frame offset]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISliderConstraintImp.UseLinearReferenceFrameA">
+            <summary>
+            Gets a value indicating whether [use linear reference frame a].
+            </summary>
+            <value>
+            <c>true</c> if [use linear reference frame a]; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.ISphereShapeImp">
+            <summary>
+            Implementation agnostic representation of a spherical collision shape.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.ISphereShapeImp.Radius">
+            <summary>
+            Gets or sets the radius.
+            </summary>
+            <value>
+            The radius.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.IStaticPlaneShapeImp">
+            <summary>
+            Implementation agnostic representation of a plane shaped collision shape.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.IStaticPlaneShapeImp.PlaneConstant">
+            <summary>
+            Gets the plane constant.
+            </summary>
+            <value>
+            The plane constant.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.IStaticPlaneShapeImp.PlaneNormal">
+            <summary>
+            Gets the plane normal.
+            </summary>
+            <value>
+            The plane normal.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.ITexture">
+            <summary>
+             This is a markup-only for different types of Texture-handles.
+             The implementation is render-platform specific: e.g. int in OpenGL, 
+             ISurface in DirectX, TextureObject in WebGL, ...
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.IVideoManagerImp">
+            <summary>
+            The interface for VideoManager implementations. This interface should contain all functions
+            to load a video.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IVideoManagerImp.CreateVideoStreamImpFromFile(System.String,System.Boolean,System.Boolean)">
+            <summary>
+            Creates the video stream imp from file.
+            </summary>
+            <param name="filename">The filename.</param>
+            <param name="loopVideo">if set to <c>true</c> [loop video].</param>
+            <param name="useAudio">if set to <c>true</c> [use audio].</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IVideoManagerImp.CreateVideoStreamImpFromCamera(System.Int32,System.Boolean)">
+            <summary>
+            Creates the video stream imp from camera.
+            </summary>
+            <param name="cameraIndex">Index of the camera.</param>
+            <param name="useAudio">if set to <c>true</c> [use audio].</param>
+            <returns></returns>
+        </member>
+        <member name="T:Fusee.Engine.Common.IVideoStreamImp">
+            <summary>
+            The interface for all VideoStream implementations.
+            This interface should contain all functions to control the playback of a video.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IVideoStreamImp.GetCurrentFrame">
+            <summary>
+            Gets the current frame.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Engine.Common.IVideoStreamImp.Start">
+            <summary>
+            Starts this stream.
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.IVideoStreamImp.Stop">
+            <summary>
+            Stops this stream.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.KeyEventArgs">
+            <summary>
+            Provides data for the KeyDown or KeyUp event. 
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.KeyEventArgs.Shift">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Fusee.Engine.Common.KeyEventArgs"/> is shift.
+            </summary>
+            <value>
+              <c>true</c> if shift; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.KeyEventArgs.Alt">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Fusee.Engine.Common.KeyEventArgs"/> is alt.
+            </summary>
+            <value>
+              <c>true</c> if alt; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.KeyEventArgs.Control">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Fusee.Engine.Common.KeyEventArgs"/> is control.
+            </summary>
+            <value>
+              <c>true</c> if control; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.KeyEventArgs.KeyCode">
+            <summary>
+            Gets or sets the key code.
+            </summary>
+            <value>
+            The key code.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.LightType">
+            <summary>
+            Specifies the type of the light.
+            A light is specified by one of three types represented by integers between 0 and 2.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.LightType.Directional">
+            <summary>
+            Directional light is represented by 0.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.LightType.Point">
+            <summary>
+            Point light is represented by 1.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.LightType.Spot">
+            <summary>
+            Spot light is represented by 2.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.Light">
+            <summary>
+            The container that holds all informations that are required for shader light calculation.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Light.Active">
+            <summary>
+            Represents the light status.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Light.AmbientColor">
+            <summary>
+            Represents the ambient color.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Light.DiffuseColor">
+            <summary>
+            Represents the diffuse color.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Light.SpecularColor">
+            <summary>
+            Represents the specular color.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Light.Position">
+            <summary>
+            Represents the position of the light.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Light.Direction">
+            <summary>
+            Represents the direction of the light.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Light.Type">
+            <summary>
+            Represents the type of the light.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Light.Angle">
+            <summary>
+            Represents the spot angle of the light.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.MouseEventArgs">
+            <summary>
+            Provides data for the MouseUp, MouseDown, and MouseMove events.
+            </summary>
+        </member>
+        <member name="P:Fusee.Engine.Common.MouseEventArgs.Button">
+            <summary>
+            Gets or sets the button.
+            </summary>
+            <value>
+            The button.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.MouseEventArgs.Position">
+            <summary>
+            Gets or sets the position.
+            </summary>
+            <value>
+            The position.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.Point">
+            <summary>
+            Sets a point in 3D space.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Point.x">
+            <summary>
+            The x-coordinate
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Point.y">
+            <summary>
+            The y-coordinate
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Point.z">
+            <summary>
+            The z-coordinate
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.RenderState">
+            <summary>
+            The render state enumeration. This is used in render context implementations to identify the render state to set.
+            Keep this binary compatible with DirectX version 9.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.BlendOperation">
+            <summary>
+            Specifies the per-pixel blend-operation to perform when alpha blending is enabled.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.Compare">
+            <summary>
+            Specifies the comparison tests to perform in Z-Buffer and in Stencil tests
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.Cull">
+            <summary>
+            Specifies if and how triangle culling should be performed. If no culling is specified, triangles are rendered, no matter how they are oriented.
+            Clockwise and Counterclockwise culling refers to in which order a triangle's vertices appear on the screen. If either is specified, triangles
+            in the respective order are culled.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.Blend">
+            <summary>
+            Used to define the source and destination blending factors. Together, these specify the blend operation to be used when writing a pixel color value onto the render canvas.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.FillMode">
+            <summary>
+            Specifies the fill mode to use by the rasterizer. Options are Point (renders vertices as single pixels), Wireframe (renders only triangles' edges as lines), or Solid (fills all pixels covered by triangles).
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.ClearFlags">
+             <summary>
+            Specifies the buffer to use when calling the Clear method. 
+             </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.KeyCodes">
+            <summary>
+            Specifies the possible key values on a keyboard. 
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.MouseButtons">
+            <summary>
+            Which mouse button was pressed.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.MouseAxes">
+            <summary>
+            Specifies the axis types for mouse devices. 
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.CursorType">
+            <summary>
+            The different cursor types directly supported by render canvas implementations
+            Standard pointer and link-hand cursor are currently supported.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.ControllerButton">
+            <summary>
+            Game controller button Ids.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.TouchAxes">
+            <summary>
+            Axis types for Touch devices. Use <code>(int) (Touchpoint_0_X/Y + 2*i)</code>
+            if not enough axes are handled by enum values.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.TouchPoints">
+            <summary>
+            Button Ids for Touch devices. Use <code>(int) (Touchpoint_0 + i)</code>
+            if not enough axes are handled by enum values.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.Helper">
+            <summary>
+            This Object is used by the OpenTK Graphics implementation in order to handle parameter passing between Fusee and OpenTK. 
+            Do not modify this object.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.VertexAttribName">
+            <summary>
+            The vertex attribute name.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.ColorAttribName">
+            <summary>
+            The color attribute name.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.NormalAttribName">
+            <summary>
+            The normal attribute name.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.UvAttribName">
+            <summary>
+            The uv attribute name.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.TangentAttribName">
+            <summary>
+            The tangent attribute name.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.BitangentAttribName">
+            <summary>
+            The bitangent attribute name.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.BoneWeightAttribName">
+            <summary>
+            The boneweight attribute name.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.BoneIndexAttribName">
+            <summary>
+            The boneindex attribute name.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.VertexAttribLocation">
+            <summary>
+            The vertex attribute location index.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.ColorAttribLocation">
+            <summary>
+            The color attribute location index.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.NormalAttribLocation">
+            <summary>
+            The normal attribute location index.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.UvAttribLocation">
+            <summary>
+            The uv attribute location index.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.TangentAttribLocation">
+            <summary>
+            The tangent attribute location index.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.BitangentAttribLocation">
+            <summary>
+            The bitangent attribute location index.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.BoneWeightAttribLocation">
+            <summary>
+            The boneweight attribute location index.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Helper.BoneIndexAttribLocation">
+            <summary>
+            The boneindex attribute location index.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.Rectangle">
+            <summary>
+            Sets the bounding box of a rectangle.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Rectangle.Left">
+            <summary>
+            The left x-coordinate
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Rectangle.Right">
+            <summary>
+            The right x-coordinate
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Rectangle.Top">
+            <summary>
+            The upper y-coordinate
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.Rectangle.Bottom">
+            <summary>
+            The lower y-coordinate
+            </summary>
+        </member>
+        <member name="M:Fusee.Engine.Common.Rectangle.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Engine.Common.Rectangle"/> struct.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="top">The top.</param>
+            <param name="right">The right.</param>
+            <param name="bottom">The bottom.</param>
+        </member>
+        <member name="P:Fusee.Engine.Common.Rectangle.Width">
+            <summary>
+            Gets the width of the rectangle.
+            </summary>
+            <value>
+            The width.
+            </value>
+        </member>
+        <member name="P:Fusee.Engine.Common.Rectangle.Height">
+            <summary>
+            Gets the height of the rectangle.
+            </summary>
+            <value>
+            The height.
+            </value>
+        </member>
+        <member name="T:Fusee.Engine.Common.RenderEventArgs">
+            <summary>
+            Render arguments for <see cref="T:Fusee.Engine.Common.IRenderCanvasImp"/> events.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.ResizeEventArgs">
+            <summary>
+            Argument Container for Resize event of <see cref="T:Fusee.Engine.Common.IRenderCanvasImp"/>.
+            </summary>
+        </member>
+        <member name="T:Fusee.Engine.Common.ShaderParamInfo">
+            <summary>
+            Contains information about a shader parameter (uniform parameter).
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ShaderParamInfo.Size">
+            <summary>
+            Contains the number of items stored under this parameter name. Only differs from 1 if the parameter is a uniform array.
+            If Size > 1 this value represents the number of array entries.
+            </summary>
+            <remarks>
+            See also <a href="https://www.khronos.org/opengles/sdk/docs/man/xhtml/glGetActiveUniform.xml">the khronos group's documentation on glGetActiveUniform</a>.
+            </remarks>
+        </member>
+        <member name="F:Fusee.Engine.Common.ShaderParamInfo.Type">
+            <summary>
+            Contains the type of the shader parameter.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ShaderParamInfo.Name">
+            <summary>
+            Contains the name of the shader parameter.
+            </summary>
+        </member>
+        <member name="F:Fusee.Engine.Common.ShaderParamInfo.Handle">
+            <summary>
+            The Handle to be used when setting or getting the parameter value from the shader.
+            </summary>
+        </member>
+    </members>
+</doc>

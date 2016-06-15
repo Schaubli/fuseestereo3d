@@ -1,0 +1,173 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fusee.Base.Core</name>
+    </assembly>
+    <members>
+        <member name="T:Fusee.Base.Core.AssetStorage">
+            <summary>
+            A class providing access to Assets. An asset is considered any content to be loaded, de-serialized and converted during
+            an application's lifetime. Often Assets should be loaded up-front and accessed during run-time with no perceivable delay.
+            AssetStorage is a staticton (a singleton with an additional static interface).
+            </summary>
+            <remarks>
+            The existance of this class is a tribute to the Web-world where a lot of asset types (e.g. images) are JavaScript built-in
+            functionality with no possibility to separate the many aspects of asset-access (like loading, deserialization, codec,
+            asynchronicity). Decent programming environments allow to separate these aspects using streams. A decoder is implemented
+            against a stream. Anything capable of providing streams, synchronously or asynchronousliy thus can act as an asset store.
+            If FUSEE had been designed without JavaScript X-compilation in mind, this class would probably not
+            exist.
+            </remarks>
+        </member>
+        <member name="P:Fusee.Base.Core.AssetStorage.Instance">
+            <summary>
+            Implements the Singleton pattern.
+            </summary>
+            <value>
+            The (one-and-only) instance of AssetStorage.
+            </value>
+        </member>
+        <member name="M:Fusee.Base.Core.AssetStorage.Get``1(System.String)">
+            <summary>
+            Staticton implementation of <see cref="M:Fusee.Base.Core.AssetStorage.GetAsset``1(System.String)"/>.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="id">The identifier.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Fusee.Base.Core.AssetStorage.GetAsset``1(System.String)">
+            <summary>
+            Retrieves the asset identified by id.
+            </summary>
+            <typeparam name="T">The expected type of the asset to retrieve.</typeparam>
+            <param name="id">The identifier.</param>
+            <returns>The asset, if found. Otherwise null.</returns>
+            <remarks>Internally, this method queries all of the registerd asset providers (<see cref="M:Fusee.Base.Core.AssetStorage.RegisterAssetProvider(Fusee.Base.Common.IAssetProvider)"/>.
+            The first asset provider capable of retrieving the asset "wins". It's up to any appliacation to guarantee
+            uniquenesss of asset identifiers among all assets and asset providers.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Core.AssetStorage.RegisterProvider(Fusee.Base.Common.IAssetProvider)">
+            <summary>
+            Staticton implementation of <see cref="M:Fusee.Base.Core.AssetStorage.RegisterAssetProvider(Fusee.Base.Common.IAssetProvider)"/>.
+            </summary>
+            <param name="assetProvider">The asset provider.</param>
+        </member>
+        <member name="M:Fusee.Base.Core.AssetStorage.RegisterAssetProvider(Fusee.Base.Common.IAssetProvider)">
+            <summary>
+            Registers the given asset provider. Use this method to register asset providers 
+            for the platform (desktop, mobile, web) your main application should run on.
+            </summary>
+            <param name="assetProvider">The asset provider to register.</param>
+        </member>
+        <member name="T:Fusee.Base.Core.Diagnostics">
+            <summary>
+            Contains some mostly static functions for diagnostic purposes.
+            </summary>
+        </member>
+        <member name="P:Fusee.Base.Core.Diagnostics.Timer">
+            <summary>
+            High precision timer values.
+            </summary>
+            <value>
+            A double value containing consecutive real time values in milliseconds.
+            </value>
+            <remarks>
+            To measure the elapsed time between two places in code get this value twice and calculate the difference.
+            </remarks>
+        </member>
+        <member name="M:Fusee.Base.Core.Diagnostics.Log(System.Object)">
+            <summary>
+            Log a debug output message to the respective output console.
+            </summary>
+            <param name="o">The object to log. Will be converted to a string.</param>
+        </member>
+        <member name="T:Fusee.Base.Core.Font">
+            <summary>
+            A Font instance contains methods to access font and glyph data stored in a font
+            description (TrueType or OpenType fonts).
+            </summary>
+        </member>
+        <member name="F:Fusee.Base.Core.Font._fontImp">
+            <summary>
+            For implementation purposes only. Do not use this.
+            </summary>
+        </member>
+        <member name="P:Fusee.Base.Core.Font.UseKerning">
+            <summary>
+                Gets or sets a value indicating whether the kerning definition of a font should be used.
+            </summary>
+            <value>
+                <c>true</c> if the kerning definition of a font should be used; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Base.Core.Font.PixelHeight">
+            <summary>
+            Gets or sets the size in pixels.
+            </summary>
+            <value>
+            The vertical size of the font in pixels.
+            </value>
+        </member>
+        <member name="M:Fusee.Base.Core.Font.GetGlyphInfo(System.UInt32)">
+            <summary>
+            Gets the character information.
+            </summary>
+            <param name="c">The character to retrieve information.</param>
+            <returns>An information record about the character.</returns>
+        </member>
+        <member name="M:Fusee.Base.Core.Font.RenderGlyph(System.UInt32,System.Int32@,System.Int32@)">
+            <summary>
+                Renders the given glyph.
+            </summary>
+            <param name="c">The character code (Unicode) of the character to render.</param>
+            <param name="bitmapLeft">
+                The x-Bearing of the glyph on the bitmap (in pixels). The number of pixels from the left border of the image 
+                to the leftmost pixel of the glyph within the rendered image.
+            </param>
+            <param name="bitmapTop">
+                The y-Bearing of the glyph on the bitmap (in pixels). The number of pixels from the character's origin 
+                (base line) of the image to the topmost pixel of the glyph within the rendered image.
+            </param>
+            <returns>
+                An image data structure containing an image of the given character.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Core.Font.GetKerning(System.UInt32,System.UInt32)">
+            <summary>
+            Gets the kerning offset between a pair of two consecutive characters in a text string.
+            </summary>
+            <param name="leftC">The left character.</param>
+            <param name="rightC">The right character.</param>
+            <returns>An offset to add to the normal advance. Typically negative since kerning rather compacts text lines.</returns>
+        </member>
+        <member name="T:Fusee.Base.Core.IO">
+            <summary>
+            Contains static methods not supported by portable libraries
+            dealing with input/output.
+            </summary>
+        </member>
+        <member name="P:Fusee.Base.Core.IO.IOImp">
+            <summary>
+            The platform dependent implementation of all IO functionality.
+            </summary>
+            <value>
+            The io implementation.
+            </value>
+        </member>
+        <member name="M:Fusee.Base.Core.IO.StreamFromFile(System.String,Fusee.Base.Common.FileMode)">
+            <summary>
+            Opens a file and returns its contents as a <see cref="T:System.IO.Stream" />.
+            </summary>
+            <param name="path">The path to the file to open.</param>
+            <param name="mode">The mode.</param>
+            <returns>
+            A stream
+            </returns>
+            <exception>
+            Exceptions thrown by this method depend on the underlying 
+            platform dependent implementation.
+            </exception>
+        </member>
+    </members>
+</doc>

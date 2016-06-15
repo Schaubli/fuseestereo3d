@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Fusee.Base.Imp.Desktop</name>
+    </assembly>
+    <members>
+        <member name="T:Fusee.Base.Imp.Desktop.FileAssetProvider">
+            <summary>
+            Asset provider for direct file access. Typically used in desktop builds where assets are simply contained within
+            a subdirectory of the application.
+            </summary>
+        </member>
+        <member name="M:Fusee.Base.Imp.Desktop.FileAssetProvider.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Base.Imp.Desktop.FileAssetProvider"/> class.
+            </summary>
+            <param name="baseDir">The base directory where assets should be looked for.</param>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Fusee.Base.Imp.Desktop.FileAssetProvider.GetStream(System.String)">
+            <summary>
+            Creates a stream for the asset identified by id using <see cref="T:System.IO.FileStream"/>
+            </summary>
+            <param name="id">The asset identifier.</param>
+            <returns>
+            A valid stream for reading if the asset ca be retrieved. null otherwise.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Fusee.Base.Imp.Desktop.FileAssetProvider.CheckExists(System.String)">
+            <summary>
+            Checks the existance of the identified asset using <see cref="M:System.IO.File.Exists(System.String)"/>
+            </summary>
+            <param name="id">The asset identifier.</param>
+            <returns>
+            true if a stream can be created.
+            </returns>
+            <exception cref="T:System.ArgumentNullException"></exception>
+        </member>
+        <member name="M:Fusee.Base.Imp.Desktop.FileAssetProvider.LoadImage(System.IO.Stream)">
+            <summary>
+            Loads a new Bitmap-Object from the given stream.
+            </summary>
+            <param name="file">Stream containing the image in a supported format (png, jpg).</param>
+            <returns>An ImageData object with all necessary information.</returns>
+        </member>
+        <member name="T:Fusee.Base.Imp.Desktop.FontImp">
+            <summary>
+            Font implementation using freetype (262) / SharpFont.
+            </summary>
+        </member>
+        <member name="M:Fusee.Base.Imp.Desktop.FontImp.#ctor(System.IO.Stream)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Fusee.Base.Imp.Desktop.FontImp"/> class. 
+            </summary>
+            <param name="stream">The stream.</param>
+        </member>
+        <member name="P:Fusee.Base.Imp.Desktop.FontImp.UseKerning">
+            <summary>
+            Gets or sets a value indicating whether the kerning definition of a font should be used.
+            </summary>
+            <value>
+            <c>true</c> if the kerning definition of a font should be used; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="P:Fusee.Base.Imp.Desktop.FontImp.PixelHeight">
+            <summary>
+            Gets or sets the size in pixels.
+            </summary>
+            <value>
+            The vertical size of the font in pixels.
+            </value>
+        </member>
+        <member name="M:Fusee.Base.Imp.Desktop.FontImp.GetGlyphInfo(System.UInt32)">
+            <summary>
+            Gets the character information.
+            </summary>
+            <param name="c">The character to retrieve information.</param>
+            <returns>
+            An information record about the character.
+            </returns>
+            <exception cref="T:System.NotImplementedException"></exception>
+        </member>
+        <member name="M:Fusee.Base.Imp.Desktop.FontImp.RenderGlyph(System.UInt32,System.Int32@,System.Int32@)">
+            <summary>
+                Renders the given glyph.
+            </summary>
+            <param name="c">The character code (Unicode) of the character to render.</param>
+            <param name="bitmapLeft">
+                The x-Bearing of the glyph on the bitmap (in pixels). The number of pixels from the left border of the image 
+                to the leftmost pixel of the glyph within the rendered image.
+            </param>
+            <param name="bitmapTop">
+                The y-Bearing of the glyph on the bitmap (in pixels). The number of pixels from the character's origin 
+                (base line) of the image to the topmost pixel of the glyph within the rendered image.
+            </param>
+            <returns>
+                An image data structure containing an image of the given character.
+            </returns>
+        </member>
+        <member name="M:Fusee.Base.Imp.Desktop.FontImp.GetKerning(System.UInt32,System.UInt32)">
+            <summary>
+            Gets the kerning offset between a pair of two consecutive characters in a text string.
+            </summary>
+            <param name="leftC">The left character.</param>
+            <param name="rightC">The right character.</param>
+            <returns>
+            An offset to add to the normal advance. Typically negative since kerning rather compacts text lines.
+            </returns>
+        </member>
+        <member name="T:Fusee.Base.Imp.Desktop.IOImp">
+            <summary>
+            Implementation (platform dependent) for IO related functionality not supported by portable libraries.
+            </summary>
+        </member>
+        <member name="M:Fusee.Base.Imp.Desktop.IOImp.StreamFromFile(System.String,Fusee.Base.Common.FileMode)">
+            <summary>
+            Opens a file and returns its contents as a <see cref="T:System.IO.Stream" />.
+            </summary>
+            <param name="path">The path to the file to open.</param>
+            <param name="mode">The file mode (read, write, append).</param>
+            <returns>
+            The stream specified by path.
+            </returns>
+        </member>
+    </members>
+</doc>
