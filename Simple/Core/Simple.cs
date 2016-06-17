@@ -19,6 +19,7 @@ namespace Fusee.External.Simple.Core
     [FuseeApplication(Name = "Simple Example", Description = "A very simple example.")]
     public class Simple : RenderCanvas
     {
+        Stereo3D _stereo3d;
         // angle variables
         private static float _angleHorz = 3.141592f * 0.25f, _angleVert, _angleVelHorz, _angleVelVert;
 
@@ -44,6 +45,8 @@ namespace Fusee.External.Simple.Core
         // Init is called on startup. 
         public override void Init()
         {
+            _stereo3d = new Stereo3D(Stereo3DMode.Oculus, Width, Height);
+            _stereo3d.AttachToContext(RC);
             #if GUI_SIMPLE
             _guiHandler = new GUIHandler();
             _guiHandler.AttachToContext(RC);
@@ -131,13 +134,20 @@ namespace Fusee.External.Simple.Core
             RC.ModelView = mtxCam * mtxRot;
 
             // Render the scene loaded in Init()
-            _sceneRenderer.Render(RC);
 
             #if GUI_SIMPLE
             _guiHandler.RenderGUI();
-            #endif
+#endif
 
             // Swap buffers: Show the contents of the backbuffer (containing the currently rerndered farame) on the front buffer.
+
+            _stereo3d.Prepare(Stereo3DEye.Left);
+            _sceneRenderer.Render(RC);
+            _stereo3d.Save();
+            _stereo3d.Prepare(Stereo3DEye.Right);
+            _sceneRenderer.Render(RC);
+            _stereo3d.Save();
+            _stereo3d.Display();
             Present();
         }
 
