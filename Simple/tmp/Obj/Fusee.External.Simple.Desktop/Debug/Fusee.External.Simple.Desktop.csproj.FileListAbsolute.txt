@@ -9,6 +9,7 @@ C:\Users\Yannick\Documents\GitHub\Fusee.Tutorial\Simple\tmp\Obj\Fusee.External.S
 C:\Users\Linus\fuseestereo3d\Simple\bin\Debug\Desktop\Assets\FuseeLogo150.png
 C:\Users\Linus\fuseestereo3d\Simple\bin\Debug\Desktop\Assets\RocketModel.fus
 C:\Users\Linus\fuseestereo3d\Simple\bin\Debug\Desktop\Assets\Lato-Black.ttf
+C:\Users\Linus\fuseestereo3d\Simple\bin\Debug\Desktop\Simple.cs
 C:\Users\Linus\fuseestereo3d\Simple\bin\Debug\Desktop\Fusee.External.Simple.Desktop.exe
 C:\Users\Linus\fuseestereo3d\Simple\bin\Debug\Desktop\Fusee.External.Simple.Desktop.pdb
 C:\Users\Linus\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Desktop\Debug\Fusee.External.Simple.Desktop.csprojResolveAssemblyReference.cache

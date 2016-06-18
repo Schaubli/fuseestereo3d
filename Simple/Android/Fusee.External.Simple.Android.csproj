@@ -58,7 +58,7 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
   <PropertyGroup>
-	<OutputRoot>$(ProjectBuildRoot)\bin\$(Configuration)\</OutputRoot>
+    <OutputRoot>$(ProjectBuildRoot)\bin\$(Configuration)\</OutputRoot>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -67,12 +67,18 @@
     <Reference Include="OpenTK" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MainActivity.cs" />
+    <Compile Include="MainActivity.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
     <Compile Include="Resources\Resource.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\Lato-Black.ttf" />
-    <AndroidAsset Include="Assets\RocketModel.fus" />
+    <AndroidAsset Include="Assets\Lato-Black.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
+    <AndroidAsset Include="Assets\RocketModel.fus">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
     <None Include="Properties\AndroidManifest.xml">
       <SubType>Designer</SubType>
     </None>
@@ -134,11 +140,11 @@
     </Reference>
     <Reference Include="protobuf-net">
       <HintPath>$(FuseeRoot)ext\protobuf\protobuf-net.dll</HintPath>
-    </Reference>  
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\AboutAssets.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </AndroidAsset>
     <!--Content Include="Assets\RocketModel.fus">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -148,7 +154,9 @@
     </Content-->
   </ItemGroup>
   <ItemGroup>
-    <AndroidAsset Include="Assets\FuseeLogo150.png" />
+    <AndroidAsset Include="Assets\FuseeLogo150.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </AndroidAsset>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\icon.png" />

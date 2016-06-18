@@ -45,6 +45,17 @@ namespace Fusee.External.Simple.Core
         // Init is called on startup. 
         public override void Init()
         {
+            //Todo: find out why width and height returns 0 on android
+            if(Width<=0)
+            {
+                Width = 1080;
+            }
+            if(Height <= 0)
+            {
+                Height = 1920;
+            }
+
+
             _stereo3d = new Stereo3D(Stereo3DMode.Oculus, Width, Height);
             _stereo3d.AttachToContext(RC);
             #if GUI_SIMPLE
