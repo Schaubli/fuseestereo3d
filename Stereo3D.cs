@@ -110,6 +110,9 @@ namespace Fusee.Engine.Core
             }";
 
         private const string OculusPs = @"
+            #ifdef GL_ES
+                precision highp float;
+            #endif
             uniform sampler2D vTexture;
 
             uniform vec2 LensCenter;
@@ -118,7 +121,7 @@ namespace Fusee.Engine.Core
             uniform vec2 ScaleIn;
             uniform vec4 HmdWarpParam;
 
-            varying vec2 vUV;
+            uniform vec2 vUV;
 
             vec2 HmdWarp(vec2 texIn)
             {
@@ -137,7 +140,7 @@ namespace Fusee.Engine.Core
 		            return;
 	            }
 
-	            gl_FragColor = texture(vTexture, tc);
+	            gl_FragColor = texture2D(vTexture, tc);
             }";
 
         #endregion
@@ -211,7 +214,7 @@ namespace Fusee.Engine.Core
             _rc = rc;
             _clearColor = rc.ClearColor;
             
-            ImageData imgData = ImageData.CreateImage(_screenWidth, _screenHeight, new ColorUint(0,0,0,0));
+            ImageData imgData = ImageData.CreateImage(_screenWidth, _screenHeight, ColorUint.Black );
             imgData.PixelFormat = ImagePixelFormat.Intensity;
             
 

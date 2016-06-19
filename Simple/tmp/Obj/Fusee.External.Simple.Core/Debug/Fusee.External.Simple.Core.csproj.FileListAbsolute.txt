@@ -16,4 +16,5 @@ C:\Users\Linus\fuseestereo3d\Simple\bin\Debug\Libraries\Fusee.External.Simple.Co
 C:\Users\Linus\fuseestereo3d\Simple\bin\Debug\Libraries\Fusee.External.Simple.Core.pdb
 C:\Users\Linus\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.dll
 C:\Users\Linus\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.pdb
-C:\Users\Linus\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.csprojResolveAssemblyReference.cache
+C:\Users\Linus\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.dll.mdb
+C:\Users\Linus\fuseestereo3d\Simple\bin\Debug\Libraries\Fusee.External.Simple.Core.dll.mdb
