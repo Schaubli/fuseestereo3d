@@ -5,28 +5,72 @@ using Android.OS;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using Fusee.Base.Common;
+using Android.Hardware;
 using Fusee.Base.Core;
+using Fusee.Base.Common;
 using Fusee.Base.Imp.Android;
 using Fusee.Engine.Imp.Graphics.Android;
 using Fusee.Serialization;
+using Fusee.Math.Core;
 using Font = Fusee.Base.Core.Font;
 using Path = Fusee.Base.Common.Path;
 
-namespace Fusee.External.Simple.Android
+namespace Fusee.Engine.Examples.Simple.Android
 {
 	[Activity (Label = "@string/app_name", MainLauncher = true, Icon = "@drawable/icon",
 #if __ANDROID_11__
 		HardwareAccelerated=false,
 #endif
-		ConfigurationChanges = ConfigChanges.KeyboardHidden, LaunchMode = LaunchMode.SingleTask)]
-	public class MainActivity : Activity
-	{
-		protected override void OnCreate (Bundle savedInstanceState)
+   
+
+    ConfigurationChanges = ConfigChanges.KeyboardHidden, LaunchMode = LaunchMode.SingleTask)]
+	public class MainActivity : Activity, ISensorEventListener
+    {
+        static readonly object _syncLock = new object();
+        SensorManager _sensorManager;
+        TextView _sensorTextView;
+       
+       
+
+
+        public void OnAccuracyChanged(Sensor sensor, SensorStatus accuracy)
+        {
+            // We don't want to do anything here.
+        }
+
+        public void OnSensorChanged(SensorEvent e)
+        {
+            
+                Simple.Core.Simple.SetGyroscope(new float3(e.Values[0], e.Values[1], e.Values[2]));
+           
+           
+        }
+        protected override void OnResume()
+        {
+            base.OnResume();
+            _sensorManager.RegisterListener(this,
+                                            _sensorManager.GetDefaultSensor(SensorType.Gyroscope), SensorDelay.Ui);
+            
+
+        }
+
+        protected override void OnPause()
+        {
+            base.OnPause();
+            _sensorManager.UnregisterListener(this);
+        }
+
+        protected override void OnCreate (Bundle savedInstanceState)
 		{
-			base.OnCreate (savedInstanceState);
+
+
+
+            base.OnCreate (savedInstanceState);
             RequestWindowFeature(WindowFeatures.NoTitle);
-		    if (SupportedOpenGLVersion() >= 3)
+
+            _sensorManager = (SensorManager)GetSystemService(Android.MainActivity.SensorService);
+            
+            if (SupportedOpenGLVersion() >= 3)
 		    {
 		        // SetContentView(new LibPaintingView(ApplicationContext, null));
 
@@ -71,7 +115,7 @@ namespace Fusee.External.Simple.Android
                     });
                 AssetStorage.RegisterProvider(fap);
 
-                var app = new External.Simple.Core.Simple();
+                var app = new Core.Simple();
 
 		        // Inject Fusee.Engine InjectMe dependencies (hard coded)
 		        RenderCanvasImp rci = new RenderCanvasImp(ApplicationContext, null, delegate { app.Run(); });

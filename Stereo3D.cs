@@ -1,8 +1,8 @@
-﻿using System.Diagnostics;
-using Fusee.Base.Common;
+﻿using Fusee.Base.Common;
 using Fusee.Engine.Common;
 using Fusee.Engine.Core.GUI;
 using Fusee.Math.Core;
+
 
 namespace Fusee.Engine.Core
 {
@@ -61,10 +61,7 @@ namespace Fusee.Engine.Core
         /// </value>
         public Stereo3DEye CurrentEye
         {
-            get
-            {
-                return _currentEye;
-            }
+            get { return _currentEye; }
         }
 
         private GUIImage _guiLImage;
@@ -80,7 +77,6 @@ namespace Fusee.Engine.Core
 
         private ITexture _contentLTex;
         private ITexture _contentRTex;
-
 
         #region OculusRift
 
@@ -110,9 +106,6 @@ namespace Fusee.Engine.Core
             }";
 
         private const string OculusPs = @"
-            #ifdef GL_ES
-                precision highp float;
-            #endif
             uniform sampler2D vTexture;
 
             uniform vec2 LensCenter;
@@ -121,7 +114,7 @@ namespace Fusee.Engine.Core
             uniform vec2 ScaleIn;
             uniform vec4 HmdWarpParam;
 
-            uniform vec2 vUV;
+            varying vec2 vUV;
 
             vec2 HmdWarp(vec2 texIn)
             {
@@ -134,12 +127,12 @@ namespace Fusee.Engine.Core
             void main()
             {
                 vec2 tc = HmdWarp(vUV.xy);
-	            if (any(bvec2(clamp(tc,ScreenCenter-vec2(0.25,0.5), ScreenCenter+vec2(0.25,0.5)) - tc)))
-	            {
-		            gl_FragColor = vec4(0.2, 0.2, 0.2, 1.0);
-		            return;
-	            }
-
+	           if (any(bvec2(clamp(tc,ScreenCenter-vec2(0.25,0.5), ScreenCenter+vec2(0.25,0.5)) - tc)))
+	           {
+		           gl_FragColor = vec4(0.2, 0.2, 0.2, 1.0);
+		           return;
+	           }
+                
 	            gl_FragColor = texture2D(vTexture, tc);
             }";
 
@@ -195,16 +188,6 @@ namespace Fusee.Engine.Core
             _screenHeight = height;
         }
 
-        public void Present()
-        {
-            
-            Prepare(Stereo3DEye.Left);
-            Save();
-            Prepare(Stereo3DEye.Right);
-            Save();
-            Display();
-        }
-
         /// <summary>
         /// Attaches the object to a specific <see cref="RenderContext"/> object.
         /// </summary>
@@ -213,15 +196,12 @@ namespace Fusee.Engine.Core
         {
             _rc = rc;
             _clearColor = rc.ClearColor;
-            
-            ImageData imgData = ImageData.CreateImage(_screenWidth, _screenHeight, ColorUint.Black );
-            imgData.PixelFormat = ImagePixelFormat.Intensity;
-            
 
+            var imgData = ImageData.CreateImage(1000, 1000, ColorUint.Black);
+            imgData.PixelFormat = ImagePixelFormat.Intensity;
             _contentLTex = _rc.CreateTexture(imgData);
             _contentRTex = _rc.CreateTexture(imgData);
 
-            
             // initialize shader and image
             switch (_activeMode)
             {
@@ -274,11 +254,11 @@ namespace Fusee.Engine.Core
                     switch (eye)
                     {
                         case Stereo3DEye.Left:
-                            _rc.Viewport(0, cuttingEdge, _screenWidth/2, _screenHeight - cuttingEdge);
+                            _rc.Viewport(0, cuttingEdge, _screenWidth, _screenHeight - cuttingEdge);    // _rc.Viewport(0, cuttingEdge, _screenWidth/2, _screenHeight - cuttingEdge);
                             break;
 
                         case Stereo3DEye.Right:
-                            _rc.Viewport(_screenWidth/2, cuttingEdge, _screenWidth/2, _screenHeight - cuttingEdge);
+                            _rc.Viewport(_screenWidth/2, cuttingEdge, _screenWidth, _screenHeight - cuttingEdge); //  _rc.Viewport(_screenWidth/2, cuttingEdge, _screenWidth/2, _screenHeight - cuttingEdge);
                             break;
                     }
 
@@ -297,7 +277,7 @@ namespace Fusee.Engine.Core
             switch (_activeMode)
             {
                 case Stereo3DMode.Oculus:
-                    const int picTrans = 81;
+                    const int picTrans = 320;//81
 
                     switch (_currentEye)
                     {
@@ -373,15 +353,15 @@ namespace Fusee.Engine.Core
             {
                 _rc.SetShaderParamTexture(_shaderTexture, _contentLTex);
 
-                lensCenter = new float2(0.3125f, 0.5f);
-                screenCenter = new float2(0.25f, 0.5f);
+                lensCenter = new float2(0.4625f, 0.5f);//0.3125f
+                screenCenter = new float2(0.45f, 0.5f);
             }
             else
             {
                 _rc.SetShaderParamTexture(_shaderTexture, _contentRTex);
 
-                lensCenter = new float2(0.6875f, 0.5f);
-                screenCenter = new float2(0.75f, 0.5f);
+                lensCenter = new float2(0.5375f, 0.5f);//0.6875f
+                screenCenter = new float2(0.55f, 0.5f);
             }
 
             _rc.SetShaderParam(_lensCenterParam, lensCenter);

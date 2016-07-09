@@ -3,7 +3,7 @@ using Fusee.Base.Core;
 using Fusee.Engine.Core;
 using Fusee.Serialization;
 
-namespace Fusee.External.Simple.Web
+namespace Fusee.Engine.Examples.Simple.Web
 {
     public class Simple
     {

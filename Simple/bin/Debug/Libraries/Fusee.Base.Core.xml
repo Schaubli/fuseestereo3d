@@ -60,6 +60,18 @@
             </summary>
             <param name="assetProvider">The asset provider to register.</param>
         </member>
+        <member name="M:Fusee.Base.Core.AssetStorage.DeepCopy``1(``0)">
+            <summary>
+            Creates a deep copy of the source object. Only works for source objects with the 
+            <see cref="T:ProtoBuf.ProtoContractAttribute"/> defined on their class.
+            </summary>
+            <typeparam name="T">
+              Type of the source and object and the returnded clone. Implicitely defined by the source parameter.
+            </typeparam>
+            <param name="source">The source object to clone.</param>
+            <returns>A deep copy of the source object. All objects referenced directly and indirectly from the source
+             object are copied, too.</returns>
+        </member>
         <member name="T:Fusee.Base.Core.Diagnostics">
             <summary>
             Contains some mostly static functions for diagnostic purposes.

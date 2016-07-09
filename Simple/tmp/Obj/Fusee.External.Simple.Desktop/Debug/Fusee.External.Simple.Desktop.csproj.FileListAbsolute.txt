@@ -15,3 +15,12 @@ C:\Users\Linus\fuseestereo3d\Simple\bin\Debug\Desktop\Fusee.External.Simple.Desk
 C:\Users\Linus\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Desktop\Debug\Fusee.External.Simple.Desktop.csprojResolveAssemblyReference.cache
 C:\Users\Linus\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Desktop\Debug\Fusee.External.Simple.Desktop.exe
 C:\Users\Linus\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Desktop\Debug\Fusee.External.Simple.Desktop.pdb
+C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\bin\Debug\Desktop\Assets\FuseeLogo150.png
+C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\bin\Debug\Desktop\Assets\RocketModel.fus
+C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\bin\Debug\Desktop\Assets\Lato-Black.ttf
+C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\bin\Debug\Desktop\Simple.cs
+C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\bin\Debug\Desktop\Fusee.External.Simple.Desktop.exe
+C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\bin\Debug\Desktop\Fusee.External.Simple.Desktop.pdb
+C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Desktop\Debug\Fusee.External.Simple.Desktop.csprojResolveAssemblyReference.cache
+C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Desktop\Debug\Fusee.External.Simple.Desktop.exe
+C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Desktop\Debug\Fusee.External.Simple.Desktop.pdb

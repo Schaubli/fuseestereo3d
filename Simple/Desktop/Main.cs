@@ -4,9 +4,10 @@ using Fusee.Base.Core;
 using Fusee.Base.Imp.Desktop;
 using Fusee.Engine.Core;
 using Fusee.Serialization;
+using FileMode = Fusee.Base.Common.FileMode;
 using Path = Fusee.Base.Common.Path;
 
-namespace Fusee.External.Simple.Desktop
+namespace Fusee.Engine.Examples.Simple.Desktop
 {
     public class Simple
     {
