@@ -44,8 +44,9 @@ namespace Fusee.Engine.Examples.Simple.Core
         private GUIText _guiSubText;
         private float _subtextHeight;
         private float _subtextWidth;
-#endif
+        #endif
         private static float3 gyroscope;
+        private bool renderStereo = false;
 
         public static void SetGyroscope(float3 vec)
         {
@@ -90,8 +91,19 @@ namespace Fusee.Engine.Examples.Simple.Core
             // Set the clear color for the backbuffer to white (100% intentsity in all color channels R, G, B, A).
             RC.ClearColor = new float4(1, 1, 1, 1);
 
-            _stereo3d = new Stereo3D(Stereo3DMode.Oculus, Width, Height);
-            _stereo3d.AttachToContext(RC);
+            System.Diagnostics.Debug.WriteLine("Width = " + Width + "  Height = " + Height);
+            if(Width <= 0)
+            {
+                Width = 2560;
+            }
+            if(Height <= 0)
+            {
+                Height = 1440;
+            }
+            if(renderStereo) { 
+                _stereo3d = new Stereo3D(Stereo3DMode.Oculus, Width, Height);
+                _stereo3d.AttachToContext(RC);
+            }
 
             // Load the rocket model
             _rocketScene = AssetStorage.Get<SceneContainer>("RocketModel.fus");
@@ -142,44 +154,48 @@ namespace Fusee.Engine.Examples.Simple.Core
             }
 
 
-            _angleHorz -= _angleVelHorz/3;
-            _angleVert -= _angleVelVert/3;
+            _angleHorz -= _angleVelHorz / 3;
+            _angleVert -= _angleVelVert / 3;
 
 
             float3 _gyroscope = GetGyroscope();
 
             float pi = 3.1415f;
 
-            _angleHorz += _gyroscope.x /30;
+            _angleHorz += _gyroscope.x / 30;
             _angleVert -= _gyroscope.y / 30;
 
-            System.Diagnostics.Debug.WriteLine(_gyroscope);
+            //System.Diagnostics.Debug.WriteLine(_gyroscope);
             // Create the camera matrix and set it as the current ModelView transformation
 
             //Calculate Rocket Rotation
-            var mtxRot = float4x4.CreateRotationY(rocketrot-= 0.02f);
+            var mtxRot = float4x4.CreateRotationY(rocketrot -= 0.02f);
 
-            //Render Left Eye
-            var mtxCam = float4x4.LookAt(100, 20, -1000, 0, 150, 0, 0, 1, 0);
-            RC.ModelView = float4x4.CreateRotationX(_angleVert) * float4x4.CreateRotationY(_angleHorz)  * mtxCam * mtxRot;
-            _stereo3d.Prepare(Stereo3DEye.Left);
-            _sceneRenderer.Render(RC);
-            _stereo3d.Save();
-            
-            //Render Right Eye
-            mtxCam = float4x4.LookAt(-100, 20, -1000, 0, 150, 0, 0, 1, 0);
-            RC.ModelView = float4x4.CreateRotationX(_angleVert) * float4x4.CreateRotationY(_angleHorz) * mtxCam * mtxRot;
-            _stereo3d.Prepare(Stereo3DEye.Right);
-            _sceneRenderer.Render(RC);
-            _stereo3d.Save();
+            if (renderStereo){
+                //Render Left Eye
+                var mtxCam = float4x4.LookAt(100, 20, -1000, 0, 150, 0, 0, 1, 0);
+                RC.ModelView = float4x4.CreateRotationX(_angleVert) * float4x4.CreateRotationY(_angleHorz) * mtxCam * mtxRot;
+                _stereo3d.Prepare(Stereo3DEye.Right);
+                _sceneRenderer.Render(RC);
+                _stereo3d.Save();
 
-            //Combine Viewports
-            _stereo3d.Display();
+                //Render Right Eye
+                mtxCam = float4x4.LookAt(-100, 20, -1000, 0, 150, 0, 0, 1, 0);
+                RC.ModelView = float4x4.CreateRotationX(_angleVert) * float4x4.CreateRotationY(_angleHorz) * mtxCam * mtxRot;
+                _stereo3d.Prepare(Stereo3DEye.Left);
+                _sceneRenderer.Render(RC);
+                _stereo3d.Save();
 
+                //Combine Viewports
+                _stereo3d.Display();
+            } else {
+                // Render the scene loaded in Init()*/
 
-
-            // Render the scene loaded in Init()*/
-            //_sceneRenderer.Render(RC);
+                var mtxCam = float4x4.LookAt(0, 50, -1000, 0, 150, 500, 0, 1, 0);
+                RC.ModelView =  float4x4.CreateRotationX(_angleVert) *  float4x4.CreateRotationY(_angleHorz) *  mtxCam  * mtxRot;
+                
+                _sceneRenderer.Render(RC);
+            }
            
             #if GUI_SIMPLE
             _guiHandler.RenderGUI();
@@ -206,7 +222,7 @@ namespace Fusee.Engine.Examples.Simple.Core
             // 0.25*PI Rad -> 45° Opening angle along the vertical direction. Horizontal opening angle is calculated based on the aspect ratio
             // Front clipping happens at 1 (Objects nearer than 1 world unit get clipped)
             // Back clipping happens at 2000 (Anything further away from the camera than 2000 world units gets clipped, polygons will be cut)
-            var projection = float4x4.CreatePerspectiveFieldOfView(MathHelper.PiOver4, aspectRatio, 1, 20000);
+            var projection = float4x4.CreatePerspectiveFieldOfView(MathHelper.PiOver4*1.5f, aspectRatio, 1, 20000);
             RC.Projection = projection;
 
 

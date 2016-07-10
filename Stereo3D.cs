@@ -106,8 +106,9 @@ namespace Fusee.Engine.Core
             }";
 
         private const string OculusPs = @"
+            precision lowp float;
             uniform sampler2D vTexture;
-
+            
             uniform vec2 LensCenter;
             uniform vec2 ScreenCenter;
             uniform vec2 Scale;
@@ -129,7 +130,7 @@ namespace Fusee.Engine.Core
                 vec2 tc = HmdWarp(vUV.xy);
 	           if (any(bvec2(clamp(tc,ScreenCenter-vec2(0.25,0.5), ScreenCenter+vec2(0.25,0.5)) - tc)))
 	           {
-		           gl_FragColor = vec4(0.2, 0.2, 0.2, 1.0);
+		           gl_FragColor = vec4(1, 0.2, 0.2, 1.0);
 		           return;
 	           }
                 
@@ -197,7 +198,7 @@ namespace Fusee.Engine.Core
             _rc = rc;
             _clearColor = rc.ClearColor;
 
-            var imgData = ImageData.CreateImage(1000, 1000, ColorUint.Black);
+            var imgData = ImageData.CreateImage(_screenWidth, _screenHeight, ColorUint.Black);
             imgData.PixelFormat = ImagePixelFormat.Intensity;
             _contentLTex = _rc.CreateTexture(imgData);
             _contentRTex = _rc.CreateTexture(imgData);
@@ -254,19 +255,19 @@ namespace Fusee.Engine.Core
                     switch (eye)
                     {
                         case Stereo3DEye.Left:
-                            _rc.Viewport(0, cuttingEdge, _screenWidth, _screenHeight - cuttingEdge);    // _rc.Viewport(0, cuttingEdge, _screenWidth/2, _screenHeight - cuttingEdge);
+                            _rc.Viewport(0, cuttingEdge, _screenWidth/2, _screenHeight - cuttingEdge);    // _rc.Viewport(0, cuttingEdge, _screenWidth/2, _screenHeight - cuttingEdge);
                             break;
 
                         case Stereo3DEye.Right:
-                            _rc.Viewport(_screenWidth/2, cuttingEdge, _screenWidth, _screenHeight - cuttingEdge); //  _rc.Viewport(_screenWidth/2, cuttingEdge, _screenWidth/2, _screenHeight - cuttingEdge);
+                            _rc.Viewport(_screenWidth/2, cuttingEdge, _screenWidth/2, _screenHeight - cuttingEdge); //  _rc.Viewport(_screenWidth/2, cuttingEdge, _screenWidth/2, _screenHeight - cuttingEdge);
                             break;
                     }
 
                     break;
             }
 
-            _rc.ClearColor = _clearColor;
-            _rc.Clear(ClearFlags.Color | ClearFlags.Depth);
+            //_rc.ClearColor = _clearColor;
+            //_rc.Clear(ClearFlags.Color | ClearFlags.Depth);
         }
 
         /// <summary>
@@ -277,7 +278,7 @@ namespace Fusee.Engine.Core
             switch (_activeMode)
             {
                 case Stereo3DMode.Oculus:
-                    const int picTrans = 320;//81
+                    const int picTrans = 320;//81 //320
 
                     switch (_currentEye)
                     {
@@ -308,8 +309,8 @@ namespace Fusee.Engine.Core
         /// </summary>
         public void Display()
         {
-            _rc.ClearColor = new float4(0, 0, 0, 0); // _clearColor
-            _rc.Clear(ClearFlags.Color | ClearFlags.Depth);
+            //_rc.ClearColor = new float4(0, 0, 0, 0); // _clearColor
+            //_rc.Clear(ClearFlags.Color | ClearFlags.Depth);
 
             var currShader = _rc.CurrentShader;
 
@@ -334,8 +335,9 @@ namespace Fusee.Engine.Core
 
                     break;
             }
-
-            _rc.SetShader(currShader);
+            
+                _rc.SetShader(currShader);
+            
         }
 
         #region OculusRift
@@ -343,7 +345,7 @@ namespace Fusee.Engine.Core
         private void RenderDistortedEye(Stereo3DEye eye)
         {
             var scale = new float2(0.1469278f, 0.2350845f);
-            var scaleIn = new float2(2, 2.5f);
+            var scaleIn = new float2(2f, 2.5f);
             var hdmWarp = new float4(K0, K1, K2, K3);
             
             float2 lensCenter;
