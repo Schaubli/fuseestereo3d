@@ -26,31 +26,34 @@ namespace Fusee.Engine.Examples.Simple.Android
     ConfigurationChanges = ConfigChanges.KeyboardHidden, LaunchMode = LaunchMode.SingleTask)]
 	public class MainActivity : Activity, ISensorEventListener
     {
-        static readonly object _syncLock = new object();
         SensorManager _sensorManager;
         TextView _sensorTextView;
-       
-       
 
+        public void OnSensorChanged(SensorEvent e)
+        {
+            if (e.Sensor.Type == SensorType.GameRotationVector)
+            {
+                float[] rotationMatrix = new float[16];
+                float[] sensorValues = new float[3];
+                float[] orientationValues = new float[3];
+                sensorValues[0] = e.Values[0];
+                sensorValues[1] = e.Values[1];
+                sensorValues[2] = e.Values[2];
+                SensorManager.GetRotationMatrixFromVector(rotationMatrix, sensorValues);
+                SensorManager.GetOrientation(rotationMatrix, orientationValues);
+                Simple.Core.Simple.gameRotationVector = orientationValues;
+            }
+        }
 
         public void OnAccuracyChanged(Sensor sensor, SensorStatus accuracy)
         {
             // We don't want to do anything here.
         }
 
-        public void OnSensorChanged(SensorEvent e)
-        {
-            
-                Simple.Core.Simple.SetGyroscope(new float3(e.Values[0], e.Values[1], e.Values[2]));
-           
-           
-        }
         protected override void OnResume()
         {
             base.OnResume();
-            _sensorManager.RegisterListener(this,
-                                            _sensorManager.GetDefaultSensor(SensorType.Gyroscope), SensorDelay.Ui);
-            
+            _sensorManager.RegisterListener(this, _sensorManager.GetDefaultSensor(SensorType.GameRotationVector), SensorDelay.Ui);
 
         }
 
@@ -62,14 +65,11 @@ namespace Fusee.Engine.Examples.Simple.Android
 
         protected override void OnCreate (Bundle savedInstanceState)
 		{
-
-
-
             base.OnCreate (savedInstanceState);
             RequestWindowFeature(WindowFeatures.NoTitle);
 
-            _sensorManager = (SensorManager)GetSystemService(Android.MainActivity.SensorService);
-            
+            _sensorManager = (SensorManager)GetSystemService(SensorService);
+
             if (SupportedOpenGLVersion() >= 3)
 		    {
 		        // SetContentView(new LibPaintingView(ApplicationContext, null));

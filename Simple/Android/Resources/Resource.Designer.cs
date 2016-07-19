@@ -9,9 +9,9 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Android.Runtime.ResourceDesignerAttribute("Fusee.Engine.Examples.Simple.Android.Resource", IsApplication=true)]
+[assembly: global::Android.Runtime.ResourceDesignerAttribute("Fusee.External.Simple.Android.Resource", IsApplication=true)]
 
-namespace Fusee.Engine.Examples.Simple.Android
+namespace Fusee.External.Simple.Android
 {
 	
 	
@@ -26,10 +26,10 @@ namespace Fusee.Engine.Examples.Simple.Android
 		
 		public static void UpdateIdValues()
 		{
-			global::Fusee.Base.Imp.Android.Resource.String.ApplicationName = global::Fusee.Engine.Examples.Simple.Android.Resource.String.ApplicationName;
-			global::Fusee.Base.Imp.Android.Resource.String.Hello = global::Fusee.Engine.Examples.Simple.Android.Resource.String.Hello;
-			global::Fusee.Engine.Imp.Graphics.Android.Resource.String.ApplicationName = global::Fusee.Engine.Examples.Simple.Android.Resource.String.ApplicationName;
-			global::Fusee.Engine.Imp.Graphics.Android.Resource.String.Hello = global::Fusee.Engine.Examples.Simple.Android.Resource.String.Hello;
+			global::Fusee.Base.Imp.Android.Resource.String.ApplicationName = global::Fusee.External.Simple.Android.Resource.String.ApplicationName;
+			global::Fusee.Base.Imp.Android.Resource.String.Hello = global::Fusee.External.Simple.Android.Resource.String.Hello;
+			global::Fusee.Engine.Imp.Graphics.Android.Resource.String.ApplicationName = global::Fusee.External.Simple.Android.Resource.String.ApplicationName;
+			global::Fusee.Engine.Imp.Graphics.Android.Resource.String.Hello = global::Fusee.External.Simple.Android.Resource.String.Hello;
 		}
 		
 		public partial class Attribute

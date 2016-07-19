@@ -11,7 +11,6 @@ using Fusee.Serialization;
 using static Fusee.Engine.Core.Input;
 using static Fusee.Engine.Core.Time;
 
-
 #if GUI_SIMPLE
 using Fusee.Engine.Core.GUI;
 #endif
@@ -26,10 +25,11 @@ namespace Fusee.Engine.Examples.Simple.Core
         public Stereo3D _stereo3d;
         // angle variables
         private static float _angleHorz = (float)-System.Math.PI/9f, _angleVert, _angleVelHorz, _angleVelVert, rocketrot;
+        private float pi = 3.1415f;
         private static float _angleRot = 0;
         private const float RotationSpeed = 7;
         private const float Damping = 0.8f;
-
+        
         private SceneContainer _rocketScene;
         private SceneRenderer _sceneRenderer;
         
@@ -45,25 +45,22 @@ namespace Fusee.Engine.Examples.Simple.Core
         private float _subtextHeight;
         private float _subtextWidth;
         #endif
-        private static float3 gyroscope;
-        private bool renderStereo = false;
-
-        public static void SetGyroscope(float3 vec)
-        {
-            
-                gyroscope = vec;
-        }
-        public static float3 GetGyroscope()
-        {
-            return gyroscope;
-        }
-        
+        public static float[] gameRotationVector;
+        private bool renderStereo = true;
 
 
         // Init is called on startup. 
         public override void Init()
         {
-
+            if (Width <= 0)
+            {
+                Width = 2560;
+            }
+            if (Height <= 0)
+            {
+                Height = 1440;
+            }
+            gameRotationVector = new float[3];
             #if GUI_SIMPLE
             _guiHandler = new GUIHandler();
             _guiHandler.AttachToContext(RC);
@@ -90,18 +87,9 @@ namespace Fusee.Engine.Examples.Simple.Core
 
             // Set the clear color for the backbuffer to white (100% intentsity in all color channels R, G, B, A).
             RC.ClearColor = new float4(1, 1, 1, 1);
-
-            System.Diagnostics.Debug.WriteLine("Width = " + Width + "  Height = " + Height);
-            if(Width <= 0)
-            {
-                Width = 2560;
-            }
-            if(Height <= 0)
-            {
-                Height = 1440;
-            }
+            
             if(renderStereo) { 
-                _stereo3d = new Stereo3D(Stereo3DMode.Oculus, Width, Height);
+                _stereo3d = new Stereo3D(Stereo3DMode.Cardboard, Width, Height);
                 _stereo3d.AttachToContext(RC);
             }
 
@@ -111,7 +99,7 @@ namespace Fusee.Engine.Examples.Simple.Core
             // Wrap a SceneRenderer around the model.
             _sceneRenderer = new SceneRenderer(_rocketScene);
         }
-
+       
         // RenderAFrame is called once a frame
         public override void RenderAFrame()
         {
@@ -133,10 +121,9 @@ namespace Fusee.Engine.Examples.Simple.Core
             }
             else if (Touch.GetTouchActive(TouchPoints.Touchpoint_0))
             {
-                _keys = false;
-                var touchVel = Touch.GetVelocity(TouchPoints.Touchpoint_0);
-                _angleVelHorz = -RotationSpeed * touchVel.x * DeltaTime * 0.0005f;
-                _angleVelVert = -RotationSpeed * touchVel.y * DeltaTime * 0.0005f;
+                //Reset view on touch 
+                _angleHorz = gameRotationVector[0];
+                _angleVert = gameRotationVector[2];
             }
             else
             {
@@ -152,48 +139,37 @@ namespace Fusee.Engine.Examples.Simple.Core
                     _angleVelVert *= curDamp;
                 }
             }
+            
 
-
+            //Rotate Scene
             _angleHorz -= _angleVelHorz / 3;
             _angleVert -= _angleVelVert / 3;
-
-
-            float3 _gyroscope = GetGyroscope();
-
-            float pi = 3.1415f;
-
-            _angleHorz += _gyroscope.x / 30;
-            _angleVert -= _gyroscope.y / 30;
-
-            //System.Diagnostics.Debug.WriteLine(_gyroscope);
-            // Create the camera matrix and set it as the current ModelView transformation
-
-            //Calculate Rocket Rotation
+            
+            //Rotate Rocket
             var mtxRot = float4x4.CreateRotationY(rocketrot -= 0.02f);
+
+            //Calculate VR
+            float4x4 headsetRotationX = float4x4.CreateRotationX(-gameRotationVector[2] + _angleVert);
+            float4x4 headsetRotationY = float4x4.CreateRotationY(-gameRotationVector[0] + _angleHorz);
 
             if (renderStereo){
                 //Render Left Eye
-                var mtxCam = float4x4.LookAt(100, 20, -1000, 0, 150, 0, 0, 1, 0);
-                RC.ModelView = float4x4.CreateRotationX(_angleVert) * float4x4.CreateRotationY(_angleHorz) * mtxCam * mtxRot;
+                var mtxCam = float4x4.LookAt(10, 20, -1000, 0, 150, 0, 0, 1, 0);
+                RC.ModelView = headsetRotationX * headsetRotationY * mtxCam * mtxRot;
                 _stereo3d.Prepare(Stereo3DEye.Right);
                 _sceneRenderer.Render(RC);
                 _stereo3d.Save();
 
                 //Render Right Eye
-                mtxCam = float4x4.LookAt(-100, 20, -1000, 0, 150, 0, 0, 1, 0);
-                RC.ModelView = float4x4.CreateRotationX(_angleVert) * float4x4.CreateRotationY(_angleHorz) * mtxCam * mtxRot;
+                mtxCam = float4x4.LookAt(-10, 20, -1000, 0, 150, 0, 0, 1, 0);
+                RC.ModelView = headsetRotationX * headsetRotationY * mtxCam * mtxRot;
                 _stereo3d.Prepare(Stereo3DEye.Left);
                 _sceneRenderer.Render(RC);
                 _stereo3d.Save();
-
-                //Combine Viewports
-                _stereo3d.Display();
             } else {
                 // Render the scene loaded in Init()*/
-
                 var mtxCam = float4x4.LookAt(0, 50, -1000, 0, 150, 500, 0, 1, 0);
-                RC.ModelView =  float4x4.CreateRotationX(_angleVert) *  float4x4.CreateRotationY(_angleHorz) *  mtxCam  * mtxRot;
-                
+                RC.ModelView = headsetRotationX * headsetRotationY * mtxCam * mtxRot;
                 _sceneRenderer.Render(RC);
             }
            
@@ -222,10 +198,8 @@ namespace Fusee.Engine.Examples.Simple.Core
             // 0.25*PI Rad -> 45° Opening angle along the vertical direction. Horizontal opening angle is calculated based on the aspect ratio
             // Front clipping happens at 1 (Objects nearer than 1 world unit get clipped)
             // Back clipping happens at 2000 (Anything further away from the camera than 2000 world units gets clipped, polygons will be cut)
-            var projection = float4x4.CreatePerspectiveFieldOfView(MathHelper.PiOver4*1.5f, aspectRatio, 1, 20000);
+            var projection = float4x4.CreatePerspectiveFieldOfView(pi/2, aspectRatio, 1, 20000);
             RC.Projection = projection;
-
-
 
             #if GUI_SIMPLE
             _guiSubText.PosX = (int)((Width - _subtextWidth) / 2);

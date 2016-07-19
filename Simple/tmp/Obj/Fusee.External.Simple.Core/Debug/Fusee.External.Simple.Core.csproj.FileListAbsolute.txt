@@ -26,3 +26,4 @@ C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\bin\Debu
 C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\bin\Debug\Libraries\Fusee.External.Simple.Core.pdb
 C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.dll
 C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.pdb
+C:\Users\Yannick\Documents\GitHub\VR\FuseeStereo3D\fuseestereo3d\Simple\tmp\Obj\Fusee.External.Simple.Core\Debug\Fusee.External.Simple.Core.csprojResolveAssemblyReference.cache
