@@ -24,12 +24,12 @@ namespace Fusee.Engine.Examples.Simple.Core
         static readonly object _syncLock = new object();
         public Stereo3D _stereo3d;
         // angle variables
-        private static float _angleHorz = (float)-System.Math.PI/9f, _angleVert, _angleVelHorz, _angleVelVert, rocketrot;
+        private static float _angleHorz = 0, _angleVert, _angleVelHorz, _angleVelVert;
         private float pi = 3.1415f;
-        private static float _angleRot = 0;
         private const float RotationSpeed = 7;
         private const float Damping = 0.8f;
-        
+        int eyeDistance = 10;
+
         private SceneContainer _rocketScene;
         private SceneRenderer _sceneRenderer;
         
@@ -45,8 +45,8 @@ namespace Fusee.Engine.Examples.Simple.Core
         private float _subtextHeight;
         private float _subtextWidth;
         #endif
-        public static float[] gameRotationVector;
-        private bool renderStereo = true;
+        public static float[] gameRotationVector = new float[3];
+        private bool renderStereo = false;
 
 
         // Init is called on startup. 
@@ -60,11 +60,9 @@ namespace Fusee.Engine.Examples.Simple.Core
             {
                 Height = 1440;
             }
-            gameRotationVector = new float[3];
             #if GUI_SIMPLE
             _guiHandler = new GUIHandler();
             _guiHandler.AttachToContext(RC);
-
             _guiFuseeLink = new GUIButton(6, 6, 157, 87);
             _guiFuseeLink.ButtonColor = new float4(0, 0, 0, 0);
             _guiFuseeLink.BorderColor = new float4(0, 0.6f, 0.2f, 1);
@@ -78,7 +76,7 @@ namespace Fusee.Engine.Examples.Simple.Core
             var fontLato = AssetStorage.Get<Font>("Lato-Black.ttf");
             fontLato.UseKerning = true;
             _guiLatoBlack = new FontMap(fontLato, 18);
-            _guiSubText = new GUIText("Simple FUSEE Example", _guiLatoBlack, 100, 100);
+            _guiSubText = new GUIText("Simple FUSEE Cardboard Example", _guiLatoBlack, 100, 100);
             _guiSubText.TextColor = new float4(0.05f, 0.25f, 0.15f, 0.8f);
             _guiHandler.Add(_guiSubText);
             _subtextWidth = GUIText.GetTextWidth(_guiSubText.Text, _guiLatoBlack);
@@ -94,7 +92,7 @@ namespace Fusee.Engine.Examples.Simple.Core
             }
 
             // Load the rocket model
-            _rocketScene = AssetStorage.Get<SceneContainer>("RocketModel.fus");
+            _rocketScene = AssetStorage.Get<SceneContainer>("WuggyLand.fus");
 
             // Wrap a SceneRenderer around the model.
             _sceneRenderer = new SceneRenderer(_rocketScene);
@@ -144,38 +142,42 @@ namespace Fusee.Engine.Examples.Simple.Core
             //Rotate Scene
             _angleHorz -= _angleVelHorz / 3;
             _angleVert -= _angleVelVert / 3;
-            
-            //Rotate Rocket
-            var mtxRot = float4x4.CreateRotationY(rocketrot -= 0.02f);
 
-            //Calculate VR
+            
+            //Calculate view
             float4x4 headsetRotationX = float4x4.CreateRotationX(-gameRotationVector[2] + _angleVert);
             float4x4 headsetRotationY = float4x4.CreateRotationY(-gameRotationVector[0] + _angleHorz);
+            float4x4 headsetRotationZ = float4x4.CreateRotationZ(-gameRotationVector[1]);
 
             if (renderStereo){
                 //Render Left Eye
-                var mtxCam = float4x4.LookAt(10, 20, -1000, 0, 150, 0, 0, 1, 0);
-                RC.ModelView = headsetRotationX * headsetRotationY * mtxCam * mtxRot;
-                _stereo3d.Prepare(Stereo3DEye.Right);
+                var camTrans = float4x4.CreateTranslation(eyeDistance / 2, -200, 0);
+                var mtxCam = float4x4.LookAt(eyeDistance/2, 0, 0, 0, 0, 400,0,1,0);
+                RC.ModelView = headsetRotationZ * headsetRotationX * headsetRotationY * mtxCam * camTrans;
+                _stereo3d.Prepare(Stereo3DEye.Left);
                 _sceneRenderer.Render(RC);
                 _stereo3d.Save();
 
                 //Render Right Eye
-                mtxCam = float4x4.LookAt(-10, 20, -1000, 0, 150, 0, 0, 1, 0);
-                RC.ModelView = headsetRotationX * headsetRotationY * mtxCam * mtxRot;
-                _stereo3d.Prepare(Stereo3DEye.Left);
+                camTrans = float4x4.CreateTranslation(-eyeDistance / 2, -200, 0);
+                mtxCam = float4x4.LookAt(-eyeDistance / 2, 0, 0, 0, 0, 400, 0, 1, 0);
+                RC.ModelView = headsetRotationZ * headsetRotationX * headsetRotationY * mtxCam * camTrans;
+                _stereo3d.Prepare(Stereo3DEye.Right);
                 _sceneRenderer.Render(RC);
                 _stereo3d.Save();
+
+                _stereo3d.Display();
             } else {
                 // Render the scene loaded in Init()*/
-                var mtxCam = float4x4.LookAt(0, 50, -1000, 0, 150, 500, 0, 1, 0);
-                RC.ModelView = headsetRotationX * headsetRotationY * mtxCam * mtxRot;
-                _sceneRenderer.Render(RC);
+                var camTrans = float4x4.CreateTranslation(0, -200, 0);
+                RC.ModelView = headsetRotationZ * headsetRotationX * headsetRotationY * camTrans ;
+                _sceneRenderer.Render(RC);                
             }
-           
-            #if GUI_SIMPLE
-            _guiHandler.RenderGUI();
-            #endif
+
+             #if GUI_SIMPLE
+                _guiHandler.RenderGUI(); //GUI can also be rendered for each eye
+             #endif
+
 
             // Swap buffers: Show the contents of the backbuffer (containing the currently rerndered farame) on the front buffer.
             Present();
@@ -193,7 +195,14 @@ namespace Fusee.Engine.Examples.Simple.Core
             RC.Viewport(0, 0, Width, Height);
 
             // Create a new projection matrix generating undistorted images on the new aspect ratio.
-            var aspectRatio = Width/(float) Height;
+            float aspectRatio;
+            if (renderStereo)
+            {
+                aspectRatio = Width / ((float)Height * 2);
+            } else
+            {
+                aspectRatio = Width / (float)Height;
+            }
 
             // 0.25*PI Rad -> 45° Opening angle along the vertical direction. Horizontal opening angle is calculated based on the aspect ratio
             // Front clipping happens at 1 (Objects nearer than 1 world unit get clipped)

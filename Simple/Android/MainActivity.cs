@@ -28,7 +28,6 @@ namespace Fusee.Engine.Examples.Simple.Android
     {
         SensorManager _sensorManager;
         TextView _sensorTextView;
-
         public void OnSensorChanged(SensorEvent e)
         {
             if (e.Sensor.Type == SensorType.GameRotationVector)
@@ -36,11 +35,27 @@ namespace Fusee.Engine.Examples.Simple.Android
                 float[] rotationMatrix = new float[16];
                 float[] sensorValues = new float[3];
                 float[] orientationValues = new float[3];
+                //System.Diagnostics.Debug.WriteLine(Resources.Configuration.Orientation);
+                int displayOrientation = WindowManager.DefaultDisplay.Orientation; // 0=Portrait  1=LandscapeLeft  3=LandscapeRight
                 sensorValues[0] = e.Values[0];
                 sensorValues[1] = e.Values[1];
                 sensorValues[2] = e.Values[2];
+                //System.Diagnostics.Debug.WriteLine(e.Values[0] + "  " + e.Values[1] + "  " + e.Values[2]);
                 SensorManager.GetRotationMatrixFromVector(rotationMatrix, sensorValues);
                 SensorManager.GetOrientation(rotationMatrix, orientationValues);
+                switch(displayOrientation)
+                {
+                    case 0://Portrait: not supported
+                        orientationValues = new float[3];
+                        break;
+                    case 1://LandscapeLeft: nothing to change here
+                        break;
+                    case 3://LandscapeRight: invert tilt value
+                        orientationValues[2] *= -1;
+                        break;
+                    default:
+                        break;
+                }
                 Simple.Core.Simple.gameRotationVector = orientationValues;
             }
         }
