@@ -21,16 +21,15 @@ namespace Fusee.Engine.Examples.Simple.Core
     [FuseeApplication(Name = "VR Example", Description = "A very simple VR example.")]
     public class Simple : RenderCanvas
     {
-        static readonly object _syncLock = new object();
         public Stereo3D _stereo3d;
         // angle variables
-        private static float _angleHorz = 0, _angleVert, _angleVelHorz, _angleVelVert;
-        private float pi = 3.1415f;
+        private static float _angleHorz = 0, _angleVert, _angleRoll,  _angleVelHorz, _angleVelVert;
         private const float RotationSpeed = 7;
         private const float Damping = 0.8f;
-        int eyeDistance = 10;
 
-        private SceneContainer _rocketScene;
+        private int _eyeDistance = 10;
+
+        private SceneContainer _WuggyScene;
         private SceneRenderer _sceneRenderer;
         
         private bool _keys;
@@ -45,13 +44,17 @@ namespace Fusee.Engine.Examples.Simple.Core
         private float _subtextHeight;
         private float _subtextWidth;
         #endif
+        
         public static float[] gameRotationVector = new float[3];
-        private bool renderStereo = false;
+
+        //Easy switch to turn StereoRendering on/off
+        private bool _renderStereo = true;
 
 
         // Init is called on startup. 
         public override void Init()
         {
+            //Width and Height are 0 on our Android Device
             if (Width <= 0)
             {
                 Width = 2560;
@@ -60,6 +63,7 @@ namespace Fusee.Engine.Examples.Simple.Core
             {
                 Height = 1440;
             }
+  
             #if GUI_SIMPLE
             _guiHandler = new GUIHandler();
             _guiHandler.AttachToContext(RC);
@@ -86,22 +90,22 @@ namespace Fusee.Engine.Examples.Simple.Core
             // Set the clear color for the backbuffer to white (100% intentsity in all color channels R, G, B, A).
             RC.ClearColor = new float4(1, 1, 1, 1);
             
-            if(renderStereo) { 
+            //Initialize StereoRendering 
+            if(_renderStereo) { 
                 _stereo3d = new Stereo3D(Stereo3DMode.Cardboard, Width, Height);
                 _stereo3d.AttachToContext(RC);
             }
 
-            // Load the rocket model
-            _rocketScene = AssetStorage.Get<SceneContainer>("WuggyLand.fus");
+            // Load the scene
+            _WuggyScene = AssetStorage.Get<SceneContainer>("WuggyLand.fus");
 
-            // Wrap a SceneRenderer around the model.
-            _sceneRenderer = new SceneRenderer(_rocketScene);
+            // Wrap a SceneRenderer around the scene.
+            _sceneRenderer = new SceneRenderer(_WuggyScene);
         }
        
         // RenderAFrame is called once a frame
         public override void RenderAFrame()
         {
-
             // Clear the backbuffer
             RC.Clear(ClearFlags.Color | ClearFlags.Depth);
 
@@ -120,8 +124,7 @@ namespace Fusee.Engine.Examples.Simple.Core
             else if (Touch.GetTouchActive(TouchPoints.Touchpoint_0))
             {
                 //Reset view on touch 
-                _angleHorz = gameRotationVector[0];
-                _angleVert = gameRotationVector[2];
+                ResetView();
             }
             else
             {
@@ -138,44 +141,48 @@ namespace Fusee.Engine.Examples.Simple.Core
                 }
             }
             
-
-            //Rotate Scene
+            //Rotate Scene with Mouse
             _angleHorz -= _angleVelHorz / 3;
             _angleVert -= _angleVelVert / 3;
 
             
-            //Calculate view
+            //Calculate view (DeviceTracking)
             float4x4 headsetRotationX = float4x4.CreateRotationX(-gameRotationVector[2] + _angleVert);
             float4x4 headsetRotationY = float4x4.CreateRotationY(-gameRotationVector[0] + _angleHorz);
-            float4x4 headsetRotationZ = float4x4.CreateRotationZ(-gameRotationVector[1]);
+            float4x4 headsetRotationZ = float4x4.CreateRotationZ(-gameRotationVector[1] + _angleRoll);
 
-            if (renderStereo){
+            //StereoRendering
+            if (_renderStereo){
+
                 //Render Left Eye
-                var camTrans = float4x4.CreateTranslation(eyeDistance / 2, -200, 0);
-                var mtxCam = float4x4.LookAt(eyeDistance/2, 0, 0, 0, 0, 400,0,1,0);
+                var camTrans = float4x4.CreateTranslation(_eyeDistance / 2, -200, 0);
+                var mtxCam = float4x4.LookAt(_eyeDistance/2, 0, 0, 0, 0, 400 , 0, 1,0);
                 RC.ModelView = headsetRotationZ * headsetRotationX * headsetRotationY * mtxCam * camTrans;
                 _stereo3d.Prepare(Stereo3DEye.Left);
                 _sceneRenderer.Render(RC);
                 _stereo3d.Save();
 
                 //Render Right Eye
-                camTrans = float4x4.CreateTranslation(-eyeDistance / 2, -200, 0);
-                mtxCam = float4x4.LookAt(-eyeDistance / 2, 0, 0, 0, 0, 400, 0, 1, 0);
+                camTrans = float4x4.CreateTranslation(-_eyeDistance / 2, -200, 0);
+                mtxCam = float4x4.LookAt(-_eyeDistance / 2, 0, 0, 0, 0, 400, 0, 1, 0);
                 RC.ModelView = headsetRotationZ * headsetRotationX * headsetRotationY * mtxCam * camTrans;
                 _stereo3d.Prepare(Stereo3DEye.Right);
                 _sceneRenderer.Render(RC);
                 _stereo3d.Save();
 
+                //We do nothing here in Cardboard-Mode. Used in Oculus and Anaglyph  
                 _stereo3d.Display();
-            } else {
-                // Render the scene loaded in Init()*/
+            }
+            //no StereoRendering
+            else {
+                // Render the scene loaded in Init()
                 var camTrans = float4x4.CreateTranslation(0, -200, 0);
                 RC.ModelView = headsetRotationZ * headsetRotationX * headsetRotationY * camTrans ;
                 _sceneRenderer.Render(RC);                
             }
 
              #if GUI_SIMPLE
-                _guiHandler.RenderGUI(); //GUI can also be rendered for each eye
+                _guiHandler.RenderGUI(); //GUI is overlayed, but can also be rendered for each eye
              #endif
 
 
@@ -196,9 +203,10 @@ namespace Fusee.Engine.Examples.Simple.Core
 
             // Create a new projection matrix generating undistorted images on the new aspect ratio.
             float aspectRatio;
-            if (renderStereo)
+            if (_renderStereo)
             {
-                aspectRatio = Width / ((float)Height * 2);
+                //aspectRatio needs to be halfed for each eye
+                aspectRatio = (Width/2) / (float)Height;
             } else
             {
                 aspectRatio = Width / (float)Height;
@@ -207,7 +215,7 @@ namespace Fusee.Engine.Examples.Simple.Core
             // 0.25*PI Rad -> 45° Opening angle along the vertical direction. Horizontal opening angle is calculated based on the aspect ratio
             // Front clipping happens at 1 (Objects nearer than 1 world unit get clipped)
             // Back clipping happens at 2000 (Anything further away from the camera than 2000 world units gets clipped, polygons will be cut)
-            var projection = float4x4.CreatePerspectiveFieldOfView(pi/2, aspectRatio, 1, 20000);
+            var projection = float4x4.CreatePerspectiveFieldOfView(M.PiOver2, aspectRatio, 1, 20000);
             RC.Projection = projection;
 
             #if GUI_SIMPLE
@@ -217,6 +225,14 @@ namespace Fusee.Engine.Examples.Simple.Core
             _guiHandler.Refresh();
             #endif
 
+        }
+
+        //Reset the view
+        private void ResetView()
+        {
+            _angleHorz = gameRotationVector[0];
+            _angleVert = gameRotationVector[2];
+            _angleRoll = gameRotationVector[1];
         }
 
         #if GUI_SIMPLE

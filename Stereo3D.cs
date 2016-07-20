@@ -193,10 +193,10 @@ namespace Fusee.Engine.Core
             _rc = rc;
             _clearColor = rc.ClearColor;
 
-            var imgData = ImageData.CreateImage(_screenWidth, _screenHeight, ColorUint.Black);
-            imgData.PixelFormat = ImagePixelFormat.Intensity;
-            _contentLTex = _rc.CreateTexture(imgData);
-            _contentRTex = _rc.CreateTexture(imgData);
+            var _imgData = ImageData.CreateImage(_screenWidth, _screenHeight, ColorUint.Black);
+            _imgData.PixelFormat = ImagePixelFormat.Intensity;
+            _contentLTex = _rc.CreateTexture(_imgData);
+            _contentRTex = _rc.CreateTexture(_imgData);
 
             // initialize shader and image
             switch (_activeMode)
@@ -286,6 +286,8 @@ namespace Fusee.Engine.Core
             switch (_activeMode)
             {
                 case Stereo3DMode.Cardboard:
+                    _rc.Viewport(0, 0, _screenWidth, _screenHeight);
+                    break;
                 case Stereo3DMode.Oculus:
                     const int picTrans = 81;
 
@@ -302,7 +304,6 @@ namespace Fusee.Engine.Core
                     }
 
                     _rc.Viewport(0, 0, _screenWidth, _screenHeight);
-
                     break;
 
                 case Stereo3DMode.Anaglyph:
@@ -318,8 +319,6 @@ namespace Fusee.Engine.Core
         /// </summary>
         public void Display()
         {
-            
-
             var currShader = _rc.CurrentShader;
 
             switch (_activeMode)

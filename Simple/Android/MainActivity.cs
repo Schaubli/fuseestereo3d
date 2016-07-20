@@ -28,34 +28,52 @@ namespace Fusee.Engine.Examples.Simple.Android
     {
         SensorManager _sensorManager;
         TextView _sensorTextView;
+
+        private int _displayOrientation = 0;
+
+        private float[] _sensorValues = new float[3];
+        private float[] _rotationMatrix = new float[16];
+        public float[] orientationValues = new float[3];
+       
+
         public void OnSensorChanged(SensorEvent e)
         {
             if (e.Sensor.Type == SensorType.GameRotationVector)
             {
-                float[] rotationMatrix = new float[16];
-                float[] sensorValues = new float[3];
-                float[] orientationValues = new float[3];
-                //System.Diagnostics.Debug.WriteLine(Resources.Configuration.Orientation);
-                int displayOrientation = WindowManager.DefaultDisplay.Orientation; // 0=Portrait  1=LandscapeLeft  3=LandscapeRight
-                sensorValues[0] = e.Values[0];
-                sensorValues[1] = e.Values[1];
-                sensorValues[2] = e.Values[2];
-                //System.Diagnostics.Debug.WriteLine(e.Values[0] + "  " + e.Values[1] + "  " + e.Values[2]);
-                SensorManager.GetRotationMatrixFromVector(rotationMatrix, sensorValues);
-                SensorManager.GetOrientation(rotationMatrix, orientationValues);
-                switch(displayOrientation)
+                _displayOrientation = WindowManager.DefaultDisplay.Orientation; // 0=Portrait  1=LandscapeLeft  3=LandscapeRight
+
+                _sensorValues[0] = e.Values[0];
+                _sensorValues[1] = e.Values[1];
+                _sensorValues[2] = e.Values[2];
+
+                SensorManager.GetRotationMatrixFromVector(_rotationMatrix, _sensorValues);
+                SensorManager.GetOrientation(_rotationMatrix, orientationValues);
+
+                //change orientationValues for different Orientation-Modes
+                switch (_displayOrientation)
                 {
                     case 0://Portrait: not supported
                         orientationValues = new float[3];
                         break;
                     case 1://LandscapeLeft: nothing to change here
                         break;
-                    case 3://LandscapeRight: invert tilt value
+                    case 3://LandscapeRight: invert tilt and roll value
                         orientationValues[2] *= -1;
+                        orientationValues[1] *= -1;
                         break;
                     default:
                         break;
                 }
+                // limit Roll to -45° and 45°
+                if (orientationValues[1] > M.PiOver4) {
+                    orientationValues[1] = M.PiOver4;
+                }
+                else if (orientationValues[1] < -M.PiOver4)
+                {
+                    orientationValues[1] = -M.PiOver4;
+                }
+
+                // pass orientationValues to Simple.cs
                 Simple.Core.Simple.gameRotationVector = orientationValues;
             }
         }
@@ -68,6 +86,7 @@ namespace Fusee.Engine.Examples.Simple.Android
         protected override void OnResume()
         {
             base.OnResume();
+            // register new Listener for our GameRotationVector-Sensor
             _sensorManager.RegisterListener(this, _sensorManager.GetDefaultSensor(SensorType.GameRotationVector), SensorDelay.Ui);
 
         }
@@ -75,14 +94,20 @@ namespace Fusee.Engine.Examples.Simple.Android
         protected override void OnPause()
         {
             base.OnPause();
+            // unregister Listener
             _sensorManager.UnregisterListener(this);
         }
 
         protected override void OnCreate (Bundle savedInstanceState)
 		{
             base.OnCreate (savedInstanceState);
+
+            //only allow Landscape and ReverseLandscape
+            this.RequestedOrientation = ScreenOrientation.SensorLandscape;
+
             RequestWindowFeature(WindowFeatures.NoTitle);
 
+            //Initialize a SensorManager
             _sensorManager = (SensorManager)GetSystemService(SensorService);
 
             if (SupportedOpenGLVersion() >= 3)
